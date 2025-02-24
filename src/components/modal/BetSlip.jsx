@@ -20,11 +20,12 @@ const BetSlip = ({
   refetchCurrentBets,
 }) => {
   const { language } = useLanguage();
-  const { token } = useContextState();
+  const { token, setPredictOdds, predictOdds } = useContextState();
   /* Close modal click outside */
   const betSlipRef = useRef();
   useCloseModalClickOutside(betSlipRef, () => {
     setOpenBetSlip(false);
+    setPredictOdds([]);
   });
   /* Button values from locale storage */
   const buttonGameValue = JSON.parse(localStorage.getItem("buttonValue"));
@@ -34,9 +35,6 @@ const BetSlip = ({
   const { refetchBalance } = useBalance();
   const [stakeErr, setStakeErr] = useState("");
   const [price, setPrice] = useState(null);
-  const [oddStake, setOddStake] = useState(null);
-  const [oddStakeLay1, setOddStakeLay1] = useState(null);
-  const [oddStakeLay2, setOddStakeLay2] = useState(null);
 
   /* Set price */
   useEffect(() => {
@@ -118,6 +116,7 @@ const BetSlip = ({
             refetchCurrentBets();
             setLoader(false);
             setOpenBetSlip(false);
+            setPredictOdds([]);
             setSuccessMessage(data?.result?.result?.placed?.[0]?.message);
           } else {
             setErrorMessage(
@@ -125,6 +124,7 @@ const BetSlip = ({
             );
             setLoader(false);
             setOpenBetSlip(false);
+            setPredictOdds([]);
             refetchExposure();
             refetchBalance();
             refetchCurrentBets();
@@ -175,23 +175,13 @@ const BetSlip = ({
     }
   };
 
-  /* Place bet calculate */
-  const pnl1 =
-    placeBetValues?.pnl && placeBetValues?.pnl[0] ? placeBetValues?.pnl[0] : 0;
-  const pnl2 =
-    placeBetValues?.pnl && placeBetValues?.pnl[1] ? placeBetValues?.pnl[1] : 0;
-  const pnl3 =
-    placeBetValues?.pnl && placeBetValues?.pnl[2] ? placeBetValues?.pnl[2] : 0;
-  const selectionId = placeBetValues?.selectionId?.toString();
-
   useEffect(() => {
+    let total;
     if (
       placeBetValues?.btype === "MATCH_ODDS" ||
       placeBetValues?.btype === "BOOKMAKER"
     ) {
       if (placeBetValues?.back) {
-        let total;
-
         if (placeBetValues?.btype === "MATCH_ODDS") {
           total = price * totalSize - totalSize;
         }
@@ -200,21 +190,23 @@ const BetSlip = ({
           total = bookmaker * totalSize - totalSize;
         }
 
-        if (selectionId && selectionId.includes(".1")) {
-          setOddStake(formatNumber(total + pnl1));
-          setOddStakeLay1(formatNumber(pnl2 + -1 * totalSize));
-          setOddStakeLay2(formatNumber(pnl3 + -1 * totalSize));
-        } else if (selectionId && selectionId.includes(".2")) {
-          setOddStake(formatNumber(total + pnl2));
-          setOddStakeLay1(formatNumber(pnl3 + -1 * totalSize));
-          setOddStakeLay2(formatNumber(pnl2 + -1 * totalSize));
-        } else {
-          setOddStake(formatNumber(total + pnl3));
-          setOddStakeLay1(formatNumber(pnl1 + -1 * totalSize));
-          setOddStakeLay2(formatNumber(pnl2 + -1 * totalSize));
-        }
+        const currentExposure = placeBetValues?.exposure?.map((exp) => {
+          return {
+            updatedExposure: totalSize
+              ? exp?.isBettingOnThisRunner
+                ? formatNumber(exp?.exposure + total)
+                : formatNumber(exp?.exposure + -1 * totalSize)
+              : null,
+
+            id: exp?.id,
+            isBettingOnThisRunner: exp?.isBettingOnThisRunner,
+            name: exp?.name,
+            exposure: exp?.exposure,
+          };
+        });
+
+        setPredictOdds(currentExposure);
       } else if (placeBetValues?.lay) {
-        let total;
         if (placeBetValues?.btype === "MATCH_ODDS") {
           total = -1 * (price * totalSize - totalSize);
         }
@@ -223,22 +215,23 @@ const BetSlip = ({
           total = -1 * (bookmaker * totalSize - totalSize);
         }
 
-        if (selectionId && selectionId.includes(".1")) {
-          setOddStake(formatNumber(total + pnl1));
-          setOddStakeLay1(formatNumber(1 * pnl2 + 1 * totalSize));
-          setOddStakeLay2(formatNumber(1 * pnl3 + 1 * totalSize));
-        } else if (selectionId && selectionId.includes(".2")) {
-          setOddStake(formatNumber(total + pnl2));
-          setOddStakeLay1(formatNumber(1 * pnl3 + 1 * totalSize));
-          setOddStakeLay2(formatNumber(1 * pnl1 + 1 * totalSize));
-        } else {
-          setOddStake(formatNumber(total + pnl3));
-          setOddStakeLay1(formatNumber(1 * pnl1 + 1 * totalSize));
-          setOddStakeLay2(formatNumber(1 * pnl2 + 1 * totalSize));
-        }
+        const currentExposure = placeBetValues?.exposure?.map((exp) => {
+          return {
+            updatedExposure: totalSize
+              ? exp?.isBettingOnThisRunner
+                ? formatNumber(exp?.exposure + total)
+                : formatNumber(1 * exp?.exposure + 1 * totalSize)
+              : null,
+            id: exp?.id,
+            isBettingOnThisRunner: exp?.isBettingOnThisRunner,
+            name: exp?.name,
+            exposure: exp?.exposure,
+          };
+        });
+        setPredictOdds(currentExposure);
       }
     }
-  }, [price, totalSize, placeBetValues, pnl1, pnl2, pnl3, selectionId]);
+  }, [price, totalSize, placeBetValues, setPredictOdds]);
 
   /* Format number */
   const formatNumber = (value) => {
@@ -246,23 +239,6 @@ const BetSlip = ({
     return hasDecimal ? value.toFixed(2) : value;
   };
   /* Adding red or green color on odd */
-  const updateElementClass = (elementId) => {
-    const element = document.getElementById(elementId);
-    if (element) {
-      if (parseFloat(element.innerText) > 0) {
-        element.removeAttribute("class");
-        element.classList.add("text-success");
-      } else {
-        element.removeAttribute("class");
-        element.classList.add("text-danger");
-      }
-    }
-  };
-  useEffect(() => {
-    updateElementClass("oddOne");
-    updateElementClass("oddTwo");
-    updateElementClass("oddThree");
-  }, [oddStake, oddStakeLay1, oddStakeLay2]);
 
   useEffect(() => {
     if (betDelay > 0) {
@@ -322,7 +298,10 @@ const BetSlip = ({
                       </h2>
                       <div _ngcontent-ng-c2459892542="" className="action-btns">
                         <button
-                          onClick={() => setOpenBetSlip(false)}
+                          onClick={() => {
+                            setOpenBetSlip(false);
+                            setPredictOdds([]);
+                          }}
                           _ngcontent-ng-c2459892542=""
                           mat-button=""
                           mat-dialog-close=""
@@ -534,201 +513,49 @@ const BetSlip = ({
                             _ngcontent-ng-c2459892542=""
                             className="pred-pl-wrap"
                           >
-                            <p
-                              _ngcontent-ng-c2459892542=""
-                              className="pred-pl-row ng-star-inserted"
-                            >
-                              <strong _ngcontent-ng-c2459892542="">
-                                {placeBetValues?.name[0]}
-                              </strong>
-                              <span
-                                style={{ fontSize: "10px", textAlign: "right" }}
-                                _ngcontent-ng-c2459892542=""
-                                className={`${
-                                  placeBetValues?.pnl &&
-                                  placeBetValues?.pnl[0] > 0
-                                    ? "text-success"
-                                    : "text-danger"
-                                }`}
-                              >
-                                {placeBetValues?.pnl[0]}
-                              </span>
-                              <span
-                                style={{ fontSize: "10px", textAlign: "right" }}
-                                id="oddOne"
-                              >
-                                {placeBetValues?.back &&
-                                  oddStake != 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".1") &&
-                                  oddStake}
-
-                                {placeBetValues?.back &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".2") &&
-                                  oddStakeLay2}
-
-                                {placeBetValues?.back &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".3") &&
-                                  oddStakeLay1}
-                                {placeBetValues?.lay &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".1") &&
-                                  oddStake}
-
-                                {placeBetValues?.lay &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".2") &&
-                                  oddStakeLay2}
-
-                                {placeBetValues?.lay &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".3") &&
-                                  oddStakeLay1}
-                              </span>
-                            </p>
-
-                            <p
-                              _ngcontent-ng-c2459892542=""
-                              className="pred-pl-row ng-star-inserted"
-                            >
-                              <strong _ngcontent-ng-c2459892542="">
-                                {placeBetValues?.name?.length > 0
-                                  ? placeBetValues?.name[1]
-                                  : null}
-                              </strong>
-
-                              <span
-                                style={{ fontSize: "10px", textAlign: "right" }}
-                                className={`${
-                                  placeBetValues?.pnl &&
-                                  placeBetValues?.pnl[1] > 0
-                                    ? "text-success"
-                                    : "text-danger"
-                                }`}
-                              >
-                                {placeBetValues?.pnl?.length > 1 &&
-                                  placeBetValues?.pnl[1]}
-                              </span>
-
-                              <span
-                                style={{ fontSize: "10px", textAlign: "right" }}
-                                id="oddTwo"
-                              >
-                                {placeBetValues?.back &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".1") &&
-                                  oddStakeLay1}
-
-                                {placeBetValues?.back &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".2") &&
-                                  oddStake}
-
-                                {placeBetValues?.back &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".3") &&
-                                  oddStakeLay2}
-
-                                {placeBetValues?.lay &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".1") &&
-                                  oddStakeLay1}
-
-                                {placeBetValues?.lay &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".2") &&
-                                  oddStake}
-
-                                {placeBetValues?.lay &&
-                                  oddStake !== 0 &&
-                                  totalSize?.toString().length > 0 &&
-                                  selectionId.includes(".3") &&
-                                  oddStakeLay2}
-                              </span>
-                            </p>
-                            {placeBetValues?.name?.length > 2 && (
-                              <p
-                                _ngcontent-ng-c2459892542=""
-                                className="pred-pl-row ng-star-inserted"
-                              >
-                                <strong _ngcontent-ng-c2459892542="">
-                                  {placeBetValues?.name?.length > 2
-                                    ? placeBetValues?.name[2]
-                                    : null}
-                                </strong>
-
-                                <span
-                                  style={{
-                                    fontSize: "10px",
-                                    textAlign: "right",
-                                  }}
-                                  className={`${
-                                    placeBetValues?.pnl &&
-                                    placeBetValues?.pnl[1] > 0
-                                      ? "text-success"
-                                      : "text-danger"
-                                  }`}
+                            {predictOdds?.map((predictOdd, i) => {
+                              return (
+                                <p
+                                  key={i}
+                                  _ngcontent-ng-c2459892542=""
+                                  className="pred-pl-row ng-star-inserted"
                                 >
-                                  {placeBetValues?.pnl?.length > 2 &&
-                                    placeBetValues?.pnl[2]}
-                                </span>
-
-                                <span
-                                  style={{
-                                    fontSize: "10px",
-                                    textAlign: "right",
-                                  }}
-                                  id="oddThree"
-                                >
-                                  {placeBetValues?.back &&
-                                    oddStake !== 0 &&
-                                    totalSize?.toString().length > 0 &&
-                                    selectionId.includes(".1") &&
-                                    oddStakeLay2}
-
-                                  {placeBetValues?.back &&
-                                    oddStake !== 0 &&
-                                    totalSize?.toString().length > 0 &&
-                                    selectionId.includes(".2") &&
-                                    oddStakeLay1}
-
-                                  {placeBetValues?.back &&
-                                    oddStake !== 0 &&
-                                    totalSize?.toString().length > 0 &&
-                                    selectionId.includes(".3") &&
-                                    oddStake}
-                                  {placeBetValues?.lay &&
-                                    oddStake !== 0 &&
-                                    totalSize?.toString().length > 0 &&
-                                    selectionId.includes(".1") &&
-                                    oddStakeLay2}
-
-                                  {placeBetValues?.lay &&
-                                    oddStake !== 0 &&
-                                    totalSize?.toString().length > 0 &&
-                                    selectionId.includes(".2") &&
-                                    oddStakeLay1}
-
-                                  {placeBetValues?.lay &&
-                                    oddStake !== 0 &&
-                                    totalSize?.toString().length > 0 &&
-                                    selectionId.includes(".3") &&
-                                    oddStake}
-                                </span>
-                              </p>
-                            )}
+                                  <strong _ngcontent-ng-c2459892542="">
+                                    {predictOdd?.name}
+                                  </strong>
+                                  <span
+                                    style={{
+                                      fontSize: "10px",
+                                      textAlign: "right",
+                                    }}
+                                    _ngcontent-ng-c2459892542=""
+                                    className={`${
+                                      predictOdd?.exposure &&
+                                      placeBetValues?.exposure > 0
+                                        ? "text-success"
+                                        : "text-danger"
+                                    }`}
+                                  >
+                                    {predictOdd?.exposure > 0 &&
+                                      predictOdd?.exposure}
+                                  </span>
+                                  <span
+                                    className={`${
+                                      predictOdd?.updatedExposure &&
+                                      placeBetValues?.updatedExposure > 0
+                                        ? "text-success"
+                                        : "text-danger"
+                                    }`}
+                                    style={{
+                                      fontSize: "10px",
+                                      textAlign: "right",
+                                    }}
+                                  >
+                                    {predictOdd?.updatedExposure}
+                                  </span>
+                                </p>
+                              );
+                            })}
                           </div>
                         ) : (
                           <div></div>

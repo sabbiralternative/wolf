@@ -30,6 +30,7 @@ const StateProvider = ({ children }) => {
   const [showBonusRule, setShowBonusRule] = useState(false);
   const [openBetSlip, setOpenBetSlip] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
+  const [predictOdds, setPredictOdds] = useState([]);
 
   const [noticeLoaded, setNoticeLoaded] = useState(false);
   const baseUrl = notice?.result?.settings?.baseUrl;
@@ -147,6 +148,8 @@ const StateProvider = ({ children }) => {
     setOpenBetSlip,
     showOTP,
     setShowOTP,
+    predictOdds,
+    setPredictOdds,
   };
   return (
     <StateContext.Provider value={stateInfo}>{children}</StateContext.Provider>

@@ -25,12 +25,12 @@ const Login = ({
   const [disable, setDisable] = useState(false);
   /* Close modal click out side */
   const warningRef = useRef();
-  const loginRef = useRef();
-  useCloseModalClickOutside(loginRef, () => {
-    if (!warningRef.current) {
-      setShowLogin(false);
-    }
-  });
+  // const loginRef = useRef();
+  // useCloseModalClickOutside(loginRef, () => {
+  //   if (!warningRef.current) {
+  //     setShowLogin(false);
+  //   }
+  // });
 
   /* handle login user */
   const onSubmit = async ({ username, password }) => {
@@ -163,7 +163,6 @@ const Login = ({
               position: "static",
               marginBottom: "10px",
             }}
-            ref={loginRef}
           >
             <div
               className="cdk-visually-hidden cdk-focus-trap-anchor"
@@ -174,6 +173,7 @@ const Login = ({
               id="LoginComponent"
               role="dialog"
               aria-modal="true"
+              // ref={loginRef}
               // style="--mat-dialog-transition-duration: 150ms;"
             >
               <div className="mdc-dialog__container">
