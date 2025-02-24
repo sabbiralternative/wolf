@@ -536,7 +536,7 @@ const BetSlip = ({
                                         : "text-danger"
                                     }`}
                                   >
-                                    {predictOdd?.exposure > 0 &&
+                                    {predictOdd?.exposure !== 0 &&
                                       predictOdd?.exposure}
                                   </span>
                                   <span
