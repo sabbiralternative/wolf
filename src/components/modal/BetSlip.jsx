@@ -542,7 +542,7 @@ const BetSlip = ({
                                   <span
                                     className={`${
                                       predictOdd?.updatedExposure &&
-                                      placeBetValues?.updatedExposure > 0
+                                      predictOdd?.updatedExposure > 0
                                         ? "text-success"
                                         : "text-danger"
                                     }`}
