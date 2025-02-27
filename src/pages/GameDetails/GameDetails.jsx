@@ -15,6 +15,7 @@ import useBalance from "../../hooks/useBalance";
 import handleDecryptData from "../../utils/handleDecryptData";
 import Score from "./Score";
 import { useSportsVideo } from "../../hooks/useIFrame";
+import ScoreCard from "./ScoreCard";
 /* eslint-disable react/no-unknown-property */
 const GameDetails = () => {
   useEffect(() => {
@@ -237,6 +238,9 @@ const GameDetails = () => {
               setShowScore={setShowScore}
               score={score}
             />
+            {data?.[0]?.score2?.length > 0 && (
+              <ScoreCard score2={data?.[0]?.score2?.[0]} />
+            )}
             {tabs === "market" && (
               <MarketTab
                 iFrame={iFrame}
