@@ -238,9 +238,10 @@ const GameDetails = () => {
               setShowScore={setShowScore}
               score={score}
             />
-            {data?.[0]?.score2?.length > 0 && (
-              <ScoreCard score2={data?.[0]?.score2?.[0]} />
-            )}
+            {data?.[0]?.score2?.length !== 0 &&
+              !Array.isArray(data?.[0]?.score2) && (
+                <ScoreCard score2={data?.[0]?.score2} />
+              )}
             {tabs === "market" && (
               <MarketTab
                 iFrame={iFrame}

@@ -443,7 +443,7 @@ html * {
 
 .sc_cw-main-container {
   width: 100% !important;
-  height: 168px;
+  /* height: 168px; */
   background-color: #fff;
   font-size: 10px !important;
 }
