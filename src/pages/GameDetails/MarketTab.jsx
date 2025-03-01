@@ -9,6 +9,7 @@ import HorseGreyhound from "./GameType/HorseGreyhound";
 import OverByOver from "./GameType/OverByOver";
 import SportsBook from "./GameType/SportsBook/SportsBook";
 import { useParams } from "react-router-dom";
+import ScoreCard from "./ScoreCard";
 
 /* eslint-disable react/no-unknown-property */
 const MarketTab = ({
@@ -209,6 +210,10 @@ const MarketTab = ({
             </div>
 
             <div _ngcontent-ng-c942213636="" className="mkt-tab-section">
+              {data?.[0]?.score2?.length !== 0 &&
+                !Array.isArray(data?.[0]?.score2) && (
+                  <ScoreCard score2={data?.[0]?.score2} />
+                )}
               {match_odds && match_odds?.length > 0 && (
                 <MatchOdds
                   match_odd={match_odds}
