@@ -35,7 +35,12 @@ const StateProvider = ({ children }) => {
   const [noticeLoaded, setNoticeLoaded] = useState(false);
   const baseUrl = notice?.result?.settings?.baseUrl;
   useEffect(() => {
-    getSetApis(setNoticeLoaded, baseUrl);
+    const fetchAPI = () => {
+      getSetApis(setNoticeLoaded, baseUrl);
+    };
+    fetchAPI();
+    const interval = setInterval(fetchAPI, 300000);
+    return () => clearInterval(interval);
   }, [noticeLoaded, baseUrl]);
 
   /* Get token from locale storage */

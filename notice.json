@@ -110,7 +110,8 @@
       "bonus": "https://api7.live/api/exchange/diamond/bonus",
       "index": "https://api7.live/api/exchange/diamond/index",
       "pg": "https://api7.live/api/exchange/diamond/pg",
-      "language": "https://api7.live/api/exchange/diamond/language"
+      "language": "https://api7.live/api/exchange/diamond/language",
+      "utr": "https://b2c.bet/deposit/utr"
     }
   },
   "success": true

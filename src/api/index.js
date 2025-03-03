@@ -51,6 +51,7 @@ export const API = {
   index: "",
   pg: "",
   language: "",
+  utr: "",
 };
 
 export const Settings = {

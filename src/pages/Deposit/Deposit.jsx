@@ -15,8 +15,10 @@ import toast from "react-hot-toast";
 import { AxiosSecure } from "../../lib/AxiosSecure";
 import useLanguage from "../../hooks/useLanguage";
 import USDT from "./USDT";
+import useUTR from "../../hooks/utr";
 
 const Deposit = () => {
+  const { mutate: getUTR } = useUTR();
   const { token, copyTextSuccess, setCopyTextSuccess } = useContextState();
   const paymentAmount = localStorage.getItem("paymentAmount");
   const [tabs, setTabs] = useState("");
@@ -105,14 +107,19 @@ const Deposit = () => {
         const data = res.data;
 
         if (data?.success) {
+          getUTR(data?.filePath, {
+            onSuccess: (data) => {
+              if (data?.success) {
+                setUtr(data?.utr);
+              }
+            },
+          });
           setLoading(false);
-          setUtr(data?.utr);
           setUploadedImage(data?.fileName);
           setFilePath(data?.filePath);
           setImage(null);
         } else {
           setLoading(false);
-          setUtr(null);
           setImage(null);
           setFilePath("");
           setUploadedImage(null);
@@ -121,7 +128,7 @@ const Deposit = () => {
       };
       handleSubmitImage();
     }
-  }, [image, token]);
+  }, [image, token, getUTR]);
 
   const handleDepositSubmit = async () => {
     if (uploadedImage || utr) {
