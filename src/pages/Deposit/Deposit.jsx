@@ -110,7 +110,9 @@ const Deposit = () => {
           getUTR(data?.filePath, {
             onSuccess: (data) => {
               if (data?.success) {
-                setUtr(data?.utr);
+                if (data?.utr !== null) {
+                  setUtr(data?.utr);
+                }
               }
             },
           });
@@ -470,7 +472,7 @@ const Deposit = () => {
                         _ngcontent-ng-c3816252360=""
                         placeholder="Enter payment UTR here"
                         type="number"
-                        value={utr}
+                        value={utr !== null && utr}
                       />
                     </div>
                     <button
