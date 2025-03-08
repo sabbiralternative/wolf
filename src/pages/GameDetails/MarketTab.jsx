@@ -210,7 +210,8 @@ const MarketTab = ({
             </div>
 
             <div _ngcontent-ng-c942213636="" className="mkt-tab-section">
-              {data?.[0]?.score2?.length !== 0 &&
+              {eventTypeId == 4 &&
+                data?.[0]?.score2?.length !== 0 &&
                 !Array.isArray(data?.[0]?.score2) && (
                   <ScoreCard score2={data?.[0]?.score2} />
                 )}
