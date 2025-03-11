@@ -24,7 +24,7 @@ const GameDetails = () => {
   const { eventId, eventTypeId } = useParams();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [horseGreyhound, setHorseGreyhound] = useState([]);
+
   const [score, setScore] = useState({});
   const [sportsBook, setSportsBook] = useState({});
   const { placeBetValues, token, openBetSlip, setOpenBetSlip, tokenLoading } =
@@ -76,7 +76,7 @@ const GameDetails = () => {
       const data = res.data;
       const decryptionData = await handleDecryptData(JSON.stringify(data));
       setLoading(false);
-      setHorseGreyhound(decryptionData);
+
       if (decryptionData?.success) {
         setData(decryptionData?.result);
         setScore(decryptionData?.score);
@@ -242,7 +242,6 @@ const GameDetails = () => {
             {tabs === "market" && (
               <MarketTab
                 iFrame={iFrame}
-                horseGreyhound={horseGreyhound}
                 score={score}
                 sportsBook={sportsBook}
                 data={data}

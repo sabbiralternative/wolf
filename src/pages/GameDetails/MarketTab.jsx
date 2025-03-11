@@ -15,7 +15,6 @@ import ScoreCard from "./ScoreCard";
 const MarketTab = ({
   sportsBook,
   data,
-  horseGreyhound,
   exposer,
   setOpenBetSlip,
   showIFrame,
@@ -278,7 +277,7 @@ const MarketTab = ({
 
               {eventTypeId == 7 || eventTypeId == 4339 ? (
                 <HorseGreyhound
-                  data={horseGreyhound}
+                  data={data}
                   setOpenBetSlip={setOpenBetSlip}
                   setPlaceBetValues={setPlaceBetValues}
                   exposer={exposer}
