@@ -73,8 +73,12 @@ const StateProvider = ({ children }) => {
   useEffect(() => {
     if (noticeLoaded) {
       /* Dynamically get  footer logo  */
-      const icon = `${API.assets}/${Settings.siteUrl}/nav-sprite.svg`;
-      setIcon(icon);
+      if (Settings.build === "production") {
+        const icon = `${API.assets}/${Settings.siteUrl}/nav-sprite.svg`;
+        setIcon(icon);
+      } else {
+        setIcon("/assets/img/logo.svg");
+      }
 
       /* Dynamically append  theme css  */
       const link = document.createElement("link");
@@ -89,8 +93,13 @@ const StateProvider = ({ children }) => {
       }
 
       /*Dynamically append Logo */
-      const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logoFormat}`;
-      setLogo(logo);
+      if (Settings.build === "production") {
+        const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logoFormat}`;
+        setLogo(logo);
+      } else {
+        setLogo("/assets/img/logo.svg");
+      }
+
       /* Dynamically append  favicon  */
       const FavIconLink = document.createElement("link");
       FavIconLink.rel = "icon";
