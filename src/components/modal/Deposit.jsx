@@ -8,8 +8,11 @@ import useGetCoin from "../../hooks/BankAccount/useGetCoin";
 import useLanguage from "../../hooks/useLanguage";
 import { languageValue } from "../../utils/language";
 import { LanguageKey } from "../../constant/constant";
+import toast from "react-hot-toast";
+import useDepositBreakdown from "../../hooks/depositBreakdown";
 
 const Deposit = ({ setSHowDeposit }) => {
+  const { mutate: handleDepositBreakdown } = useDepositBreakdown();
   const { valueByLanguage } = useLanguage();
   const { paymentAmount, setPaymentAmount } = useContextState();
   const withdrawRef = useRef();
@@ -25,9 +28,22 @@ const Deposit = ({ setSHowDeposit }) => {
   const handleNavigateDeposit = (e) => {
     e.preventDefault();
     if (paymentAmount) {
-      localStorage.setItem("paymentAmount", paymentAmount);
-      navigate("/profile/deposit");
-      setSHowDeposit(false);
+      handleDepositBreakdown(
+        { paymentAmount },
+        {
+          onSuccess: (data) => {
+            if (data?.minimumDeposit && paymentAmount < data?.minimumDeposit) {
+              toast.error(`Minimum deposit amount is ${data?.minimumDeposit}`);
+            } else {
+              localStorage.setItem("paymentAmount", paymentAmount);
+              navigate("/profile/deposit");
+              setSHowDeposit(false);
+            }
+          },
+        }
+      );
+    } else {
+      return toast.error("Amount is required");
     }
   };
   return (
@@ -154,7 +170,6 @@ const Deposit = ({ setSHowDeposit }) => {
                         className="modal-footer"
                       >
                         <button
-                          disabled={paymentAmount < 100}
                           _ngcontent-ng-c2000663781=""
                           type="submit"
                           mat-button=""

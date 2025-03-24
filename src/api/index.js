@@ -52,6 +52,7 @@ export const API = {
   pg: "",
   language: "",
   utr: "",
+  depositBreakdown: "",
 };
 
 export const Settings = {
