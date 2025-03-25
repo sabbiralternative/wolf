@@ -27,15 +27,21 @@ const Deposit = ({ setSHowDeposit }) => {
 
   const handleNavigateDeposit = (e) => {
     e.preventDefault();
-    if (paymentAmount) {
+
+    const floatAmount = parseFloat(paymentAmount);
+
+    if (typeof floatAmount !== "number") {
+      return toast.error("Please enter a valid number");
+    }
+    if (floatAmount) {
       handleDepositBreakdown(
-        { paymentAmount },
+        { amount: floatAmount },
         {
           onSuccess: (data) => {
-            if (data?.minimumDeposit && paymentAmount < data?.minimumDeposit) {
+            if (data?.minimumDeposit && floatAmount < data?.minimumDeposit) {
               toast.error(`Minimum deposit amount is ${data?.minimumDeposit}`);
             } else {
-              localStorage.setItem("paymentAmount", paymentAmount);
+              localStorage.setItem("paymentAmount", floatAmount);
               navigate("/profile/deposit");
               setSHowDeposit(false);
             }
