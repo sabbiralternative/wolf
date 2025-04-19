@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import usePassbook from "../../hooks/usePassbook";
 import useContextState from "../../hooks/useContextState";
+import moment from "moment";
 
 /* eslint-disable react/no-unknown-property */
 const Passbook = () => {
@@ -13,12 +14,14 @@ const Passbook = () => {
       navigate(`/passbook/${item?.marketId}`);
     }
   };
-
+  const getUniqueDate = Array.from(
+    new Set(passbook?.map((item) => item?.settledTime))
+  );
   return (
     <div
       _ngcontent-ng-c3622565476=""
       className="page-body"
-      style={{ minHeight: "100vh"}}
+      style={{ minHeight: "100vh" }}
     >
       <div _ngcontent-ng-c3622565476="" className="passbook-page-wrap">
         <div
@@ -79,65 +82,146 @@ const Passbook = () => {
                                 _ngcontent-ng-c773751984=""
                                 className="mat-accordion bet-history-accordion ng-star-inserted"
                               >
-                                {token ? (
-                                  passbook?.map((item, i) => {
-                                    return (
-                                      <div
-                                        onClick={() =>
-                                          handleNavigateSinglePassbook(item)
-                                        }
-                                        key={i}
-                                        _ngcontent-ng-c773751984=""
-                                        hidetoggle="true"
-                                        className="mat-expansion-panel ng-tns-c1859850774-77 ng-star-inserted mat-expanded mat-expansion-panel-spacing"
-                                      >
-                                        <div
-                                          _ngcontent-ng-c773751984=""
-                                          role="button"
-                                          className="mat-expansion-panel-header mat-focus-indicator ng-tns-c2690051721-78 ng-tns-c1859850774-77 mat-expansion-toggle-indicator-after ng-star-inserted mat-expanded"
-                                          id="mat-expansion-panel-header-8"
-                                          aria-controls="cdk-accordion-child-8"
-                                          aria-expanded="true"
-                                          aria-disabled="false"
-                                        >
-                                          <span className="mat-content ng-tns-c2690051721-78 mat-content-hide-toggle">
+                                {token && getUniqueDate?.length > 0 ? (
+                                  <>
+                                    {getUniqueDate?.map((date) => {
+                                      const filterByDate = passbook?.filter(
+                                        (item) => item?.settledTime === date
+                                      );
+                                      const totalPnl = filterByDate?.reduce(
+                                        (acc, curr) => {
+                                          return acc + curr.memberWin;
+                                        },
+                                        0
+                                      );
+                                      return (
+                                        <div key={date}>
+                                          <div
+                                            style={{
+                                              marginBottom: "3px",
+                                              color: "white",
+                                              borderRadius: "10px",
+                                              display: "flex",
+                                              alignItems: "center",
+                                              justifyContent: "space-between",
+                                              padding: "9px 10px",
+                                              backgroundColor:
+                                                "var(--primary-color)",
+                                              maxWidth: "calc(100% - 10px)",
+                                              margin: "8px auto 0",
+                                            }}
+                                          >
                                             <div
-                                              _ngcontent-ng-c773751984=""
-                                              className="mat-expansion-panel-header-title ng-tns-c2690051721-78"
+                                              style={{
+                                                fontSize: "11px",
+
+                                                lineHeight: "140%",
+                                              }}
                                             >
-                                              <h3 _ngcontent-ng-c773751984="">
-                                                {item?.narration}
-                                              </h3>
-                                              <p _ngcontent-ng-c773751984="">
-                                                {item?.settledTime}
-                                              </p>
+                                              {moment(date).format(
+                                                "Do-MMM-YYYY"
+                                              )}
                                             </div>
                                             <div
-                                              _ngcontent-ng-c773751984=""
-                                              className="mat-expansion-panel-header-description ng-tns-c2690051721-78"
+                                              style={{
+                                                fontSize: "11px",
+
+                                                lineHeight: "140%",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                              }}
                                             >
+                                              <span>Total PL</span>
                                               <span
-                                                _ngcontent-ng-c773751984=""
-                                                className={`${
-                                                  item?.memberWin > 0
-                                                    ? "Won"
-                                                    : "Lost"
-                                                }`}
+                                                style={{
+                                                  marginTop: "-2px",
+                                                  marginLeft: "4px",
+                                                }}
                                               >
-                                                {item?.memberWin}
+                                                :
+                                              </span>
+                                              <span
+                                                style={{
+                                                  marginLeft: "4px",
+                                                  textShadow: "1px 1px #000000",
+                                                  color:
+                                                    totalPnl > 0
+                                                      ? "#48BB78"
+                                                      : totalPnl < 0
+                                                      ? "#F56565"
+                                                      : "#FFFFFF",
+                                                }}
+                                              >
+                                                {totalPnl}
                                               </span>
                                             </div>
-                                          </span>
+                                          </div>
+
+                                          {passbook?.map((item, i) => {
+                                            return (
+                                              <div
+                                                onClick={() =>
+                                                  handleNavigateSinglePassbook(
+                                                    item
+                                                  )
+                                                }
+                                                key={i}
+                                                _ngcontent-ng-c773751984=""
+                                                hidetoggle="true"
+                                                className="mat-expansion-panel ng-tns-c1859850774-77 ng-star-inserted mat-expanded mat-expansion-panel-spacing"
+                                              >
+                                                <div
+                                                  _ngcontent-ng-c773751984=""
+                                                  role="button"
+                                                  className="mat-expansion-panel-header mat-focus-indicator ng-tns-c2690051721-78 ng-tns-c1859850774-77 mat-expansion-toggle-indicator-after ng-star-inserted mat-expanded"
+                                                  id="mat-expansion-panel-header-8"
+                                                  aria-controls="cdk-accordion-child-8"
+                                                  aria-expanded="true"
+                                                  aria-disabled="false"
+                                                >
+                                                  <span className="mat-content ng-tns-c2690051721-78 mat-content-hide-toggle">
+                                                    <div
+                                                      _ngcontent-ng-c773751984=""
+                                                      className="mat-expansion-panel-header-title ng-tns-c2690051721-78"
+                                                    >
+                                                      <h3 _ngcontent-ng-c773751984="">
+                                                        {item?.narration}
+                                                      </h3>
+                                                      <p _ngcontent-ng-c773751984="">
+                                                        {item?.settledTime}
+                                                      </p>
+                                                    </div>
+                                                    <div
+                                                      _ngcontent-ng-c773751984=""
+                                                      className="mat-expansion-panel-header-description ng-tns-c2690051721-78"
+                                                    >
+                                                      <span
+                                                        _ngcontent-ng-c773751984=""
+                                                        className={`${
+                                                          item?.memberWin > 0
+                                                            ? "Won"
+                                                            : "Lost"
+                                                        }`}
+                                                      >
+                                                        {item?.memberWin}
+                                                      </span>
+                                                    </div>
+                                                  </span>
+                                                </div>
+                                                <div
+                                                  role="region"
+                                                  className="mat-expansion-panel-content ng-tns-c1859850774-77 ng-trigger ng-trigger-bodyExpansion"
+                                                  id="cdk-accordion-child-8"
+                                                  aria-labelledby="mat-expansion-panel-header-8"
+                                                ></div>
+                                              </div>
+                                            );
+                                          })}
                                         </div>
-                                        <div
-                                          role="region"
-                                          className="mat-expansion-panel-content ng-tns-c1859850774-77 ng-trigger ng-trigger-bodyExpansion"
-                                          id="cdk-accordion-child-8"
-                                          aria-labelledby="mat-expansion-panel-header-8"
-                                        ></div>
-                                      </div>
-                                    );
-                                  })
+                                      );
+                                    })}
+                                  </>
                                 ) : (
                                   <div
                                     _ngcontent-ng-c2482505616=""
