@@ -70,6 +70,7 @@ const Footer = () => {
       window.chaport.open();
     });
   };
+
   return (
     <>
       {/* My market modal */}
@@ -79,6 +80,30 @@ const Footer = () => {
       location.pathname !== "/profile/deposit" &&
       !location.pathname?.includes("/casino") ? (
         <div _ngcontent-ng-c943649379="" className="page-footer">
+          <div
+            _ngcontent-ng-c943649379=""
+            className="floating-btns"
+            style={{ cursor: "pointer", bottom: "120px" }}
+          >
+            <div
+              _ngcontent-ng-c943649379=""
+              className="btn-item ng-star-inserted"
+            >
+              <div _ngcontent-ng-c943649379="" className="btn-wrap whatsapp">
+                {socialLink?.telegramLink && location.pathname === "/" ? (
+                  <img
+                    onClick={() =>
+                      window.open(socialLink?.telegramLink, "_blank")
+                    }
+                    style={{ height: "40px", width: "40px" }}
+                    _ngcontent-ng-c943649379=""
+                    alt="WhatsApp"
+                    src={"/assets/img/telegram.png"}
+                  />
+                ) : null}
+              </div>
+            </div>
+          </div>
           <div
             _ngcontent-ng-c943649379=""
             className="floating-btns"
