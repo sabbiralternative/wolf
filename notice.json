@@ -31,12 +31,12 @@
       "b2c": true,
       "language": true,
       "build": "development",
-      "betDelay": true
-    },
-    "logo": {
-      "height": 55,
-      "width": 125,
-      "format": "svg"
+      "betDelay": true,
+      "logo": {
+        "height": 55,
+        "width": 125,
+        "format": "svg"
+      }
     },
 
     "endpoint": {

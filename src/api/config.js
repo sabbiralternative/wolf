@@ -66,9 +66,9 @@ export const getSetApis = (setNoticeLoaded, baseUrl) => {
         API.bonus = data?.result?.endpoint?.bonus;
         API.index = data?.result?.endpoint?.index;
 
-        Settings.logoFormat = data?.result?.logo?.format;
-        Settings.logoHeight = data?.result?.logo?.height;
-        Settings.logoWidth = data?.result?.logo?.width;
+        Settings.logoFormat = data?.result?.settings?.logo?.format;
+        Settings.logoHeight = data?.result?.settings?.logo?.height;
+        Settings.logoWidth = data?.result?.settings?.logo?.width;
         Settings.bonus = data?.result?.settings?.bonus;
         Settings.mac88 = data?.result?.settings?.mac88;
         Settings.build = data?.result?.settings?.build;
