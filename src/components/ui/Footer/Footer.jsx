@@ -7,6 +7,7 @@ import useGetVersion from "../../../hooks/useGetVersion";
 import useLanguage from "../../../hooks/useLanguage";
 import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../constant/constant";
+import img from "../../../../public/assets/img";
 
 /* eslint-disable react/no-unknown-property */
 const Footer = () => {
@@ -80,6 +81,30 @@ const Footer = () => {
       location.pathname !== "/profile/deposit" &&
       !location.pathname?.includes("/casino") ? (
         <div _ngcontent-ng-c943649379="" className="page-footer">
+          <div
+            _ngcontent-ng-c943649379=""
+            className="floating-btns"
+            style={{ cursor: "pointer", bottom: "170px" }}
+          >
+            <div
+              _ngcontent-ng-c943649379=""
+              className="btn-item ng-star-inserted"
+            >
+              <div _ngcontent-ng-c943649379="" className="btn-wrap whatsapp">
+                {socialLink?.instagramLink && location.pathname === "/" ? (
+                  <img
+                    onClick={() =>
+                      window.open(socialLink?.instagramLink, "_blank")
+                    }
+                    style={{ height: "40px", width: "40px" }}
+                    _ngcontent-ng-c943649379=""
+                    alt="WhatsApp"
+                    src={img.instagram}
+                  />
+                ) : null}
+              </div>
+            </div>
+          </div>
           <div
             _ngcontent-ng-c943649379=""
             className="floating-btns"
