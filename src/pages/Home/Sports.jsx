@@ -26,7 +26,7 @@ const Sports = () => {
   useEffect(() => {
     const gameData = async () => {
       if (sportsType !== null) {
-        const apiUrl = `${API.group}/${sportsType}`;
+        const apiUrl = `${API.groupSportsBook}/${sportsType}`;
         const res = await axios.get(apiUrl, {
           headers: {
             "Cache-Control": "public",

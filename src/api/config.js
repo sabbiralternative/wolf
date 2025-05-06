@@ -18,7 +18,7 @@ export const getSetApis = (setNoticeLoaded, baseUrl) => {
         API.accessToken = data?.result?.endpoint?.accessToken;
         API.balance = data?.result?.endpoint?.balance;
         API.changePassword = data?.result?.endpoint?.changePassword;
-        API.group = data?.result?.endpoint?.group;
+        API.groupSportsBook = data?.result?.endpoint?.groupSportsBook;
         API.inPlayAndPopularEvents =
           data?.result?.endpoint?.inPlayAndPopularEvents;
         API.ladder = data?.result?.endpoint?.ladder;

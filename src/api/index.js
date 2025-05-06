@@ -2,7 +2,7 @@ export const API = {
   accessToken: "",
   balance: "",
   changePassword: "",
-  group: "",
+  groupSportsBook: "",
   inPlayAndPopularEvents: "",
   ladder: "",
   login: "",
