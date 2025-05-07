@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import useCloseModalClickOutside from "../../hooks/useCloseModalClickOutside";
-import { API } from "../../api";
+import { API, Settings } from "../../api";
 import { jwtDecode } from "jwt-decode";
 import { AxiosSecure } from "../../lib/AxiosSecure";
 import useContextState from "../../hooks/useContextState";
@@ -281,7 +281,7 @@ const AddBank = ({
                               className="ifsc-input ng-untouched ng-pristine ng-invalid"
                             />
                           </div>
-                          {mobile && (
+                          {mobile && Settings.otp && (
                             <div
                               style={{ position: "relative" }}
                               _ngcontent-ng-c1372444345=""
@@ -341,7 +341,7 @@ const AddBank = ({
                               )}
                             </div>
                           )}
-                          {mobile && (
+                          {mobile && Settings.otp && (
                             <div
                               style={{ position: "relative" }}
                               _ngcontent-ng-c1372444345=""
