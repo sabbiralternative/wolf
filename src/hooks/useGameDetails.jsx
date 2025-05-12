@@ -4,20 +4,21 @@ import { API } from "../api";
 
 /* Game details api we are not using in this project */
 const useGameDetails = (eventTypeId, eventId) => {
-  const { data,refetch:refetchGame } = useQuery({
+  const { data, refetch: refetchGame } = useQuery({
     queryKey: ["gameDetails"],
-   
+
     queryFn: async () => {
-      const res = await axios.get(`${API.odds}/${eventTypeId}/${eventId}`);
+      const res = await axios.get(
+        `${API.eventDetails}/${eventTypeId}/${eventId}`
+      );
       const data = res.data;
       if (data.success) {
         return data?.result;
       }
     },
     refetchInterval: 600,
-    
   });
-  return { data,refetchGame };
+  return { data, refetchGame };
 };
 
 export default useGameDetails;

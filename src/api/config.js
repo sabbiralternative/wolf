@@ -24,7 +24,7 @@ export const getSetApis = (setNoticeLoaded, baseUrl) => {
         API.ladder = data?.result?.endpoint?.ladder;
         API.login = data?.result?.endpoint?.login;
         API.notification = data?.result?.endpoint?.notification;
-        API.odds = data?.result?.endpoint?.odds;
+        API.eventDetails = data?.result?.endpoint?.eventDetails;
         API.order = data?.result?.endpoint?.order;
         API.updateButtonValues = data?.result?.endpoint?.updateButtonValues;
         API.activityLog = data?.result?.endpoint?.activityLog;

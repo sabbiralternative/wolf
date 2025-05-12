@@ -7,7 +7,7 @@ export const API = {
   ladder: "",
   login: "",
   notification: "",
-  odds: "",
+  eventDetails: "",
   order: "",
   updateButtonValues: "",
   activityLog: "",
