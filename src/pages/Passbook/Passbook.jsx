@@ -82,7 +82,7 @@ const Passbook = () => {
                                 _ngcontent-ng-c773751984=""
                                 className="mat-accordion bet-history-accordion ng-star-inserted"
                               >
-                                {token && getUniqueDate?.length > 0 ? (
+                                {token && getUniqueDate?.length > 0 && (
                                   <>
                                     {getUniqueDate?.map((date) => {
                                       const filterByDate = passbook?.filter(
@@ -222,13 +222,24 @@ const Passbook = () => {
                                       );
                                     })}
                                   </>
-                                ) : (
+                                )}
+                                {!token && (
                                   <div
                                     _ngcontent-ng-c2482505616=""
                                     className="no-data ng-star-inserted"
                                   >
                                     <p _ngcontent-ng-c2482505616="">
                                       Please login to view your passbook entries
+                                    </p>
+                                  </div>
+                                )}
+                                {token && getUniqueDate?.length === 0 && (
+                                  <div
+                                    _ngcontent-ng-c2482505616=""
+                                    className="no-data ng-star-inserted"
+                                  >
+                                    <p _ngcontent-ng-c2482505616="">
+                                      No passbook entries available
                                     </p>
                                   </div>
                                 )}

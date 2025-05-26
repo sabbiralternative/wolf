@@ -6,7 +6,7 @@
   "result": {
     "settings": {
       "siteTitle": "a23money",
-      "siteUrl": "a23money.com",
+      "siteUrl": "batman247.com",
       "interval": 800,
       "casino": "diamond",
       "register": true,
@@ -92,7 +92,7 @@
       "whatsapp": "https://api7.live/api/account/diamond/whatsapp",
       "otp": "https://api7.live/api/exchange/diamond/otp",
       "testCasino": "https://cache7.live/api/exchange/diamond/testCasino",
-      "assets": "https://api7.live/sitethemes",
+      "assets": "https://mythemedata.com/sitethemes",
       "myMarket": "https://api7.live/api/exchange/diamond/myMarket",
       "liveCasinoWolf": "https://api7.live/api/exchange/diamond/liveCasinoWolf",
       "slotsWolf": "https://api7.live/api/exchange/diamond/slotsWolf",
