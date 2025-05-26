@@ -9,7 +9,7 @@ const useSportsBook = (sportsType) => {
   const { data: sports, refetch: refetchSports } = useQuery({
     queryKey: ["sports"],
     queryFn: async () => {
-      const res = await axios.get(`${API.group}/${sportsType || 0}`, {
+      const res = await axios.get(`${API.groupSportsBook}/${sportsType || 0}`, {
         headers: {
           "Cache-Control": "public",
           "max-age": 1,
