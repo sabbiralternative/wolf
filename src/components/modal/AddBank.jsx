@@ -34,7 +34,7 @@ const AddBank = ({
   const handleBankCrud = async (e) => {
     e.preventDefault();
 
-    if (mobile && !addBank.otp) {
+    if (mobile && !addBank.otp && Settings.otp) {
       return toast.error("Please enter otp to add new account");
     }
 
