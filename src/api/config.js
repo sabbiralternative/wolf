@@ -70,6 +70,7 @@ export const getSetApis = (setNoticeLoaded, baseUrl) => {
         Settings.logoHeight = data?.result?.settings?.logo?.height;
         Settings.logoWidth = data?.result?.settings?.logo?.width;
         Settings.bonus = data?.result?.settings?.bonus;
+        Settings.otpWhatsapp = data?.result?.settings?.otpWhatsapp;
         Settings.mac88 = data?.result?.settings?.mac88;
         Settings.build = data?.result?.settings?.build;
         Settings.betFairCashOut = data?.result?.settings?.betFairCashOut;

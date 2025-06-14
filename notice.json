@@ -32,6 +32,7 @@
       "language": true,
       "build": "development",
       "betDelay": true,
+      "otpWhatsapp": true,
       "logo": {
         "height": 55,
         "width": 125,

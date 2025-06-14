@@ -307,7 +307,7 @@ const GetOTP = ({
                                   ? " Get OTP On Message"
                                   : "Proceed"}
                               </button>
-                              {Settings?.otpless && (
+                              {Settings?.otpWhatsapp && (
                                 <>
                                   <p
                                     _ngcontent-ng-c2806737617=""

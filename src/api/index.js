@@ -84,4 +84,5 @@ export const Settings = {
   bookmakerCashOut: "",
   language: "",
   betDelay: "",
+  otpWhatsapp: "",
 };
