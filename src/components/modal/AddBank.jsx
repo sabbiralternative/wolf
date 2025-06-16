@@ -403,6 +403,7 @@ const AddBank = ({
                                 type="text"
                                 formcontrolname="ifscCode"
                                 className="ifsc-input ng-untouched ng-pristine ng-invalid"
+                                maxLength={6}
                               />
                             </div>
                           )}
