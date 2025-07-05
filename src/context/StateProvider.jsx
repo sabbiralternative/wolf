@@ -10,6 +10,7 @@ const StateProvider = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [token, setToken] = useState("");
   const [showLogin, setShowLogin] = useState(false);
+  const [showChangePassModal, setShowChangePassModal] = useState(false);
 
   const [getToken, setGetToken] = useState(false);
   const [tokenLoading, setTokenLoading] = useState(true);
@@ -164,6 +165,8 @@ const StateProvider = ({ children }) => {
     setShowOTP,
     predictOdds,
     setPredictOdds,
+    showChangePassModal,
+    setShowChangePassModal,
   };
   return (
     <StateContext.Provider value={stateInfo}>{children}</StateContext.Provider>

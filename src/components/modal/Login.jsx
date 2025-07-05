@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useRef, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import useCloseModalClickOutside from "../../hooks/useCloseModalClickOutside";
+// import useCloseModalClickOutside from "../../hooks/useCloseModalClickOutside";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import UseEncryptData from "../../hooks/UseEncryptData";

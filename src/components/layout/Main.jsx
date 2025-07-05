@@ -44,12 +44,13 @@ const Main = () => {
     showBonusRule,
     setShowBonusRule,
     token,
+    showChangePassModal,
+    setShowChangePassModal,
     // tokenLoading,
     // isCheckedBonusToken,
     setTokenLoading,
   } = useContextState();
 
-  const [showChangePassModal, setShowChangePassModal] = useState("");
   const [successEditStake, setSuccessEditStake] = useState("");
   const navigate = useNavigate();
   const disabledDevtool = Settings.disabledDevtool;
