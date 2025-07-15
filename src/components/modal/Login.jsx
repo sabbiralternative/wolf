@@ -52,6 +52,11 @@ const Login = ({
           localStorage.setItem("depositMethod", JSON.stringify(res?.result));
         }
       }
+      const banner = data?.result?.banner;
+      if (banner) {
+        localStorage.setItem("banner", banner);
+      }
+      /* Set social login data to locale storage */
       /* Set token to localeStorage */
       localStorage.setItem("token", data.result.token);
       localStorage.setItem("memberId", data.result.memberId);
@@ -123,6 +128,10 @@ const Login = ({
         /* set button value to locale storage */
         const buttonValue = JSON.stringify(data.result.buttonValue.game);
         localStorage.setItem("buttonValue", buttonValue);
+        const banner = data?.result?.banner;
+        if (banner) {
+          localStorage.setItem("banner", banner);
+        }
         /* if in locale storage token and login name available and  data?.result?.changePassword === false */
         if (
           localStorage.getItem("token") &&

@@ -4,18 +4,22 @@ import LiveCasino from "./LiveCasino";
 import Sports from "./Sports";
 import useContextState from "../../hooks/useContextState";
 import LiveCasinoTab from "./LiveCasinoTab/LiveCasinoTab";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SliderImage from "./SliderImage";
 import useBannerImage from "../../hooks/useBannerImage";
 // import Banner from "./Banner";
 import useBalance from "../../hooks/useBalance";
 import { Settings } from "../../api";
 import Mac88 from "./Mac88";
+import Banner from "../../components/modal/Banner";
 // import MyMatches from "./MyMatches";
 
 /* eslint-disable react/no-unknown-property */
 const Home = () => {
-  const { sportsType, tokenLoading } = useContextState();
+  const [showModal, setShowModal] = useState(false);
+  const banner = localStorage.getItem("banner");
+  const { sportsType, tokenLoading, token, showChangePassModal } =
+    useContextState();
   const { bannerImage } = useBannerImage();
   const { refetchBalance } = useBalance();
   // const location = useLocation();
@@ -45,8 +49,19 @@ const Home = () => {
       item?.remove();
     });
   }, [bannerImage, sportsType]);
+
+  useEffect(() => {
+    const hasModalBeenShown = localStorage.getItem("hasModalBeenShown");
+    if (!hasModalBeenShown) {
+      setShowModal(true);
+    }
+  }, []);
+
   return (
     <>
+      {token && showModal && banner && !showChangePassModal && (
+        <Banner setShowModal={setShowModal} banner={banner} />
+      )}
       <div
         _ngcontent-ng-c943649379=""
         className="hydrated"
