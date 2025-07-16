@@ -48,7 +48,9 @@ const Main = () => {
     setShowChangePassModal,
     // tokenLoading,
     // isCheckedBonusToken,
+
     setTokenLoading,
+    showLogin,
   } = useContextState();
 
   const [successEditStake, setSuccessEditStake] = useState("");
@@ -191,6 +193,13 @@ const Main = () => {
     setShowVersionChange(false);
     window.location.reload();
   };
+
+  useEffect(() => {
+    const changePassword = localStorage.getItem("changePassword");
+    if (changePassword) {
+      setShowChangePassModal(true);
+    }
+  }, [showLogin, setShowChangePassModal, showChangePassModal]);
 
   return (
     <>

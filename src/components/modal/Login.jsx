@@ -89,6 +89,7 @@ const Login = ({
       if (data?.result?.changePassword) {
         setGetToken((prev) => !prev);
         setShowLogin(false);
+        localStorage.setItem("changePassword", true);
         setShowChangePassModal(true);
       }
     } else {
