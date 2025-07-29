@@ -1,7 +1,7 @@
 const Score = ({ score, eventTypeId }) => {
   return (
     <div>
-      {eventTypeId == 2 ? (
+      {eventTypeId == 2 && score ? (
         <div
           style={{
             display: "flex",
