@@ -250,13 +250,27 @@ const Deposit = () => {
                     <span>{method?.title}</span>
                   </p>
                   <div _ngcontent-ng-c3816252360="" className="img-wrap">
-                    <img
-                      _ngcontent-ng-c3816252360=""
-                      alt="Payment Method"
-                      src={`/assets/img/${method?.type}.${
-                        method?.type === "qr" ? "svg" : "png"
-                      }`}
-                    />
+                    {method?.type === "usd" ? (
+                      <img
+                        _ngcontent-ng-c3816252360=""
+                        alt="Payment Method"
+                        src={`/assets/img/trc20.svg`}
+                      />
+                    ) : method.type === "usdt_bep20" ? (
+                      <img
+                        _ngcontent-ng-c3816252360=""
+                        alt="Payment Method"
+                        src={`/assets/img/bep20.svg`}
+                      />
+                    ) : (
+                      <img
+                        _ngcontent-ng-c3816252360=""
+                        alt="Payment Method"
+                        src={`/assets/img/${method?.type}.${
+                          method?.type === "qr" ? "svg" : "png"
+                        }`}
+                      />
+                    )}
                   </div>
                 </div>
               );
@@ -272,7 +286,9 @@ const Deposit = () => {
           <>
             <div ref={paymentMethodRef}>
               {tabs === "qr" && <QRCode depositData={depositData} />}
-              {tabs === "usdt" && <USDT depositData={depositData} />}
+              {tabs === "usdt" || tabs === "usdt_bep20" ? (
+                <USDT depositData={depositData} />
+              ) : null}
               {tabs === "upi" && <UPI depositData={depositData} />}
               {tabs === "bank" && <Bank depositData={depositData} />}
             </div>
