@@ -228,53 +228,55 @@ const Deposit = () => {
         </div>
         {Array.isArray(depositMethods) && depositMethods?.length > 0 && (
           <div _ngcontent-ng-c3816252360="" className="select-method-card">
-            {depositMethods?.map((method) => {
-              return (
-                <div
-                  key={method?.paymentId}
-                  onClick={() => handleVisibleBankMethod(method)}
-                  _ngcontent-ng-c3816252360=""
-                  className={`method-type ng-star-inserted ${
-                    paymentId === method?.paymentId ? "selected" : ""
-                  }`}
-                >
-                  <p
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "2px",
-                    }}
+            {depositMethods
+              ?.sort((a, b) => a?.sort - b?.sort)
+              ?.map((method) => {
+                return (
+                  <div
+                    key={method?.paymentId}
+                    onClick={() => handleVisibleBankMethod(method)}
                     _ngcontent-ng-c3816252360=""
+                    className={`method-type ng-star-inserted ${
+                      paymentId === method?.paymentId ? "selected" : ""
+                    }`}
                   >
-                    <span> {method?.type?.toUpperCase()}</span>
-                    <span>{method?.title}</span>
-                  </p>
-                  <div _ngcontent-ng-c3816252360="" className="img-wrap">
-                    {method?.type === "usd" ? (
-                      <img
-                        _ngcontent-ng-c3816252360=""
-                        alt="Payment Method"
-                        src={`/assets/img/trc20.svg`}
-                      />
-                    ) : method.type === "usdt_bep20" ? (
-                      <img
-                        _ngcontent-ng-c3816252360=""
-                        alt="Payment Method"
-                        src={`/assets/img/bep20.svg`}
-                      />
-                    ) : (
-                      <img
-                        _ngcontent-ng-c3816252360=""
-                        alt="Payment Method"
-                        src={`/assets/img/${method?.type}.${
-                          method?.type === "qr" ? "svg" : "png"
-                        }`}
-                      />
-                    )}
+                    <p
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "2px",
+                      }}
+                      _ngcontent-ng-c3816252360=""
+                    >
+                      <span> {method?.type?.toUpperCase()}</span>
+                      <span>{method?.title}</span>
+                    </p>
+                    <div _ngcontent-ng-c3816252360="" className="img-wrap">
+                      {method?.type === "usd" ? (
+                        <img
+                          _ngcontent-ng-c3816252360=""
+                          alt="Payment Method"
+                          src={`/assets/img/trc20.svg`}
+                        />
+                      ) : method.type === "usdt_bep20" ? (
+                        <img
+                          _ngcontent-ng-c3816252360=""
+                          alt="Payment Method"
+                          src={`/assets/img/bep20.svg`}
+                        />
+                      ) : (
+                        <img
+                          _ngcontent-ng-c3816252360=""
+                          alt="Payment Method"
+                          src={`/assets/img/${method?.type}.${
+                            method?.type === "qr" ? "svg" : "png"
+                          }`}
+                        />
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         )}
         {isFetched && depositMethods?.length === 0 && (
