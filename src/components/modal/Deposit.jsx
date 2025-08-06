@@ -52,6 +52,8 @@ const Deposit = ({ setSHowDeposit }) => {
       return toast.error("Amount is required");
     }
   };
+
+  console.log(depositData);
   return (
     <div className="cdk-overlay-container">
       <div className="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing"></div>
@@ -163,12 +165,12 @@ const Deposit = ({ setSHowDeposit }) => {
                             formcontrolname="coins"
                             className="ng-untouched ng-pristine ng-invalid"
                           />
-                          <p
+                          {/* <p
                             _ngcontent-ng-c2000663781=""
                             className="note-message ng-star-inserted"
                           >
                             Minimum deposit amount is 100 coins
-                          </p>
+                          </p> */}
                         </div>
                       </div>
                       <div
