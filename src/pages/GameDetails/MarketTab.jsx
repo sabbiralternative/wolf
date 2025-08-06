@@ -128,10 +128,10 @@ const MarketTab = ({
                 </div>
               )}
 
-              {match_odds?.length > 0 &&
-                match_odds?.[0]?.eventTypeId == 4 &&
-                match_odds[0]?.score?.length !== 0 &&
-                match_odds?.[0]?.score?.map((team, i) => {
+              {data?.[0]?.score?.length > 0 &&
+                eventTypeId == 4 &&
+                data?.[0]?.score?.length !== 0 &&
+                data?.[0]?.score?.map((team, i) => {
                   return (
                     <div
                       key={i}

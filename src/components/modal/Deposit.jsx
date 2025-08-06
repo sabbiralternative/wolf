@@ -53,7 +53,6 @@ const Deposit = ({ setSHowDeposit }) => {
     }
   };
 
-  console.log(depositData);
   return (
     <div className="cdk-overlay-container">
       <div className="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing"></div>
