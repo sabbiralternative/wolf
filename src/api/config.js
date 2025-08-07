@@ -96,6 +96,7 @@ export const getSetApis = (setNoticeLoaded, baseUrl) => {
         Settings.bookmakerCashOut = data?.result?.settings?.bookmakerCashOut;
         Settings.language = data?.result?.settings?.language;
         Settings.betDelay = data?.result?.settings?.betDelay;
+        Settings.complaint = data?.result?.settings?.complaint;
 
         setNoticeLoaded(true);
       }

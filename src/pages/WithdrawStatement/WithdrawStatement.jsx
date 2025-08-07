@@ -2,13 +2,23 @@
 import { useState } from "react";
 import useWithdrawStatement from "../../hooks/useWithdrawStatement";
 import ViewImage from "../../components/modal/ViewImage";
+import Complaint from "../../components/modal/Complaint";
+import { Settings } from "../../api";
 
 const WithdrawStatement = () => {
+  const [complaintId, setComplaintId] = useState(null);
   const [image, setImage] = useState(null);
   const { withdrawStatement } = useWithdrawStatement();
 
   return (
     <>
+      {complaintId && (
+        <Complaint
+          setComplaintId={setComplaintId}
+          complaintId={complaintId}
+          method="withdraw"
+        />
+      )}
       {image && <ViewImage image={image} setImage={setImage} />}
       <div
         _ngcontent-ng-c3622565476=""
@@ -122,6 +132,26 @@ const WithdrawStatement = () => {
                                       >
                                         {withdraw?.status}
                                       </span>
+                                      {Settings.complaint && (
+                                        <button
+                                          style={{
+                                            backgroundColor: "rgb(255 131 46)",
+                                            borderRadius: "5px",
+                                            fontSize: "12px",
+                                            border: "none",
+                                            color: "white",
+                                            marginTop: "3px",
+                                          }}
+                                          onClick={() =>
+                                            setComplaintId(
+                                              withdraw?.referenceNo
+                                            )
+                                          }
+                                          className="px-2 py-1  text-white   "
+                                        >
+                                          Raise Complaint
+                                        </button>
+                                      )}
                                     </p>
                                   </li>
                                 </ul>
