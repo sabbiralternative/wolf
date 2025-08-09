@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useWithdrawStatement from "../../hooks/useWithdrawStatement";
 import ViewImage from "../../components/modal/ViewImage";
 import Complaint from "../../components/modal/Complaint";
@@ -10,8 +10,65 @@ const WithdrawStatement = () => {
   const [image, setImage] = useState(null);
   const { withdrawStatement } = useWithdrawStatement();
 
+  const withdrawTab = [
+    'If you face any issue with your withdraw, click the "Report Issue" button next to your withdraw details to let us know.',
+    "यदि आपको अपने निकासी (Withdrawal) में कोई समस्या आती है, तो हमें बताने के लिए अपनी निकासी विवरण के पास दिए गए  Report Issue बटन पर क्लिक करें",
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // fade out
+      setFade(false);
+
+      setTimeout(() => {
+        setCurrentIndex((prev) => {
+          return (prev + 1) % withdrawTab.length;
+        });
+        setFade(true);
+      }, 500); // fade out duration
+    }, 10000); // 10s display time
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
+      {Settings.complaint && (
+        <div
+          style={{
+            minHeight: "20px",
+            backgroundColor: "white",
+            textAlign: "start",
+            marginTop: "10px",
+            paddingLeft: "0.625rem", // px-2.5
+            paddingRight: "0.625rem",
+            paddingTop: "0.25rem", // py-1
+            paddingBottom: "0.25rem",
+            color: "var(--text_color_primary1)",
+            borderRadius: "0.25rem", // rounded
+            fontSize: "12px", // text-[12px]
+            boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)", // shadow-sm
+            marginLeft: "20px", // mx-2
+            marginRight: "20px",
+            display: "flex", // flex
+            alignItems: "center", // items-center
+            gap: "0.5rem", // gap-2
+            transitionProperty: "opacity", // transition-opacity
+            transitionDuration: "500ms", // duration-500
+            opacity: fade ? 1 : 0,
+            fontWeight: 500, // for font-medium in <span>
+          }}
+        >
+          <img
+            style={{ height: "15px" }}
+            src="/assets/img/info-icon-svgrepo-com.svg"
+            alt=""
+          />
+          <span>{withdrawTab[currentIndex]}</span>
+        </div>
+      )}
       {complaintId && (
         <Complaint
           setComplaintId={setComplaintId}
@@ -149,7 +206,7 @@ const WithdrawStatement = () => {
                                           }
                                           className="px-2 py-1  text-white   "
                                         >
-                                          Raise Complaint
+                                          Report Issue
                                         </button>
                                       )}
                                     </p>
