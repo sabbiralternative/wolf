@@ -39,6 +39,7 @@ const Deposit = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [filePath, setFilePath] = useState("");
   const { language } = useLanguage();
+  const [receipt, setReceipt] = useState(null);
 
   const handleVisibleBankMethod = async (method) => {
     setTabs(method?.type);
@@ -138,14 +139,16 @@ const Deposit = () => {
 
   const handleDepositSubmit = async () => {
     if (uploadedImage || utr) {
-      const screenshotPostData = {
+      let screenshotPostData = {
         type: "depositSubmit",
         paymentId,
         amount: paymentAmount,
         fileName: uploadedImage,
         utr: String(utr),
       };
-
+      if (tabs === "usdt" || tabs === "usdt_bep20") {
+        screenshotPostData.receipt_no = receipt;
+      }
       const res = await AxiosSecure.post(API.bankAccount, screenshotPostData);
       const result = res?.data;
       if (result?.success) {
@@ -473,7 +476,9 @@ const Deposit = () => {
                         className="mat-expansion-panel-header-title ng-tns-c2690051721-2"
                       >
                         {" "}
-                        Enter Payment UTR
+                        {tabs === "usdt" || tabs === "usdt_bep20"
+                          ? "Hash Code"
+                          : "Enter Payment UTR"}
                       </div>
                     </span>
                   </div>
@@ -496,23 +501,88 @@ const Deposit = () => {
                             onChange={handleUTRChange}
                             onKeyDown={handleKeyDown}
                             _ngcontent-ng-c3816252360=""
-                            placeholder="Enter payment UTR here"
+                            placeholder={
+                              tabs === "usdt" || tabs === "usdt_bep20"
+                                ? "Enter Hash code"
+                                : "Enter payment UTR here"
+                            }
                             type="number"
                             value={utr !== null && utr}
                           />
                         </div>
-                        <button
-                          onClick={handleDepositSubmit}
-                          disabled={!filePath || !utr}
-                          _ngcontent-ng-c3816252360=""
-                          className="btn secondary-btn"
-                        >
-                          Submit
-                        </button>
+                        {tabs !== "usdt" && tabs !== "usdt_bep20" && (
+                          <button
+                            onClick={handleDepositSubmit}
+                            disabled={!filePath || !utr}
+                            _ngcontent-ng-c3816252360=""
+                            className="btn secondary-btn"
+                          >
+                            Submit
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
                 </div>
+                {tabs === "usdt" || tabs === "usdt_bep20" ? (
+                  <div
+                    _ngcontent-ng-c3816252360=""
+                    className="mat-expansion-panel payment-confirm-panel ng-tns-c1859850774-1 ng-star-inserted"
+                  >
+                    <div
+                      _ngcontent-ng-c3816252360=""
+                      role="button"
+                      className="mat-expansion-panel-header mat-focus-indicator ng-tns-c2690051721-2 ng-tns-c1859850774-1 ng-star-inserted"
+                      id="mat-expansion-panel-header-0"
+                      aria-controls="cdk-accordion-child-0"
+                      aria-expanded="false"
+                      aria-disabled="false"
+                    >
+                      <span className="mat-content ng-tns-c2690051721-2">
+                        <div
+                          _ngcontent-ng-c3816252360=""
+                          className="mat-expansion-panel-header-title ng-tns-c2690051721-2"
+                        >
+                          Receipt Number
+                        </div>
+                      </span>
+                    </div>
+                    <div
+                      role="region"
+                      className="mat-expansion-panel-content ng-tns-c1859850774-1 ng-trigger ng-trigger-bodyExpansion"
+                      id="cdk-accordion-child-0"
+                      aria-labelledby="mat-expansion-panel-header-0"
+                    >
+                      <div className="mat-expansion-panel-body ng-tns-c1859850774-1">
+                        <div
+                          _ngcontent-ng-c3816252360=""
+                          className="panel-content ng-tns-c1859850774-1"
+                        >
+                          <div
+                            _ngcontent-ng-c3816252360=""
+                            className="input-wrap"
+                          >
+                            <input
+                              onChange={(e) => setReceipt(e.target.value)}
+                              _ngcontent-ng-c3816252360=""
+                              placeholder={"Enter Receipt Number"}
+                              type="number"
+                              value={receipt}
+                            />
+                          </div>
+                          <button
+                            onClick={handleDepositSubmit}
+                            disabled={!filePath || !utr}
+                            _ngcontent-ng-c3816252360=""
+                            className="btn secondary-btn"
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
               </>
             )}
           </>
