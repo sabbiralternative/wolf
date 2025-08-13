@@ -24,6 +24,7 @@ const GameDetails = () => {
   const { eventId, eventTypeId } = useParams();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [iScore, setIScore] = useState({});
 
   const [score, setScore] = useState({});
   const [sportsBook, setSportsBook] = useState({});
@@ -81,6 +82,7 @@ const GameDetails = () => {
       setLoading(false);
 
       if (decryptionData?.success) {
+        setIScore(decryptionData?.iscore);
         setData(decryptionData?.result);
         setScore(decryptionData?.score);
         setSportsBook(decryptionData?.sportsbook?.Result);
@@ -256,6 +258,7 @@ const GameDetails = () => {
                 match_odds={match_odds}
                 setMatch_odds={setMatch_odds}
                 setShowLoginWarn={setShowLoginWarn}
+                iScore={iScore}
               />
             )}
             {tabs === "openBets" && <OpenBetsTab myBets={myBets} />}

@@ -9,7 +9,8 @@ import HorseGreyhound from "./GameType/HorseGreyhound";
 import OverByOver from "./GameType/OverByOver";
 import SportsBook from "./GameType/SportsBook/SportsBook";
 import { useParams } from "react-router-dom";
-import ScoreCard from "./ScoreCard";
+// import ScoreCard from "./ScoreCard";
+import CricketScore from "./CricketScore";
 
 /* eslint-disable react/no-unknown-property */
 const MarketTab = ({
@@ -24,6 +25,7 @@ const MarketTab = ({
   setShowLoginWarn,
   score,
   iFrame,
+  iScore,
 }) => {
   const [bookmarker, setBookmarker] = useState([]);
   const [bookmarker2, setBookmarker2] = useState([]);
@@ -209,11 +211,12 @@ const MarketTab = ({
             </div>
 
             <div _ngcontent-ng-c942213636="" className="mkt-tab-section">
-              {eventTypeId == 4 &&
+              {/* {eventTypeId == 4 &&
                 data?.[0]?.score2?.length !== 0 &&
                 !Array.isArray(data?.[0]?.score2) && (
                   <ScoreCard score2={data?.[0]?.score2} />
-                )}
+                )} */}
+              {eventTypeId == 4 && iScore && <CricketScore iscore={iScore} />}
               {match_odds && match_odds?.length > 0 && (
                 <MatchOdds
                   match_odd={match_odds}
