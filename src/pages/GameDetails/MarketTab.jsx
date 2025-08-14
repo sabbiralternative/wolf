@@ -130,7 +130,7 @@ const MarketTab = ({
                 </div>
               )}
 
-              {data?.[0]?.score?.length > 0 &&
+              {/* {data?.[0]?.score?.length > 0 &&
                 eventTypeId == 4 &&
                 data?.[0]?.score?.length !== 0 &&
                 data?.[0]?.score?.map((team, i) => {
@@ -207,7 +207,7 @@ const MarketTab = ({
                       </div>
                     </div>
                   );
-                })}
+                })} */}
             </div>
 
             <div _ngcontent-ng-c942213636="" className="mkt-tab-section">
