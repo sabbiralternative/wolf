@@ -39,7 +39,7 @@ const Deposit = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [filePath, setFilePath] = useState("");
   const { language } = useLanguage();
-  const [receipt, setReceipt] = useState(null);
+  // const [receipt, setReceipt] = useState(null);
 
   const handleVisibleBankMethod = async (method) => {
     setTabs(method?.type);
@@ -146,9 +146,9 @@ const Deposit = () => {
         fileName: uploadedImage,
         utr: String(utr),
       };
-      if (tabs === "usdt" || tabs === "usdt_bep20") {
-        screenshotPostData.receipt_no = receipt;
-      }
+      // if (tabs === "usdt" || tabs === "usdt_bep20") {
+      //   screenshotPostData.receipt_no = receipt;
+      // }
       const res = await AxiosSecure.post(API.bankAccount, screenshotPostData);
       const result = res?.data;
       if (result?.success) {
@@ -510,21 +510,20 @@ const Deposit = () => {
                             value={utr !== null && utr}
                           />
                         </div>
-                        {tabs !== "usdt" && tabs !== "usdt_bep20" && (
-                          <button
-                            onClick={handleDepositSubmit}
-                            disabled={!filePath || !utr}
-                            _ngcontent-ng-c3816252360=""
-                            className="btn secondary-btn"
-                          >
-                            Submit
-                          </button>
-                        )}
+
+                        <button
+                          onClick={handleDepositSubmit}
+                          disabled={!filePath || !utr}
+                          _ngcontent-ng-c3816252360=""
+                          className="btn secondary-btn"
+                        >
+                          Submit
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
-                {tabs === "usdt" || tabs === "usdt_bep20" ? (
+                {/* {tabs === "usdt" || tabs === "usdt_bep20" ? (
                   <div
                     _ngcontent-ng-c3816252360=""
                     className="mat-expansion-panel payment-confirm-panel ng-tns-c1859850774-1 ng-star-inserted"
@@ -582,7 +581,7 @@ const Deposit = () => {
                       </div>
                     </div>
                   </div>
-                ) : null}
+                ) : null} */}
               </>
             )}
           </>
