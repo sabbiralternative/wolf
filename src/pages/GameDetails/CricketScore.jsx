@@ -203,39 +203,46 @@ const CricketScore = ({ iscore }) => {
                     Current Over
                   </span>
                   <div style={{ display: "flex", gap: "11px" }}>
-                    {iscore?.currentOver?.map((cv, i) => (
-                      <span
-                        key={i}
-                        style={{
-                          fontSize: "0.75rem",
-                          fontWeight: 500,
-                          minWidth: "1.25rem",
-                          minHeight: "1.25rem",
-                          aspectRatio: "1 / 1",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                          borderRadius: "50%",
-                          padding: "0.25rem",
-                          color: "white",
-                          backgroundColor:
-                            cv == "0"
-                              ? "#999"
-                              : cv == "1"
-                              ? "#48a23c"
-                              : cv == "W"
-                              ? "#c9362b"
-                              : cv == "4"
-                              ? "#2d90d4"
-                              : cv == "6"
-                              ? "#601c78"
-                              : "#c2ad7b",
-                        }}
-                      >
-                        <span>{cv}</span>
-                      </span>
-                    ))}
+                    {iscore?.currentOver?.map((cv, i) => {
+                      return (
+                        <span
+                          key={i}
+                          style={{
+                            fontSize: "0.75rem",
+                            fontWeight: 500,
+                            minWidth: "1.25rem",
+                            minHeight: "1.25rem",
+                            aspectRatio: "1 / 1",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                            borderRadius: "50%",
+                            padding: "0.25rem",
+                            color: "white",
+                            backgroundColor:
+                              cv == "0"
+                                ? "#999"
+                                : cv == "1"
+                                ? "#48a23c"
+                                : cv.split().includes("W")
+                                ? "#c9362b"
+                                : cv == "4"
+                                ? "#2d90d4"
+                                : cv == "6"
+                                ? "#601c78"
+                                : cv.split().includes("b") ||
+                                  cv.split().includes("lb") ||
+                                  cv.split().includes("wd") ||
+                                  cv.split().includes("nb")
+                                ? "#c2ad7b"
+                                : "#999",
+                          }}
+                        >
+                          <span>{cv}</span>
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -282,39 +289,46 @@ const CricketScore = ({ iscore }) => {
                     Previous Over
                   </span>
                   <div style={{ display: "flex", gap: "11px" }}>
-                    {iscore?.previousOver?.map((pv, i) => (
-                      <span
-                        key={i}
-                        style={{
-                          fontSize: "0.75rem",
-                          fontWeight: 500,
-                          minWidth: "1.25rem",
-                          minHeight: "1.25rem",
-                          aspectRatio: "1 / 1",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                          borderRadius: "50%",
-                          padding: "0.25rem",
-                          color: "white",
-                          backgroundColor:
-                            pv == "0"
-                              ? "#999"
-                              : pv == "1"
-                              ? "#48a23c"
-                              : pv == "W"
-                              ? "#c9362b"
-                              : pv == "4"
-                              ? "#2d90d4"
-                              : pv == "6"
-                              ? "#601c78"
-                              : "#c2ad7b",
-                        }}
-                      >
-                        <span>{pv}</span>
-                      </span>
-                    ))}
+                    {iscore?.previousOver?.map((pv, i) => {
+                      return (
+                        <span
+                          key={i}
+                          style={{
+                            fontSize: "0.75rem",
+                            fontWeight: 500,
+                            minWidth: "1.25rem",
+                            minHeight: "1.25rem",
+                            aspectRatio: "1 / 1",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                            borderRadius: "50%",
+                            padding: "0.25rem",
+                            color: "white",
+                            backgroundColor:
+                              pv == "0"
+                                ? "#999"
+                                : pv == "1"
+                                ? "#48a23c"
+                                : pv.split().includes("W")
+                                ? "#c9362b"
+                                : pv == "4"
+                                ? "#2d90d4"
+                                : pv == "6"
+                                ? "#601c78"
+                                : pv.split().includes("b") ||
+                                  pv.split().includes("lb") ||
+                                  pv.split().includes("wd") ||
+                                  pv.split().includes("nb")
+                                ? "#c2ad7b"
+                                : "#999",
+                          }}
+                        >
+                          <span>{pv}</span>
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               )}
