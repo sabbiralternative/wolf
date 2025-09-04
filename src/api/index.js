@@ -53,6 +53,7 @@ export const API = {
   language: "",
   utr: "",
   depositBreakdown: "",
+  withdrawBreakdown: "",
 };
 
 export const Settings = {

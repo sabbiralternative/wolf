@@ -5,6 +5,7 @@ import useCloseModalClickOutside from "../../hooks/useCloseModalClickOutside";
 import { API } from "../../api";
 import { TbRuler3 } from "react-icons/tb";
 import { AxiosSecure } from "../../lib/AxiosSecure";
+import useWithdrawBreakdown from "../../hooks/withdrawBreakdown";
 
 const Withdraw = ({
   setSHowWithdraw,
@@ -15,6 +16,7 @@ const Withdraw = ({
   withdrawData,
   setBankId,
 }) => {
+  const { data } = useWithdrawBreakdown();
   const [disable, setDisable] = useState(false);
   const [amount, setAmount] = useState("");
   const withdrawRef = useRef();
@@ -171,7 +173,8 @@ const Withdraw = ({
                             _ngcontent-ng-c2000663781=""
                             className="note-message ng-star-inserted"
                           >
-                            Minimum withdrawal amount is 100 coins
+                            Minimum withdrawal amount is{" "}
+                            {data?.result?.minimumWithdraw} coins
                           </p>
                         </div>
                         <div
@@ -354,12 +357,11 @@ const Withdraw = ({
                       >
                         <button
                           disabled={
-                            (parseFloat(amount) >= 100 &&
-                              parseFloat(withdrawData?.withdrawableCoins) >=
-                                parseFloat(amount)) ||
-                            disable
-                              ? false
-                              : true
+                            !amount ||
+                            amount < data?.result?.minimumWithdraw ||
+                            amount > data?.result?.mainWallet
+                              ? true
+                              : false
                           }
                           style={{
                             cursor: disable ? "not-allowed" : "pointer",
