@@ -33,7 +33,7 @@ const Banner = ({ banner, setShowModal }) => {
             className="cdk-overlay-pane login-dialog"
             style={{
               width: "calc(100% - 30px)",
-              maxHeight: "320px",
+              maxHeight: "fit-content",
               maxWidth: "500px",
               position: "static",
               marginBottom: "10px",
@@ -84,7 +84,6 @@ const Banner = ({ banner, setShowModal }) => {
                               width: "25px",
                               border: "none",
                               cursor: "pointer",
-                              color: "black",
                             }}
                           >
                             <IoClose
@@ -94,7 +93,7 @@ const Banner = ({ banner, setShowModal }) => {
                                 fontWeight: "700",
                               }}
                               size={30}
-                              color="white"
+                              color="black"
                             />
                           </button>
                           <img

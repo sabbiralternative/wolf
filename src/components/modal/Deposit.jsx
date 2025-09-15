@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import useDepositBreakdown from "../../hooks/depositBreakdown";
 
 const Deposit = ({ setSHowDeposit }) => {
-  const { mutate: handleDepositBreakdown } = useDepositBreakdown();
+  const { data } = useDepositBreakdown({ amount: 100 });
   const { valueByLanguage } = useLanguage();
   const { paymentAmount, setPaymentAmount } = useContextState();
   const withdrawRef = useRef();
@@ -34,20 +34,13 @@ const Deposit = ({ setSHowDeposit }) => {
       return toast.error("Please enter a valid number");
     }
     if (floatAmount) {
-      handleDepositBreakdown(
-        { amount: floatAmount },
-        {
-          onSuccess: (data) => {
-            if (data?.minimumDeposit && floatAmount < data?.minimumDeposit) {
-              toast.error(`Minimum deposit amount is ${data?.minimumDeposit}`);
-            } else {
-              localStorage.setItem("paymentAmount", floatAmount);
-              navigate("/profile/deposit");
-              setSHowDeposit(false);
-            }
-          },
-        }
-      );
+      if (data?.minimumDeposit && floatAmount < data?.minimumDeposit) {
+        toast.error(`Minimum deposit amount is ${data?.minimumDeposit}`);
+      } else {
+        localStorage.setItem("paymentAmount", floatAmount);
+        navigate("/profile/deposit");
+        setSHowDeposit(false);
+      }
     } else {
       return toast.error("Amount is required");
     }
@@ -153,7 +146,8 @@ const Deposit = ({ setSHowDeposit }) => {
                         </div>
                         <div _ngcontent-ng-c2000663781="" className="form-wrap">
                           <label _ngcontent-ng-c2000663781="">
-                            Deposit Coins
+                            Deposit Coins (Minimum deposit amount is{" "}
+                            {data?.minimumDeposit})
                           </label>
                           <input
                             onChange={(e) => setPaymentAmount(e.target.value)}
@@ -177,6 +171,9 @@ const Deposit = ({ setSHowDeposit }) => {
                         className="modal-footer"
                       >
                         <button
+                          disabled={
+                            Number(paymentAmount) < Number(data?.minimumDeposit)
+                          }
                           _ngcontent-ng-c2000663781=""
                           type="submit"
                           mat-button=""
