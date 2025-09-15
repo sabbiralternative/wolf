@@ -1,12 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { LanguageKey } from "../../constant/constant";
 import useCurrentBets from "../../hooks/useCurrentBets";
 import useLanguage from "../../hooks/useLanguage";
 import { languageValue } from "../../utils/language";
 /* eslint-disable react/no-unknown-property */
 const ActiveBets = () => {
+  const navigate = useNavigate();
   const { valueByLanguage } = useLanguage();
   /* get my bets */
   const { myBets } = useCurrentBets();
+  const navigateGameList = (item) => {
+    navigate(`/game-details/${item?.eventTypeId}/${item?.eventId}`);
+  };
 
   return (
     <div _ngcontent-ng-c3622565476="" className="page-body">
@@ -198,6 +203,14 @@ const ActiveBets = () => {
                                                       ?.map((item, i) => {
                                                         return (
                                                           <div
+                                                            style={{
+                                                              cursor: "pointer",
+                                                            }}
+                                                            onClick={() =>
+                                                              navigateGameList(
+                                                                item
+                                                              )
+                                                            }
                                                             key={i}
                                                             _ngcontent-ng-c773751984=""
                                                             className={`betslip-datalist ng-star-inserted ${
