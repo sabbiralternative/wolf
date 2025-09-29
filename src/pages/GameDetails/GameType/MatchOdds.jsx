@@ -143,7 +143,7 @@ const MatchOdds = ({
             >
               <div _ngcontent-ng-c942213636="" className="head-wrap">
                 <h2 _ngcontent-ng-c942213636="" className="card-heading">
-                  {games?.eventTypeId == 4 ? games?.btype : games?.name}
+                  {games?.name?.toUpperCase()}
                 </h2>
 
                 <div
