@@ -39,7 +39,9 @@ const MarketTab = ({
   useEffect(() => {
     const filterMatch_odds = data?.filter(
       (match_odd) =>
-        match_odd.btype === "MATCH_ODDS" && match_odd?.visible == true
+        match_odd.btype === "MATCH_ODDS" &&
+        match_odd?.visible == true &&
+        match_odd?.name !== "tied match"
     );
     setMatch_odds(filterMatch_odds);
 
@@ -79,6 +81,13 @@ const MarketTab = ({
     );
     setOverByOver(overByOverFilter);
   }, [data]);
+
+  const tiedMatch = data?.filter(
+    (match_odd) =>
+      match_odd.btype === "MATCH_ODDS" &&
+      match_odd?.visible == true &&
+      match_odd?.name === "tied match"
+  );
 
   return (
     <div className="mat-mdc-tab-body-wrapper">
@@ -287,6 +296,16 @@ const MarketTab = ({
                   setShowLoginWarn={setShowLoginWarn}
                 />
               ) : null}
+
+              {tiedMatch && tiedMatch?.length > 0 && (
+                <MatchOdds
+                  match_odd={tiedMatch}
+                  setOpenBetSlip={setOpenBetSlip}
+                  setPlaceBetValues={setPlaceBetValues}
+                  exposer={exposer}
+                  setShowLoginWarn={setShowLoginWarn}
+                />
+              )}
             </div>
           </div>
         </div>
