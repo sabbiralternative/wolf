@@ -5,9 +5,10 @@ import useCloseModalClickOutside from "../../../hooks/useCloseModalClickOutside"
 import { API, Settings } from "../../../api";
 import useContextState from "../../../hooks/useContextState";
 import Success from "../../ui/Notification/Success";
-import getOtpOnWhatsapp from "../../../utils/getOtpOnWhatsapp";
+// import getOtpOnWhatsapp from "../../../utils/getOtpOnWhatsapp";
 import toast from "react-hot-toast";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
+import useGetSocialLink from "../../../hooks/useGetSocialLink";
 const GetOTP = ({
   setShowOTP,
   setShowRegister,
@@ -15,7 +16,9 @@ const GetOTP = ({
   setMobileNo,
   setOrderId,
 }) => {
-  const { logo } = useContextState();
+  const { socialLink } = useGetSocialLink();
+
+  const { logo, token } = useContextState();
   const [err, setErr] = useState("");
   /* Close otp modal click outside */
   const OTPRef = useRef();
@@ -51,16 +54,18 @@ const GetOTP = ({
     }
   };
 
-  const handleGetOtpOnWhatsapp = async () => {
-    await getOtpOnWhatsapp(mobileNo, setOrderId, setShowRegister);
-  };
+  // const handleGetOtpOnWhatsapp = async () => {
+  //   await getOtpOnWhatsapp(mobileNo, setOrderId, setShowRegister);
+  // };
 
   const handleMobileNo = (e) => {
     if (e.target.value.length <= 10) {
       setMobileNo(e.target.value);
     }
   };
-
+  const getWhatsappOTP = (link) => {
+    window.open(link, "_blank");
+  };
   return (
     <div className="cdk-overlay-container">
       {err && <Success message={err} setMessage={setErr} success={false} />}
@@ -307,30 +312,35 @@ const GetOTP = ({
                                   ? " Get OTP On Message"
                                   : "Proceed"}
                               </button>
-                              {Settings?.otpWhatsapp && (
-                                <>
-                                  <p
-                                    _ngcontent-ng-c2806737617=""
-                                    className="separator ng-star-inserted"
-                                  >
-                                    OR
-                                  </p>
-                                  <div
-                                    _ngcontent-ng-c2806737617=""
-                                    className="extra-btns"
-                                  >
-                                    <button
-                                      onClick={handleGetOtpOnWhatsapp}
-                                      disabled={mobileNo?.length < 10}
+                              {Settings?.registrationWhatsapp &&
+                                socialLink?.whatsapplink &&
+                                !token && (
+                                  <>
+                                    <p
                                       _ngcontent-ng-c2806737617=""
-                                      type="button"
-                                      className="btn secondary-btn ng-star-inserted"
+                                      className="separator ng-star-inserted"
                                     >
-                                      Get OTP on WhatsApp
-                                    </button>
-                                  </div>
-                                </>
-                              )}
+                                      OR
+                                    </p>
+                                    <div
+                                      _ngcontent-ng-c2806737617=""
+                                      className="extra-btns"
+                                    >
+                                      <button
+                                        onClick={() =>
+                                          getWhatsappOTP(
+                                            socialLink?.whatsapplink
+                                          )
+                                        }
+                                        _ngcontent-ng-c2806737617=""
+                                        type="button"
+                                        className="btn secondary-btn ng-star-inserted"
+                                      >
+                                        Get OTP on WhatsApp
+                                      </button>
+                                    </div>
+                                  </>
+                                )}
                             </div>
                           </div>
                         </form>
