@@ -213,8 +213,8 @@ const Navbar = () => {
               >
                 <img
                   style={{
-                    height: `${Settings.logoHeight}px`,
-                    width: `${Settings.logoWidth}px`,
+                    // height: `${Settings.logoHeight}px`,
+                    // width: `${Settings.logoWidth}px`,
                     objectFit: "contain",
                   }}
                   _ngcontent-ng-c3243547741=""
