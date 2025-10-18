@@ -78,7 +78,7 @@ const StateProvider = ({ children }) => {
         const icon = `${API.assets}/${Settings.siteUrl}/nav-sprite.svg`;
         setIcon(icon);
       } else {
-        setIcon("/assets/img/logo.svg");
+        setIcon(`/assets/img/logo.svg`);
       }
 
       /* Dynamically append  theme css  */
@@ -98,7 +98,7 @@ const StateProvider = ({ children }) => {
         const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logoFormat}`;
         setLogo(logo);
       } else {
-        setLogo("/assets/img/logo.svg");
+        setLogo(`/assets/img/logo.${Settings.logoFormat}`);
       }
 
       /* Dynamically append  favicon  */
