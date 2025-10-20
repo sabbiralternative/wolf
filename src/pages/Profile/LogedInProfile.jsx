@@ -259,6 +259,35 @@ const LoggedInProfile = ({
               </div>
             </a>
           </li> */}
+          {socialLink?.branchWhatsapplink && (
+            <li
+              _ngcontent-ng-c2865632707=""
+              routerlink="/rules"
+              routerlinkactive="active-link"
+              className="smenu-item"
+            >
+              <a
+                onClick={() => navigateWhatsApp(socialLink?.branchWhatsapplink)}
+                _ngcontent-ng-c2865632707=""
+                className="smenu-link"
+              >
+                <div _ngcontent-ng-c2865632707="" className="label-wrap">
+                  <img
+                    _ngcontent-ng-c2865632707=""
+                    alt="Menu Icon"
+                    src="/assets/img/whatsapp.png"
+                  />
+                  <span _ngcontent-ng-c2865632707="">
+                    {" "}
+                    {languageValue(
+                      valueByLanguage,
+                      LanguageKey.DEPOSIT_SUPPORT
+                    )}
+                  </span>
+                </div>
+              </a>
+            </li>
+          )}
           <li _ngcontent-ng-c2865632707="" className="smenu-item">
             <Link
               to="/active-bets"
@@ -466,35 +495,6 @@ const LoggedInProfile = ({
                   <span _ngcontent-ng-c2865632707="">
                     {" "}
                     {languageValue(valueByLanguage, LanguageKey.ALL_SUPPORT)}
-                  </span>
-                </div>
-              </a>
-            </li>
-          )}
-          {socialLink?.branchWhatsapplink && (
-            <li
-              _ngcontent-ng-c2865632707=""
-              routerlink="/rules"
-              routerlinkactive="active-link"
-              className="smenu-item"
-            >
-              <a
-                onClick={() => navigateWhatsApp(socialLink?.branchWhatsapplink)}
-                _ngcontent-ng-c2865632707=""
-                className="smenu-link"
-              >
-                <div _ngcontent-ng-c2865632707="" className="label-wrap">
-                  <img
-                    _ngcontent-ng-c2865632707=""
-                    alt="Menu Icon"
-                    src="/assets/img/whatsapp.png"
-                  />
-                  <span _ngcontent-ng-c2865632707="">
-                    {" "}
-                    {languageValue(
-                      valueByLanguage,
-                      LanguageKey.DEPOSIT_SUPPORT
-                    )}
                   </span>
                 </div>
               </a>
