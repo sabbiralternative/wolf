@@ -52,9 +52,7 @@ const AppPopup = ({ setIsModalOpen }) => {
         </div>
         <div className="app-text">
           <h2>{languageValue(valueByLanguage, LanguageKey.DOWNLOAD)}</h2>
-          <span>
-            {languageValue(valueByLanguage, LanguageKey.INSTANT_DOWNLOAD)}
-          </span>
+
           <div className="star">
             <img src="/assets/img/app-star.svg" alt="star" />
             <img src="/assets/img/app-star.svg" alt="star" />
@@ -65,7 +63,7 @@ const AppPopup = ({ setIsModalOpen }) => {
         </div>
       </div>
       <a
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", textDecoration: "none" }}
         onClick={handleDownload}
         className="install-btn"
       >

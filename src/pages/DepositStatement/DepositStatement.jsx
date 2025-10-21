@@ -133,6 +133,7 @@ const DepositStatement = () => {
                                 key={i}
                                 _ngcontent-ng-c2945624842=""
                                 className="transaction-item ng-star-inserted"
+                                style={{ padding: "0px" }}
                               >
                                 <div
                                   onClick={() =>
@@ -144,9 +145,13 @@ const DepositStatement = () => {
                                   }
                                   _ngcontent-ng-c2945624842=""
                                   className="wrapper"
+                                  style={{ paddingRight: "0px" }}
                                 >
                                   <ul _ngcontent-ng-c2945624842="">
-                                    <li _ngcontent-ng-c2945624842="">
+                                    <li
+                                      _ngcontent-ng-c2945624842=""
+                                      style={{ padding: "10px" }}
+                                    >
                                       <p
                                         _ngcontent-ng-c2945624842=""
                                         className="txn-type"
@@ -191,11 +196,13 @@ const DepositStatement = () => {
                                   <div
                                     style={{
                                       display: "flex",
+                                      alignItems: "center",
                                       justifyContent: "space-between",
                                       marginTop: "4px",
                                     }}
                                   >
                                     <span
+                                      style={{ marginBottom: "10px" }}
                                       _ngcontent-ng-c2945624842=""
                                       role="img"
                                       className="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color ng-star-inserted"
@@ -212,10 +219,12 @@ const DepositStatement = () => {
                                       <button
                                         style={{
                                           backgroundColor: "rgb(255 131 46)",
-                                          borderRadius: "5px",
+                                          borderBottomRightRadius: "5px",
+                                          borderTopLeftRadius: "5px",
                                           fontSize: "12px",
                                           border: "none",
                                           color: "white",
+                                          marginTop: "auto",
                                         }}
                                         onClick={() =>
                                           setComplaintId(data?.referenceNo)

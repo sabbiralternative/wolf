@@ -273,7 +273,7 @@
 .android-popup {
   width: 100%;
   background: #000c24;
-  padding: 16px;
+  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: flex-start;

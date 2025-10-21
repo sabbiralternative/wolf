@@ -126,14 +126,17 @@ const WithdrawStatement = () => {
                               key={i}
                               _ngcontent-ng-c2945624842=""
                               className="transaction-item ng-star-inserted"
+                              style={{ padding: "0px" }}
                             >
                               <div
                                 _ngcontent-ng-c2945624842=""
                                 className="wrapper"
+                                style={{ paddingRight: "0px" }}
                               >
                                 <ul _ngcontent-ng-c2945624842="">
                                   <li _ngcontent-ng-c2945624842="">
                                     <p
+                                      style={{ padding: "2px 10px" }}
                                       _ngcontent-ng-c2945624842=""
                                       className="txn-type"
                                     >
@@ -169,12 +172,14 @@ const WithdrawStatement = () => {
                                       className="amount"
                                     >
                                       <span
+                                        style={{ padding: "2px 10px" }}
                                         _ngcontent-ng-c2945624842=""
                                         className="coins"
                                       >
                                         {withdraw?.amount}
                                       </span>
                                       <span
+                                        style={{ padding: "0px 10px" }}
                                         _ngcontent-ng-c2945624842=""
                                         className={` status
                              ${
@@ -193,11 +198,12 @@ const WithdrawStatement = () => {
                                         <button
                                           style={{
                                             backgroundColor: "rgb(255 131 46)",
-                                            borderRadius: "5px",
+                                            borderBottomRightRadius: "4px",
+                                            borderTopLeftRadius: "4px",
                                             fontSize: "12px",
                                             border: "none",
                                             color: "white",
-                                            marginTop: "3px",
+                                            marginTop: "4px",
                                           }}
                                           onClick={() =>
                                             setComplaintId(
