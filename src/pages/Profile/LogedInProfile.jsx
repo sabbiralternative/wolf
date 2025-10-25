@@ -474,7 +474,7 @@ const LoggedInProfile = ({
             </li>
           )}
 
-          {socialLink?.whatsapplink && (
+          {/* {socialLink?.whatsapplink && (
             <li
               _ngcontent-ng-c2865632707=""
               routerlink="/rules"
@@ -499,7 +499,7 @@ const LoggedInProfile = ({
                 </div>
               </a>
             </li>
-          )}
+          )} */}
 
           {token && (
             <li
