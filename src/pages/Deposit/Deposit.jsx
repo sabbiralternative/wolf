@@ -16,6 +16,7 @@ import { AxiosSecure } from "../../lib/AxiosSecure";
 import useLanguage from "../../hooks/useLanguage";
 import USDT from "./USDT";
 import useUTR from "../../hooks/utr";
+import img from "../../../public/assets/img";
 
 const Deposit = () => {
   const { mutate: getUTR } = useUTR();
@@ -46,7 +47,7 @@ const Deposit = () => {
     setPaymentId(method?.paymentId);
     const generatedToken = UseTokenGenerator();
 
-    if (method?.type === "pg") {
+    if (method?.type === "upigateway") {
       let pgPayload = {
         paymentId: method?.paymentId,
         token: generatedToken,
@@ -54,9 +55,10 @@ const Deposit = () => {
         amount: paymentAmount,
       };
       if (Settings.language) {
-        pgPayload = language;
+        pgPayload.language = language;
       }
       const res = await AxiosSecure.post(API.pg, pgPayload);
+
       if (res?.data?.success) {
         window.location.href = res?.data?.result?.link;
         // if (settings?.paymentIntent) {
@@ -91,7 +93,12 @@ const Deposit = () => {
   };
 
   useEffect(() => {
-    if (paymentMethodRef && paymentMethodRef.current && tabs && tabs !== "pg") {
+    if (
+      paymentMethodRef &&
+      paymentMethodRef.current &&
+      tabs &&
+      tabs !== "upigateway"
+    ) {
       paymentMethodRef.current.scrollIntoView({
         behavior: "smooth",
       });
@@ -259,6 +266,12 @@ const Deposit = () => {
                           _ngcontent-ng-c3816252360=""
                           alt="Payment Method"
                           src={`/assets/img/bep20.svg`}
+                        />
+                      ) : method?.type === "upigateway" ? (
+                        <img
+                          _ngcontent-ng-c3816252360=""
+                          alt="Payment Method"
+                          src={img.upigateway}
                         />
                       ) : (
                         <img
