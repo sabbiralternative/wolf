@@ -408,38 +408,43 @@ const BetSlip = ({
                               type="number"
                               numbersonly=""
                               name=""
-                              readOnly={placeBetValues?.isWeak}
+                              readOnly={
+                                placeBetValues?.isWeak ||
+                                placeBetValues?.cashout
+                              }
                               className="rate-inp"
                               defaultValue={price}
                             />
-                            {!placeBetValues?.isWeak && (
-                              <div
-                                style={{
-                                  position: "absolute",
-                                  top: 3,
-                                  right: 5,
-                                  display: "flex",
-                                  flexDirection: "column",
-                                }}
-                              >
-                                <MdKeyboardArrowUp
-                                  onClick={handleIncreasePrice}
-                                  style={{ cursor: "pointer" }}
-                                  size={15}
-                                />
-                                <MdKeyboardArrowDown
-                                  onClick={handleDecreasePrice}
-                                  style={{ cursor: "pointer" }}
-                                  size={15}
-                                />
-                              </div>
-                            )}
+                            {!placeBetValues?.isWeak &&
+                              !placeBetValues?.cashout && (
+                                <div
+                                  style={{
+                                    position: "absolute",
+                                    top: 3,
+                                    right: 5,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                  }}
+                                >
+                                  <MdKeyboardArrowUp
+                                    onClick={handleIncreasePrice}
+                                    style={{ cursor: "pointer" }}
+                                    size={15}
+                                  />
+                                  <MdKeyboardArrowDown
+                                    onClick={handleDecreasePrice}
+                                    style={{ cursor: "pointer" }}
+                                    size={15}
+                                  />
+                                </div>
+                              )}
                           </div>
                           <div
                             _ngcontent-ng-c2459892542=""
                             className="bet-action-item"
                           >
                             <input
+                              readOnly={placeBetValues?.cashout}
                               onChange={(e) => setTotalSize(e.target.value)}
                               _ngcontent-ng-c2459892542=""
                               type="number"
@@ -492,6 +497,7 @@ const BetSlip = ({
                           {buttonGameValue?.slice(0, 8).map(({ value }, i) => {
                             return (
                               <button
+                                disabled={placeBetValues?.cashout}
                                 onClick={() => setTotalSize(value)}
                                 key={i}
                                 _ngcontent-ng-c2459892542=""
