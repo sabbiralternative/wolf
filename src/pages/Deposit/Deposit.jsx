@@ -16,7 +16,6 @@ import { AxiosSecure } from "../../lib/AxiosSecure";
 import useLanguage from "../../hooks/useLanguage";
 import USDT from "./USDT";
 import useUTR from "../../hooks/utr";
-import img from "../../../public/assets/img";
 
 const Deposit = () => {
   const { mutate: getUTR } = useUTR();
@@ -271,7 +270,7 @@ const Deposit = () => {
                         <img
                           _ngcontent-ng-c3816252360=""
                           alt="Payment Method"
-                          src={img.upigateway}
+                          src={`/assets/img/bhim.png`}
                         />
                       ) : (
                         <img
