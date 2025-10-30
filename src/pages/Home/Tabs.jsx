@@ -357,7 +357,7 @@ const Tabs = () => {
                 </div>
               </div>
             )}
-            <div
+            {/* <div
               onClick={() => handleNavigate("aura")}
               _ngcontent-ng-c2582205232=""
               routerlink="/casino-bmk-lobby"
@@ -385,7 +385,7 @@ const Tabs = () => {
               <div _ngcontent-ng-c2582205232="" className="tab-label">
                 {languageValue(valueByLanguage, LanguageKey.CARD_GAMES)}
               </div>
-            </div>
+            </div> */}
 
             <div
               onClick={() => handleNavigate("live-casino")}
@@ -443,7 +443,7 @@ const Tabs = () => {
                 />
               </div>
               <div _ngcontent-ng-c2582205232="" className="tab-label">
-                {languageValue(valueByLanguage, LanguageKey.LIVE_CASINO)}
+                Casino
               </div>
             </div>
           </div>
