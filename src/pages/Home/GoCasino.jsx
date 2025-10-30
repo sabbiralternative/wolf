@@ -18,8 +18,6 @@ const GoCasino = () => {
   const [warnMessage, setWarnMessage] = useState(false);
   const navigate = useNavigate();
 
-  console.log(data);
-
   const handleCasino = (code, name) => {
     if (token) {
       if (isCheckedBonusToken) {
@@ -64,7 +62,7 @@ const GoCasino = () => {
           {data?.map((item, i) => {
             return (
               <li
-                onClick={() => handleCasino(item?.game_code, item?.game_name)}
+                onClick={() => handleCasino(item?.game_id, item?.game_name)}
                 key={i}
                 _ngcontent-ng-c943649379=""
                 className="ng-star-inserted"
