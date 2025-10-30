@@ -9362,7 +9362,7 @@ ion-refresher-content {
   display: flex;
   flex-direction: column;
   row-gap: 2px;
-  min-height: 80px;
+  /* min-height: 80px; */
 }
 
 .page-body[_ngcontent-ng-c943649379]

@@ -24,13 +24,14 @@ const useGoCasino = () => {
       if (Settings.language) {
         payload.language = language;
       }
-      const res = await axios.post(API.auraWolf, payload, {
+      const res = await axios.post(API.mac88, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       const result = res?.data;
-      if (result?.status === "success") {
+
+      if (result?.success) {
         return result?.data;
       }
     },

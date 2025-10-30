@@ -18,6 +18,8 @@ const GoCasino = () => {
   const [warnMessage, setWarnMessage] = useState(false);
   const navigate = useNavigate();
 
+  console.log(data);
+
   const handleCasino = (code, name) => {
     if (token) {
       if (isCheckedBonusToken) {
@@ -83,18 +85,18 @@ const GoCasino = () => {
                   <img _ngcontent-ng-c943649379="" alt="" src={item?.img} />
                 </a>
                 <div _ngcontent-ng-c943649379="" className="game-detail">
-                  <p _ngcontent-ng-c943649379="" className="company-type">
+                  {/* <p _ngcontent-ng-c943649379="" className="company-type">
                     {item?.provider_name}
-                  </p>
+                  </p> */}
                   <p _ngcontent-ng-c943649379="" className="game-name">
                     {item?.game_name}
                   </p>
-                  <p
+                  {/* <p
                     _ngcontent-ng-c943649379=""
                     className="coins-limit ng-star-inserted"
                   >
                     {item?.text}
-                  </p>
+                  </p> */}
                 </div>
               </li>
             );

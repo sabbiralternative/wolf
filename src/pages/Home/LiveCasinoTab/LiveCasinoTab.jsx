@@ -28,7 +28,7 @@ const LiveCasinoTab = () => {
     const apiMapping = {
       "live-casino": API.liveCasinoWolf,
       casino: API.slotWolf,
-      aura: API.auraWolf,
+      aura: API.mac88,
     };
     let payload = {
       gameList,
