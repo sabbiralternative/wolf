@@ -357,35 +357,37 @@ const Tabs = () => {
                 </div>
               </div>
             )}
-            {/* <div
-              onClick={() => handleNavigate("aura")}
-              _ngcontent-ng-c2582205232=""
-              routerlink="/casino-bmk-lobby"
-              routerlinkactive="active-link"
-              className={`pagetab-item ng-star-inserted   ${
-                sportsType === "aura" && location.pathname === "/"
-                  ? "active-link"
-                  : ""
-              }`}
-            >
+            {Settings.aura && (
               <div
+                onClick={() => handleNavigate("aura")}
                 _ngcontent-ng-c2582205232=""
-                className={`icon-wrap ${
+                routerlink="/casino-bmk-lobby"
+                routerlinkactive="active-link"
+                className={`pagetab-item ng-star-inserted   ${
                   sportsType === "aura" && location.pathname === "/"
-                    ? "rotate-animation"
+                    ? "active-link"
                     : ""
                 }`}
               >
-                <img
+                <div
                   _ngcontent-ng-c2582205232=""
-                  alt="Tab Icon"
-                  src="/assets/img/cards-header-icon.svg"
-                />
+                  className={`icon-wrap ${
+                    sportsType === "aura" && location.pathname === "/"
+                      ? "rotate-animation"
+                      : ""
+                  }`}
+                >
+                  <img
+                    _ngcontent-ng-c2582205232=""
+                    alt="Tab Icon"
+                    src="/assets/img/cards-header-icon.svg"
+                  />
+                </div>
+                <div _ngcontent-ng-c2582205232="" className="tab-label">
+                  {languageValue(valueByLanguage, LanguageKey.CARD_GAMES)}
+                </div>
               </div>
-              <div _ngcontent-ng-c2582205232="" className="tab-label">
-                {languageValue(valueByLanguage, LanguageKey.CARD_GAMES)}
-              </div>
-            </div> */}
+            )}
 
             <div
               onClick={() => handleNavigate("live-casino")}

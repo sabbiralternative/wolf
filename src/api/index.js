@@ -87,4 +87,5 @@ export const Settings = {
   betDelay: "",
   otpWhatsapp: "",
   complaint: "",
+  aura: "",
 };

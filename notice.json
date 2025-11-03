@@ -34,6 +34,7 @@
       "betDelay": true,
       "otpWhatsapp": true,
       "complaint": true,
+      "aura": true,
       "logo": {
         "height": 55,
         "width": 125,
