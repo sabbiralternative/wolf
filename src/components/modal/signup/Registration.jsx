@@ -50,6 +50,12 @@ const Registration = ({
     const { data } = await AxiosSecure.post(API.register, registerData);
 
     if (data?.success) {
+      if (window?.fbq) {
+        window.fbq("track", "CompleteRegistration", {
+          content_name: "User Signup",
+          status: "success",
+        });
+      }
       localStorage.removeItem("referralCode");
       if (Settings.deposit) {
         const handleDeposit = handleDepositMethod(data.result.token);
