@@ -46,12 +46,13 @@ const Deposit = () => {
     setPaymentId(method?.paymentId);
     const generatedToken = UseTokenGenerator();
 
-    if (method?.type === "upigateway") {
+    if (method?.type === "upigateway" || method?.type === "toitgateway") {
       let pgPayload = {
         paymentId: method?.paymentId,
         token: generatedToken,
         site: Settings.siteUrl,
         amount: paymentAmount,
+        method: method?.type,
       };
       if (Settings.language) {
         pgPayload.language = language;
@@ -96,7 +97,8 @@ const Deposit = () => {
       paymentMethodRef &&
       paymentMethodRef.current &&
       tabs &&
-      tabs !== "upigateway"
+      tabs !== "upigateway" &&
+      tabs !== "toitgateway"
     ) {
       paymentMethodRef.current.scrollIntoView({
         behavior: "smooth",
@@ -266,7 +268,8 @@ const Deposit = () => {
                           alt="Payment Method"
                           src={`/assets/img/bep20.svg`}
                         />
-                      ) : method?.type === "upigateway" ? (
+                      ) : method?.type === "upigateway" ||
+                        method?.type === "toitgateway" ? (
                         <img
                           _ngcontent-ng-c3816252360=""
                           alt="Payment Method"
