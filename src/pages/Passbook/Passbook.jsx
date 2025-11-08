@@ -17,6 +17,7 @@ const Passbook = () => {
   const getUniqueDate = Array.from(
     new Set(passbook?.map((item) => item?.settledTime))
   );
+
   return (
     <div
       _ngcontent-ng-c3622565476=""
@@ -189,7 +190,8 @@ const Passbook = () => {
                                                         {item?.narration}
                                                       </h3>
                                                       <p _ngcontent-ng-c773751984="">
-                                                        {item?.settledTime}
+                                                        {item?.settledTime}{" "}
+                                                        {item?.time}
                                                       </p>
                                                     </div>
                                                     <div
