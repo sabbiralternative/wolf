@@ -8,9 +8,11 @@ import { handleVisibleBankDetails } from "../../utils/handleVisibleBankDetails";
 import Success from "../../components/ui/Notification/Success";
 import useGetBankAccountName from "../../hooks/BankAccount/useGetBankAccountName";
 import { AxiosSecure } from "../../lib/AxiosSecure";
+import AddUSDTAccount from "../../components/modal/AddUSDTAccount";
 
 const MyBankDetails = () => {
   const [showAddBank, setShowAddBank] = useState(false);
+  const [showUSDTModal, setShowUSDTModal] = useState(false);
   const [showDefaultWarning, setShowDefaultWarning] = useState(false);
   const [bankId, setBankId] = useState("");
   const [successCrudMgs, setSuccessCrudMsg] = useState("");
@@ -240,6 +242,15 @@ const MyBankDetails = () => {
                       >
                         Add New Bank
                       </button>
+                      <button
+                        style={{ marginTop: "5px" }}
+                        onClick={() => setShowUSDTModal(true)}
+                        _ngcontent-ng-c3542240159=""
+                        type="button"
+                        className="btn secondary-btn"
+                      >
+                        Add USDT Account
+                      </button>
                     </div>
                     {bankData?.length > 0 && (
                       <div
@@ -290,7 +301,7 @@ const MyBankDetails = () => {
                                       _ngcontent-ng-c3542240159=""
                                       className="mat-expansion-panel-header-title ng-tns-c2690051721-5"
                                     >
-                                      <div
+                                      {/* <div
                                         _ngcontent-ng-c3542240159=""
                                         className="img-wrap"
                                       >
@@ -299,7 +310,7 @@ const MyBankDetails = () => {
                                           alt="Bank Icon"
                                           src={`/assets/img/${data?.bankCode}.png`}
                                         />
-                                      </div>
+                                      </div> */}
                                       <h2 _ngcontent-ng-c3542240159="">
                                         {data?.bankName}
                                         {data?.isDefault === 1 && (
@@ -497,6 +508,14 @@ const MyBankDetails = () => {
       {showAddBank && (
         <AddBank
           setShowAddBank={setShowAddBank}
+          refetchBankData={refetchBankData}
+          setErrCrudMsg={setErrCrudMsg}
+          setSuccessCrudMsg={setSuccessCrudMsg}
+        />
+      )}
+      {showUSDTModal && (
+        <AddUSDTAccount
+          setShowUSDTModal={setShowUSDTModal}
           refetchBankData={refetchBankData}
           setErrCrudMsg={setErrCrudMsg}
           setSuccessCrudMsg={setSuccessCrudMsg}
