@@ -1,34 +1,22 @@
 /* eslint-disable react/no-unknown-property */
-import { API } from "../../api";
-import useContextState from "../../hooks/useContextState";
+
+import { useState } from "react";
+import ChooseAmount from "./ChoseAmount";
+import BankAccount from "./BankAccount";
 
 const Withdraw = () => {
-  const { token } = useContextState();
-  if (!token) {
-    return;
-  }
+  const [amount, setAmount] = useState("");
+  const [tab, setTab] = useState("choseAmount");
   return (
     <div
       _ngcontent-ng-c943649379=""
-      className="page-body demoID"
+      className="page-body demoID "
       style={{ height: "100vh" }}
     >
-      <iframe
-        allow="fullscreen;"
-        src={`${API?.withdraw}/${API?.siteUrl}/${token}`}
-        style={{ width: "100%", height: "100vh", border: "0px" }}
-      ></iframe>
-      <div _ngcontent-ng-c943649379="" className="floating-btns">
-        <div _ngcontent-ng-c943649379="" className="btn-item ng-star-inserted">
-          <div _ngcontent-ng-c943649379="" className="btn-wrap whatsapp">
-            <img
-              _ngcontent-ng-c943649379=""
-              alt="WhatsApp"
-              src="/assets/img/whatsapp-icon.svg"
-            />
-          </div>
-        </div>
-      </div>
+      {tab === "choseAmount" && (
+        <ChooseAmount amount={amount} setAmount={setAmount} setTab={setTab} />
+      )}
+      {tab === "bank" && <BankAccount amount={amount} />}
     </div>
   );
 };

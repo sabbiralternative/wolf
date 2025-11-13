@@ -191,7 +191,7 @@ const LoggedInProfile = ({
                 )}
                 {Settings.withdraw && (
                   <button
-                    onClick={handleWithdrawData}
+                    onClick={() => navigate("/withdraw")}
                     _ngcontent-ng-c2865632707=""
                     mat-flat-button=""
                     className="notranslate mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-unthemed mat-mdc-button-base"

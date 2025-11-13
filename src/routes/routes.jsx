@@ -49,7 +49,7 @@ export const router = createBrowserRouter(
           element: <Deposit />,
         },
         {
-          path: "profile/withdraw",
+          path: "withdraw",
           element: <Withdraw />,
         },
 
