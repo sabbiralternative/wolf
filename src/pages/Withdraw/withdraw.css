@@ -15,22 +15,22 @@
 }
 
 .withdraw-title {
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 12px;
 }
 
 .withdraw-instructions {
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-size: 0.75rem;
+  font-size: 12px;
   transition: all 0.1s ease-in-out;
 }
 
 .instruction-item {
-  font-size: 0.75rem;
+  font-size: 12px;
   padding-top: 0.25rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1rem;
 }
 
@@ -45,9 +45,9 @@
 }
 
 .form-header {
-  font-size: 1rem;
+  font-size: 12px;
   width: 100%;
-  font-weight: 700;
+  font-weight: 500;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -56,7 +56,7 @@
 }
 
 .form-header-text {
-  font-size: 0.875rem;
+  font-size: 12px;
 }
 
 .form-card {
@@ -82,7 +82,7 @@
 
 .available-balance {
   background: var(--primary-color);
-  font-size: 0.875rem;
+  font-size: 12px;
   margin-top: 0.25rem;
   border-radius: 0.25rem;
   color: white;
@@ -98,7 +98,7 @@
 
 .input-label {
   margin-left: 0.25rem;
-  font-size: 0.875rem;
+  font-size: 12px;
 }
 
 .required-mark {
@@ -119,7 +119,7 @@
 }
 
 .amount-input {
-  font-size: 0.875rem;
+  font-size: 12px;
   padding: 0 0.25rem;
   flex-grow: 1;
   min-width: 0;
@@ -189,10 +189,10 @@
 }
 
 .bank-account-header {
-  font-size: 1rem;
+  font-size: 12px;
 
   width: 100%;
-  font-weight: 700;
+  font-weight: 500;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -201,11 +201,11 @@
 }
 
 .bank-account-header-text {
-  font-size: 0.875rem;
+  font-size: 12px;
 }
 
 .tab-container {
-  font-size: 0.875rem;
+  font-size: 12px;
   width: 100%;
   border-radius: 8px;
   background-color: white;
@@ -228,8 +228,8 @@
   gap: 0.375rem;
   letter-spacing: 0.05em;
   padding: 0.75rem;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   background: none;
   border: none;
   cursor: pointer;
@@ -296,7 +296,7 @@
 
 .field-label {
   margin-left: 0.25rem;
-  font-size: 0.875rem;
+  font-size: 12px;
 }
 
 .required-asterisk {
@@ -314,7 +314,7 @@
 }
 
 .form-input {
-  font-size: 0.875rem;
+  font-size: 12px;
   padding: 0 0.25rem;
   flex-grow: 1;
   min-width: 0;
@@ -354,16 +354,15 @@
   position: relative;
   overflow: hidden;
   transition: all 0.15s ease-in-out;
-  font-weight: bold;
+  font-weight: 500;
   height: fit-content;
   background-color: var(--primary-color);
-  font-size: 0.75rem;
+  font-size: 12px;
   white-space: nowrap;
   margin-right: 0.25rem;
   padding: 0.25rem 0.75rem;
   border-radius: 0.25rem;
   border: none;
-  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -462,7 +461,7 @@
 }
 
 .terms-text {
-  font-size: 0.875rem;
+  font-size: 12px;
   color: var(--primary-color);
   font-weight: 400;
   line-height: 1.25rem;
@@ -470,7 +469,7 @@
 
 .terms-link {
   text-decoration: underline;
-  font-size: 0.875rem;
+  font-size: 12px;
   background: var(--primary-color);
   -webkit-background-clip: text;
   background-clip: text;
@@ -482,9 +481,7 @@
 
 .submit-container {
   width: 100%;
-  position: sticky;
-  bottom: 0;
-  left: 0;
+
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
 }
@@ -496,7 +493,7 @@
   width: 100%;
   color: white;
   height: 2.5rem;
-  font-size: 1rem;
+  font-size: 12px;
   border-radius: 0.375rem;
   font-weight: 500;
   line-height: 1rem;
@@ -519,7 +516,6 @@
   align-items: flex-start;
   justify-content: start;
   gap: 1rem;
-  font-family: "Lato", sans-serif;
 }
 
 .account-list {
@@ -565,7 +561,7 @@
   height: 50px;
   background: #5a4bff;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 12px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -589,8 +585,8 @@
 }
 
 .account-name {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -636,7 +632,7 @@
 }
 
 .terms-text {
-  font-size: 14px;
+  font-size: 12px;
   color: #222;
   font-weight: 400;
   line-height: 1.25rem;
@@ -660,8 +656,8 @@
   width: 100%;
   height: 40px;
   border-radius: 6px;
-  font-weight: 900;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 12px;
   background: var(--primary-color);
   color: #fff;
   border: none;
@@ -693,7 +689,7 @@
 
 .no-account-text {
   color: #666;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   margin-top: 1rem;
 }
