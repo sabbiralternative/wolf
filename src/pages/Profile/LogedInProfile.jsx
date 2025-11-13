@@ -474,7 +474,7 @@ const LoggedInProfile = ({
             </li>
           )}
 
-          {/* {Settings.referral && (
+          {Settings.referral && (
             <li
               _ngcontent-ng-c2865632707=""
               routerlink="/affiliate"
@@ -496,7 +496,7 @@ const LoggedInProfile = ({
                 </div>
               </Link>
             </li>
-          )} */}
+          )}
 
           {/* {socialLink?.whatsapplink && (
             <li

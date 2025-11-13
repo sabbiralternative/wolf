@@ -116,7 +116,9 @@
       "language": "https://api7.live/api/exchange/diamond/language",
       "utr": "https://b2c.bet/deposit/utr",
       "depositBreakdown": "https://api7.live/api/exchange/diamond/depositBreakdown",
-      "withdrawBreakdown": "https://api7.live/api/exchange/diamond/withdrawBreakdown"
+      "withdrawBreakdown": "https://api7.live/api/exchange/diamond/withdrawBreakdown",
+      "sb_cashout": "https://api7.live/api/exchange/diamond/sb_cashout",
+      "fast_cashout": "https://api7.live/api/exchange/diamond/fast_cashout"
     }
   },
   "success": true
