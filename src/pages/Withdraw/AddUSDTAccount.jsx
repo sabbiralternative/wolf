@@ -141,7 +141,7 @@ const AddUSDTAccount = ({ setTab, refetchBankAccounts }) => {
             }}
           >
             <div style={{ display: "flex", alignItems: "center" }}>
-              <p style={{ margin: "0px" }}>BEP20</p>
+              <p style={{ margin: "0px", fontSize: "12px" }}>BEP20</p>
               <input
                 name="usdt-type"
                 onChange={(e) => {
@@ -157,7 +157,7 @@ const AddUSDTAccount = ({ setTab, refetchBankAccounts }) => {
               />
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <p style={{ margin: "0px" }}>TRC20</p>
+              <p style={{ margin: "0px", fontSize: "12px" }}>TRC20</p>
               <input
                 name="usdt-type"
                 onChange={(e) => {
