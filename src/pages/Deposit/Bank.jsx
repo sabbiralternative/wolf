@@ -1,9 +1,7 @@
-import useContextState from "../../hooks/useContextState";
 import { handleCopyToClipBoard } from "../../utils/handleCopyToClipBoard";
 
 /* eslint-disable react/no-unknown-property */
 const Bank = ({ depositData }) => {
-  const { setCopyTextSuccess } = useContextState();
   return (
     <div
       _ngcontent-ng-c3816252360=""
@@ -16,12 +14,7 @@ const Bank = ({ depositData }) => {
           <p _ngcontent-ng-c3816252360="">
             {depositData?.accountName}{" "}
             <a
-              onClick={() =>
-                handleCopyToClipBoard(
-                  depositData?.accountName,
-                  setCopyTextSuccess
-                )
-              }
+              onClick={() => handleCopyToClipBoard(depositData?.accountName)}
               _ngcontent-ng-c3816252360=""
             >
               <span
@@ -41,12 +34,7 @@ const Bank = ({ depositData }) => {
           <p _ngcontent-ng-c3816252360="">
             {depositData?.accountNumber}{" "}
             <a
-              onClick={() =>
-                handleCopyToClipBoard(
-                  depositData?.accountNumber,
-                  setCopyTextSuccess
-                )
-              }
+              onClick={() => handleCopyToClipBoard(depositData?.accountNumber)}
               _ngcontent-ng-c3816252360=""
             >
               <span
@@ -66,9 +54,7 @@ const Bank = ({ depositData }) => {
           <p _ngcontent-ng-c3816252360="">
             {depositData?.ifsc}{" "}
             <a
-              onClick={() =>
-                handleCopyToClipBoard(depositData?.ifsc, setCopyTextSuccess)
-              }
+              onClick={() => handleCopyToClipBoard(depositData?.ifsc)}
               _ngcontent-ng-c3816252360=""
             >
               <span
@@ -88,9 +74,7 @@ const Bank = ({ depositData }) => {
           <p _ngcontent-ng-c3816252360="">
             {depositData?.bankName}
             <a
-              onClick={() =>
-                handleCopyToClipBoard(depositData?.bankName, setCopyTextSuccess)
-              }
+              onClick={() => handleCopyToClipBoard(depositData?.bankName)}
               _ngcontent-ng-c3816252360=""
             >
               <span

@@ -474,6 +474,30 @@ const LoggedInProfile = ({
             </li>
           )}
 
+          {/* {Settings.referral && (
+            <li
+              _ngcontent-ng-c2865632707=""
+              routerlink="/affiliate"
+              routerlinkactive="active-link"
+              className="smenu-item"
+            >
+              <Link
+                to="/affiliate"
+                _ngcontent-ng-c2865632707=""
+                className="smenu-link"
+              >
+                <div _ngcontent-ng-c2865632707="" className="label-wrap">
+                  <img
+                    _ngcontent-ng-c2865632707=""
+                    alt="Menu Icon"
+                    src="/assets/img/sidenav_rules.svg"
+                  />
+                  <span _ngcontent-ng-c2865632707=""> Affiliate</span>
+                </div>
+              </Link>
+            </li>
+          )} */}
+
           {/* {socialLink?.whatsapplink && (
             <li
               _ngcontent-ng-c2865632707=""

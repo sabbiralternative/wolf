@@ -1,10 +1,7 @@
-import useContextState from "../../hooks/useContextState";
 import { handleCopyToClipBoard } from "../../utils/handleCopyToClipBoard";
 
 /* eslint-disable react/no-unknown-property */
 const UPI = ({ depositData }) => {
-  const { setCopyTextSuccess } = useContextState();
-
   return (
     <div
       _ngcontent-ng-c3816252360=""
@@ -35,9 +32,7 @@ const UPI = ({ depositData }) => {
           <p _ngcontent-ng-c3816252360="">
             <span _ngcontent-ng-c3816252360="">{depositData?.upiId}</span>
             <a
-              onClick={() =>
-                handleCopyToClipBoard(depositData?.upiId, setCopyTextSuccess)
-              }
+              onClick={() => handleCopyToClipBoard(depositData?.upiId)}
               _ngcontent-ng-c3816252360=""
             >
               <span
@@ -53,9 +48,7 @@ const UPI = ({ depositData }) => {
           </p>
         </li>
         <li
-          onClick={() =>
-            handleCopyToClipBoard(depositData?.upiId, setCopyTextSuccess)
-          }
+          onClick={() => handleCopyToClipBoard(depositData?.upiId)}
           _ngcontent-ng-c3816252360=""
           className="ng-star-inserted"
         >
@@ -87,9 +80,7 @@ const UPI = ({ depositData }) => {
           </p>
         </li>
         <li
-          onClick={() =>
-            handleCopyToClipBoard(depositData?.upiId, setCopyTextSuccess)
-          }
+          onClick={() => handleCopyToClipBoard(depositData?.upiId)}
           _ngcontent-ng-c3816252360=""
           className="ng-star-inserted"
         >

@@ -10,7 +10,7 @@ const CricketScore = ({ iscore }) => {
       <div
         style={{
           width: "100%",
-          backgroundColor: "var(--secondary-color)",
+          backgroundColor: "white",
           paddingLeft: 0,
           paddingRight: 0,
         }}
@@ -403,7 +403,7 @@ const CricketScore = ({ iscore }) => {
       >
         <div
           style={{
-            backgroundColor: "var(--secondary-color)",
+            backgroundColor: "white",
 
             paddingTop: "0.25rem", // py-1
             paddingBottom: "0.25rem",

@@ -526,10 +526,11 @@ const BetSlip = ({
                               _ngcontent-ng-c2459892542=""
                               style={{ textTransform: "none" }}
                             >
-                              Range: {placeBetValues?.minLiabilityPerBet} to{" "}
+                              Limit: {placeBetValues?.minLiabilityPerBet} to{" "}
                               {placeBetValues?.maxLiabilityPerBet}
                               <span _ngcontent-ng-c2459892542="">
-                                Max Market: 20K
+                                Max Market:{" "}
+                                {placeBetValues?.maxLiabilityPerMarket}
                               </span>
                             </h2>
                           </div>

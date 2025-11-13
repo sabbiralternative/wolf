@@ -1,17 +1,16 @@
 /* eslint-disable react/no-unknown-property */
 import { useState } from "react";
-import Tabs from "./Tabs";
+// import Tabs from "./Tabs";
 import SportsColumn from "./SportsColumn";
 
 const SportsBook = ({ sportsBook }) => {
-  const [tabs, setTabs] = useState("Main");
+  const [tabs] = useState("Main");
   const filteredSportsBook = sportsBook?.MarketGroups?.filter(
     (group) =>
       group?.Name !== "Bet Builder" &&
       group?.Name !== "Fast Markets" &&
       group?.Name !== "Player Specials"
   );
-
 
   let sports;
   if (tabs === "ALL") {
@@ -33,24 +32,24 @@ const SportsBook = ({ sportsBook }) => {
           Sportsbook
         </h2>
       </div>
-      <div _ngcontent-ng-c942213636="" className="fancybody-header">
+      {/* <div _ngcontent-ng-c942213636="" className="fancybody-header">
         <h3 _ngcontent-ng-c942213636="" className="card-title">
           Min: {sportsBook?.minLiabilityPerBet} | Max:{" "}
           {sportsBook?.maxLiabilityPerBet}
         </h3>
-      </div>
+      </div> */}
 
       <div className="">
         <div className="_asb_event-details-markets">
-          <Tabs setTabs={setTabs} sportsBook={filteredSportsBook} tabs={tabs} />
+          {/* <Tabs setTabs={setTabs} sportsBook={filteredSportsBook} tabs={tabs} /> */}
           <div className="_asb_items-tabs-content">
             <div className="asb-cut">
               <div>
                 <div className="_asb_event-details-markets-group">
-                  <SportsColumn 
-                  tabs={tabs} 
-                  sports={sports}
-                  sportsBook={sportsBook}
+                  <SportsColumn
+                    tabs={tabs}
+                    sports={sports}
+                    sportsBook={sportsBook}
                   />
                 </div>
               </div>

@@ -19,6 +19,7 @@ import BonusStatement from "../pages/BonusStatement/BonusStatement";
 import ReferralStatement from "../pages/ReferralStatement/ReferralStatement";
 import HorseRacing from "../pages/HorseRacing/HorseRacing";
 import GreyhoundRacing from "../pages/GreyhoundRacing/GreyhoundRacing";
+import Affiliate from "../pages/Affiliate/Affiliate";
 
 export const router = createBrowserRouter(
   [
@@ -99,6 +100,10 @@ export const router = createBrowserRouter(
         {
           path: "greyhound-racing",
           element: <GreyhoundRacing />,
+        },
+        {
+          path: "affiliate",
+          element: <Affiliate />,
         },
       ],
     },

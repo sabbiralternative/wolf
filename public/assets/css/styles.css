@@ -23250,8 +23250,8 @@ mat-icon {
 }
 @media (hover: hover) and (pointer: fine) and (hover: hover) and (pointer: fine) {
   ._asb_price-block-content:hover {
-    background: #ba3c83;
-    border-color: #ba3c83;
+    background: #d4d4d9;
+    border-color: #d4d4d9;
     color: #1a192a;
   }
 }
@@ -23287,7 +23287,7 @@ mat-icon {
 ._asb_event-details-markets-group {
   background: #fff;
   border-radius: 8px;
-  margin-top: 24px;
+  margin-top: 10px;
 }
 ._asb_event-details-markets-group ._asb_toggle-switch-label {
   color: #1a192a;
@@ -23394,7 +23394,7 @@ mat-icon {
 }
 
 ._asb_items-tabs-tab--simple-button-selected {
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 @media only screen and (min-width: 360px) {
