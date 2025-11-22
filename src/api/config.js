@@ -66,6 +66,8 @@ export const getSetApis = (setNoticeLoaded, baseUrl) => {
         API.bonus = data?.result?.endpoint?.bonus;
         API.index = data?.result?.endpoint?.index;
         API.withdrawBreakdown = data?.result?.endpoint?.withdrawBreakdown;
+        API.sb_cashout = data?.result?.endpoint?.sb_cashout;
+        API.fast_cashout = data?.result?.endpoint?.fast_cashout;
 
         Settings.logoFormat = data?.result?.settings?.logo?.format;
         Settings.logoHeight = data?.result?.settings?.logo?.height;

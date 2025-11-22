@@ -261,7 +261,15 @@ const GameDetails = () => {
                 iScore={iScore}
               />
             )}
-            {tabs === "openBets" && <OpenBetsTab myBets={myBets} />}
+            {tabs === "openBets" && (
+              <OpenBetsTab
+                myBets={myBets}
+                refetchCurrentBets={refetchCurrentBets}
+                sportsBook={sportsBook}
+                setSuccessMessage={setSuccessMessage}
+                setErrorMessage={setErrorMessage}
+              />
+            )}
           </div>
         </div>
       </div>
