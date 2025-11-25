@@ -140,8 +140,9 @@ const OpenBetsTab = ({
 
                               const price = (
                                 0.92 *
-                                bet?.amount *
-                                (bet?.userRate / column?.Price)
+                                  bet?.amount *
+                                  (bet?.userRate / column?.Price) -
+                                bet?.amount
                               )?.toFixed(2);
                               return (
                                 <div
@@ -194,7 +195,7 @@ const OpenBetsTab = ({
                                         <p _ngcontent-ng-c942213636=""></p>
                                       </div>
                                     </div>
-                                    {bet?.cashout && (
+                                    {bet?.cashout && column && (
                                       <button
                                         onClick={() =>
                                           handleCashOut({
