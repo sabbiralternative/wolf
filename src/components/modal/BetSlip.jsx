@@ -20,6 +20,7 @@ const BetSlip = ({
   setErrorMessage,
   refetchCurrentBets,
 }) => {
+  const [isCashOut, setIsCashOut] = useState(false);
   const { eventTypeId } = useParams();
   const { language } = useLanguage();
   const { token, setPredictOdds, predictOdds } = useContextState();
@@ -42,6 +43,7 @@ const BetSlip = ({
   useEffect(() => {
     setPrice(placeBetValues?.price);
     setTotalSize(placeBetValues?.totalSize?.toFixed(2));
+    setIsCashOut(placeBetValues?.cashout || false);
   }, [placeBetValues]);
 
   let payload = {};
@@ -64,7 +66,7 @@ const BetSlip = ({
         totalSize: totalSize,
         isBettable: placeBetValues?.isBettable,
         eventId: placeBetValues?.eventId,
-        cashout: false,
+        cashout: isCashOut,
         b2c: Settings.b2c,
       };
     } else {
@@ -81,7 +83,7 @@ const BetSlip = ({
         isBettable: placeBetValues?.isBettable,
         maxLiabilityPerBet: placeBetValues?.maxLiabilityPerBet,
         eventId: placeBetValues?.eventId,
-        cashout: placeBetValues?.cashout || false,
+        cashout: isCashOut,
         b2c: Settings.b2c,
       };
     }
@@ -174,6 +176,7 @@ const BetSlip = ({
     } else {
       setPrice(parseFloat(price) + 1);
     }
+    setIsCashOut(false);
   };
 
   /* Decrease price bets */
@@ -195,6 +198,7 @@ const BetSlip = ({
     } else {
       setPrice(parseFloat(price) - 1);
     }
+    setIsCashOut(false);
   };
 
   useEffect(() => {
@@ -271,6 +275,19 @@ const BetSlip = ({
       setBetDelay(null);
     }
   }, [setBetDelay, betDelay]);
+
+  const handleButtonValue = (value) => {
+    setIsCashOut(false);
+    const buttonValue = Number(value);
+    const prevStake = !totalSize ? null : Number(totalSize);
+
+    if (prevStake === null) {
+      setTotalSize(buttonValue);
+    }
+    if (prevStake >= 0) {
+      setTotalSize(buttonValue + prevStake);
+    }
+  };
 
   return (
     <div className="cdk-overlay-container">
@@ -406,49 +423,45 @@ const BetSlip = ({
                             <input
                               _ngcontent-ng-c2459892542=""
                               type="number"
-                              numbersonly=""
-                              name=""
-                              readOnly={
-                                placeBetValues?.isWeak ||
-                                placeBetValues?.cashout
-                              }
+                              readOnly={placeBetValues?.isWeak}
                               className="rate-inp"
-                              defaultValue={price}
+                              value={price}
+                              onChange={(e) => setPrice(e.target.value)}
                             />
-                            {!placeBetValues?.isWeak &&
-                              !placeBetValues?.cashout && (
-                                <div
-                                  style={{
-                                    position: "absolute",
-                                    top: 3,
-                                    right: 5,
-                                    display: "flex",
-                                    flexDirection: "column",
-                                  }}
-                                >
-                                  <MdKeyboardArrowUp
-                                    onClick={handleIncreasePrice}
-                                    style={{ cursor: "pointer" }}
-                                    size={15}
-                                  />
-                                  <MdKeyboardArrowDown
-                                    onClick={handleDecreasePrice}
-                                    style={{ cursor: "pointer" }}
-                                    size={15}
-                                  />
-                                </div>
-                              )}
+                            {!placeBetValues?.isWeak && (
+                              <div
+                                style={{
+                                  position: "absolute",
+                                  top: 3,
+                                  right: 5,
+                                  display: "flex",
+                                  flexDirection: "column",
+                                }}
+                              >
+                                <MdKeyboardArrowUp
+                                  onClick={handleIncreasePrice}
+                                  style={{ cursor: "pointer" }}
+                                  size={15}
+                                />
+                                <MdKeyboardArrowDown
+                                  onClick={handleDecreasePrice}
+                                  style={{ cursor: "pointer" }}
+                                  size={15}
+                                />
+                              </div>
+                            )}
                           </div>
                           <div
                             _ngcontent-ng-c2459892542=""
                             className="bet-action-item"
                           >
                             <input
-                              readOnly={placeBetValues?.cashout}
-                              onChange={(e) => setTotalSize(e.target.value)}
+                              onChange={(e) => {
+                                setTotalSize(e.target.value);
+                                setIsCashOut(false);
+                              }}
                               _ngcontent-ng-c2459892542=""
                               type="number"
-                              numbersonly=""
                               name="betStake"
                               className="ng-untouched ng-pristine ng-valid"
                               defaultValue={totalSize}
@@ -497,8 +510,7 @@ const BetSlip = ({
                           {buttonGameValue?.slice(0, 8).map(({ value }, i) => {
                             return (
                               <button
-                                disabled={placeBetValues?.cashout}
-                                onClick={() => setTotalSize(value)}
+                                onClick={() => handleButtonValue(value)}
                                 key={i}
                                 _ngcontent-ng-c2459892542=""
                                 mat-flat-button=""
