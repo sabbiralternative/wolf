@@ -3,10 +3,12 @@ import useGetIndex from "../../../hooks/useGetIndex";
 import AddNewUser from "../../modal/Affiliate/AddNewUser";
 import assets from "../../../assets";
 import { handleCopyToClipBoard } from "../../../utils/handleCopyToClipBoard";
+import useGetSocialLink from "../../../hooks/useGetSocialLink";
 
 const InviteSection = () => {
   const [showAddNewUserModal, setShowAddNewUserModal] = useState(false);
   const { data } = useGetIndex();
+  const { socialLink } = useGetSocialLink();
 
   return (
     <Fragment>
@@ -27,25 +29,27 @@ const InviteSection = () => {
             />
           </div>
         </div>
-        <div className="nw-affi-add-new-user-btn-sec" data-v-4c49d924>
-          <button
-            onClick={() => setShowAddNewUserModal(true)}
-            className="nw-affi-add-new-user-btn"
-            data-bs-target="#AfAddNewUser"
-            data-bs-toggle="modal"
-            data-v-4c49d924
-          >
-            <span data-v-4c49d924>
-              <img
-                style={{ height: "20px", width: "20px" }}
-                src={assets.affiAddUser}
-                alt="affi-add-user"
-                data-v-4c49d924
-              />{" "}
-              ADD NEW USER
-            </span>
-          </button>
-        </div>
+        {socialLink?.referral_create_account && (
+          <div className="nw-affi-add-new-user-btn-sec" data-v-4c49d924>
+            <button
+              onClick={() => setShowAddNewUserModal(true)}
+              className="nw-affi-add-new-user-btn"
+              data-bs-target="#AfAddNewUser"
+              data-bs-toggle="modal"
+              data-v-4c49d924
+            >
+              <span data-v-4c49d924>
+                <img
+                  style={{ height: "20px", width: "20px" }}
+                  src={assets.affiAddUser}
+                  alt="affi-add-user"
+                  data-v-4c49d924
+                />{" "}
+                ADD NEW USER
+              </span>
+            </button>
+          </div>
+        )}
         <div data-v-4c49d924 className="nw-affi-qr-invite-wrapper">
           <div data-v-4c49d924 className="nw-affi-qr-invite-code">
             <div data-v-4c49d924 className="nw-affi-qr-invite-heading">
