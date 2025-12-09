@@ -465,6 +465,7 @@ const BetSlip = ({
                               name="betStake"
                               className="ng-untouched ng-pristine ng-valid"
                               defaultValue={totalSize}
+                              placeholder={`Max : ${placeBetValues?.maxLiabilityPerBet}`}
                             />
                           </div>
                           <div
@@ -472,6 +473,7 @@ const BetSlip = ({
                             className="bet-action-item"
                           >
                             <button
+                              // disabled={!totalSize}
                               onClick={handleOrderBets}
                               _ngcontent-ng-c2459892542=""
                               mat-flat-button=""
@@ -481,8 +483,54 @@ const BetSlip = ({
                               mat-ripple-loader-disabled=""
                             >
                               <span className="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
-                              <span className="mdc-button__label">Submit</span>
-                              <span className="mat-mdc-focus-indicator"></span>
+                              <span
+                                className="mdc-button__label"
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "space-between",
+                                  gap: "0px 6px",
+                                  fontSize: "11px",
+                                }}
+                              >
+                                <span> Place Bet</span>
+
+                                <span
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    gap: "0px 1px",
+                                    fontSize: "10px",
+                                  }}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width={11}
+                                    height={11}
+                                    viewBox="0 0 12 12"
+                                    fill="none"
+                                  >
+                                    <g clipPath="url(#clip0_2144_3162)">
+                                      <path
+                                        d="M9.91095 3.68857L10.3814 3.21808C10.5643 3.03525 10.5643 2.7388 10.3814 2.55606C10.1986 2.37323 9.90225 2.37323 9.71942 2.55606L9.24893 3.02655C8.45956 2.36884 7.50037 1.9715 6.47717 1.87848V0.93631H6.92972C7.18826 0.93631 7.39783 0.726654 7.39783 0.468109C7.39783 0.209564 7.18826 0 6.92972 0H5.08832C4.82977 0 4.62021 0.209564 4.62021 0.468109C4.62021 0.726654 4.82977 0.93631 5.08832 0.93631H5.54086V1.87848C2.97958 2.11139 0.9375 4.26306 0.9375 6.92844C0.9375 9.73141 3.20572 12 6.00906 12C8.81195 12 11.0805 9.73178 11.0805 6.92844C11.0805 5.73111 10.6682 4.59723 9.91095 3.68857ZM6.00897 11.0637C3.72885 11.0637 1.87372 9.20865 1.87372 6.92844C1.87372 4.64832 3.72885 2.79327 6.00897 2.79327C8.28918 2.79327 10.1442 4.64832 10.1442 6.92844C10.1442 9.20865 8.28918 11.0637 6.00897 11.0637ZM8.1785 4.759C8.36133 4.94183 8.36133 5.23828 8.1785 5.42102L6.34003 7.25949C6.1572 7.44232 5.86075 7.44232 5.67801 7.25949C5.49518 7.07666 5.49518 6.78021 5.67801 6.59747L7.51639 4.759C7.69922 4.57617 7.99567 4.57617 8.1785 4.759Z"
+                                        fill="var(--primary-bg)"
+                                      />
+                                    </g>
+                                    <defs>
+                                      <clipPath id="clip0_2144_3162">
+                                        <rect
+                                          width={12}
+                                          height={12}
+                                          fill="white"
+                                        />
+                                      </clipPath>
+                                    </defs>
+                                  </svg>
+                                  {placeBetValues?.betDelay}s
+                                </span>
+                              </span>
+                              <span className="mat-mdc-focus-indicator"> </span>
                               <span className="mat-mdc-button-touch-target"></span>
                             </button>
                           </div>
