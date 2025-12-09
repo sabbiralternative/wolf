@@ -1,9 +1,22 @@
 import { Fragment, useState } from "react";
 import assets from "../../../assets";
 import AddNewUser from "../../modal/Affiliate/AddNewUser";
+import { useNavigate } from "react-router-dom";
+import useGetSocialLink from "../../../hooks/useGetSocialLink";
+import { useGetIndex } from "../../../hooks";
+import { Pagination } from "rsuite";
 
 const UserList = () => {
+  const navigate = useNavigate();
   const [showAddNewUserModal, setShowAddNewUserModal] = useState(false);
+  const [activePage, setActivePage] = useState(1);
+  const { socialLink } = useGetSocialLink();
+  const { data } = useGetIndex({
+    type: "get_affiliate_users",
+    page: activePage,
+  });
+
+  const meta = data?.pagination;
   return (
     <Fragment>
       {showAddNewUserModal && (
@@ -65,30 +78,102 @@ const UserList = () => {
                   </tr>
                 </thead>
                 <tbody data-v-fd406c30>
-                  <tr data-v-fd406c30 className="tabetdat">
-                    <td data-v-fd406c30 colSpan={5}>
-                      <div
-                        data-v-fd406c30
-                        className="text-center affiliate-no-recoard-data"
-                      >
-                        No Records Found
-                      </div>
-                    </td>
-                  </tr>
+                  {data?.result?.length > 0 ? (
+                    data?.result?.map((item) => {
+                      return (
+                        <tr key={item?.punter_id} data-v-fd406c30="">
+                          <td data-v-fd406c30="">{item?.username}</td>
+                          <td data-v-fd406c30="">
+                            <span
+                              data-v-fd406c30=""
+                              className="affi-green-text"
+                            >
+                              {item?.credit_limit}
+                            </span>
+                          </td>
+                          <td data-v-fd406c30="">{item?.date_added}</td>
+                          <td data-v-fd406c30="">
+                            <button
+                              style={{
+                                height: "auto",
+                                marginTop: "0px",
+                                width: "auto",
+                                padding: "5px 10px",
+                                borderRadius: "3px",
+                                margin: "auto",
+                              }}
+                              data-v-fd406c30=""
+                              className="submit-btn rounded bg-primary"
+                            >
+                              View
+                            </button>
+                          </td>
+                          <td data-v-fd406c30="">
+                            <button
+                              onClick={() =>
+                                navigate(
+                                  `/affiliate/user-profit-loss?punter_id=${item?.punter_id}`
+                                )
+                              }
+                              style={{
+                                height: "auto",
+                                marginTop: "0px",
+                                width: "auto",
+                                padding: "5px 10px",
+                                borderRadius: "3px",
+                                margin: "auto",
+                              }}
+                              data-v-fd406c30=""
+                              className="submit-btn rounded bg-primary"
+                            >
+                              View
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr data-v-fd406c30 className="tabetdat">
+                      <td data-v-fd406c30 colSpan={5}>
+                        <div
+                          data-v-fd406c30
+                          className="text-center affiliate-no-recoard-data"
+                        >
+                          No Records Found
+                        </div>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
-            <div data-v-fd406c30 className="nw-affi-add-new-user-btn-sec">
-              <button
-                onClick={() => setShowAddNewUserModal(true)}
-                className="nw-affi-add-new-user-btn"
-                data-bs-target="#AfAddNewUser"
-                data-bs-toggle="modal"
-                data-v-4c49d924
-              >
-                <span data-v-4c49d924>ADD NEW USER</span>
-              </button>
+            <div style={{ display: "flex", justifyContent: "end" }}>
+              <Pagination
+                prev
+                next
+                size="md"
+                total={meta?.totalRecords}
+                limit={meta?.recordsPerPage}
+                activePage={activePage}
+                onChangePage={setActivePage}
+                maxButtons={5}
+                ellipsis
+                boundaryLinks
+              />
             </div>
+            {socialLink?.referral_create_account && (
+              <div data-v-fd406c30 className="nw-affi-add-new-user-btn-sec">
+                <button
+                  onClick={() => setShowAddNewUserModal(true)}
+                  className="nw-affi-add-new-user-btn"
+                  data-bs-target="#AfAddNewUser"
+                  data-bs-toggle="modal"
+                  data-v-4c49d924
+                >
+                  <span data-v-4c49d924>ADD NEW USER</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>

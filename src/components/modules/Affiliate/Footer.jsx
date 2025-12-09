@@ -1,9 +1,17 @@
 import { Fragment, useState } from "react";
 import assets from "../../../assets";
 import ShareAffiliateLink from "../../modal/Affiliate/ShareAffiliateLink";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const Footer = ({ setTab, tab }) => {
+const Footer = () => {
+  const { search } = useLocation();
+  const navigate = useNavigate();
+  const params = new URLSearchParams(search);
   const [showShareAffiliateLink, setShowShareAffiliateLink] = useState(false);
+  const tab = params.get("tab");
+  const handleChangeTab = (t) => {
+    navigate(`/affiliate?tab=${t}`);
+  };
   return (
     <Fragment>
       {showShareAffiliateLink && (
@@ -15,9 +23,9 @@ const Footer = ({ setTab, tab }) => {
         <nav data-v-066114c4>
           <a
             data-v-066114c4
-            onClick={() => setTab("dashboard")}
+            onClick={() => handleChangeTab("dashboard")}
             className={`${
-              tab === "dashboard"
+              tab === "dashboard" || !tab
                 ? "router-link-active router-link-exact-active active"
                 : ""
             }`}
@@ -34,7 +42,7 @@ const Footer = ({ setTab, tab }) => {
             </span>
           </a>
           <a
-            onClick={() => setTab("user-list")}
+            onClick={() => handleChangeTab("user-list")}
             data-v-066114c4
             className={`${
               tab === "user-list"
@@ -67,7 +75,7 @@ const Footer = ({ setTab, tab }) => {
             </span>
           </a>
           <a
-            onClick={() => setTab("pnl")}
+            onClick={() => handleChangeTab("pnl")}
             data-v-066114c4
             className={`${
               tab === "pnl"
@@ -86,7 +94,7 @@ const Footer = ({ setTab, tab }) => {
             </span>
           </a>
           <a
-            onClick={() => setTab("reports")}
+            onClick={() => handleChangeTab("reports")}
             data-v-066114c4
             className={`${
               tab === "reports"

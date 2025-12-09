@@ -5,7 +5,7 @@ import useCloseModalClickOutside from "../../hooks/useCloseModalClickOutside";
 import useContextState from "../../hooks/useContextState";
 import { handleCopyToClipBoard } from "../../utils/handleCopyToClipBoard";
 import Success from "../ui/Notification/Success";
-import useGetIndex from "../../hooks/useGetIndex";
+import { useGetIndex } from "../../hooks";
 const Referral = ({ setShowReferral }) => {
   const [successCopy, setSuccessCopy] = useState("");
   const { logo } = useContextState();
@@ -13,7 +13,9 @@ const Referral = ({ setShowReferral }) => {
   useCloseModalClickOutside(referralRef, () => {
     setShowReferral(false);
   });
-  const { data } = useGetIndex();
+  const { data } = useGetIndex({
+    type: "get_referral_code",
+  });
 
   return (
     <div className="cdk-overlay-container">
@@ -114,11 +116,14 @@ const Referral = ({ setShowReferral }) => {
                           _ngcontent-ng-c526813732=""
                           className="refer-code-text"
                         >
-                          {data?.link}
+                          {data?.result?.link}
                         </p>
                         <button
                           onClick={() =>
-                            handleCopyToClipBoard(data?.text, setSuccessCopy)
+                            handleCopyToClipBoard(
+                              data?.result?.text,
+                              setSuccessCopy
+                            )
                           }
                           _ngcontent-ng-c526813732=""
                           className="btn secondary-btn"

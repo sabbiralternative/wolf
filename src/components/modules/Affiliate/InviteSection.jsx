@@ -1,13 +1,15 @@
 import { Fragment, useState } from "react";
-import useGetIndex from "../../../hooks/useGetIndex";
 import AddNewUser from "../../modal/Affiliate/AddNewUser";
 import assets from "../../../assets";
 import { handleCopyToClipBoard } from "../../../utils/handleCopyToClipBoard";
 import useGetSocialLink from "../../../hooks/useGetSocialLink";
+import { useGetIndex } from "../../../hooks";
 
 const InviteSection = () => {
   const [showAddNewUserModal, setShowAddNewUserModal] = useState(false);
-  const { data } = useGetIndex();
+  const { data } = useGetIndex({
+    type: "get_referral_code",
+  });
   const { socialLink } = useGetSocialLink();
 
   return (
@@ -15,7 +17,11 @@ const InviteSection = () => {
       {showAddNewUserModal && (
         <AddNewUser setShowAddNewUserModal={setShowAddNewUserModal} />
       )}
-      <div data-v-4c49d924 className="nw-affi-invite-sec">
+      <div
+        data-v-4c49d924
+        className="nw-affi-invite-sec"
+        style={{ marginBottom: "20px" }}
+      >
         <div className="nw-affi-invite-content-wrapper" data-v-4c49d924>
           <div className="nw-affi-invite-content" data-v-4c49d924>
             <h2 data-v-4c49d924>Invite your friends</h2>
@@ -61,7 +67,7 @@ const InviteSection = () => {
               <h3 data-v-4c49d924>Invitation Code</h3>
             </div>
             <div data-v-4c49d924 className="nw-affi-share-link-sec">
-              <span data-v-4c49d924>{data?.link}</span>
+              <span data-v-4c49d924>{data?.result?.link}</span>
               <button
                 style={{
                   position: "absolute",
@@ -69,7 +75,7 @@ const InviteSection = () => {
                   top: "0px",
                   background: "transparent",
                 }}
-                onClick={() => handleCopyToClipBoard(data?.text)}
+                onClick={() => handleCopyToClipBoard(data?.result?.text)}
                 data-v-4c49d924
                 className="thm-but thm-bdr-btn affi-cancel-btn affi-yellow-btn"
               >

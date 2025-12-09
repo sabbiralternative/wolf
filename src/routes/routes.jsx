@@ -20,6 +20,7 @@ import ReferralStatement from "../pages/ReferralStatement/ReferralStatement";
 import HorseRacing from "../pages/HorseRacing/HorseRacing";
 import GreyhoundRacing from "../pages/GreyhoundRacing/GreyhoundRacing";
 import Affiliate from "../pages/Affiliate/Affiliate";
+import AffiliateUserProfitLoss from "../pages/AffiliateUserProfitLoss/AffiliateUserProfitLoss";
 
 export const router = createBrowserRouter(
   [
@@ -104,6 +105,10 @@ export const router = createBrowserRouter(
         {
           path: "affiliate",
           element: <Affiliate />,
+        },
+        {
+          path: "/affiliate/user-profit-loss",
+          element: <AffiliateUserProfitLoss />,
         },
       ],
     },

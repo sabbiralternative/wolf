@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "rsuite/Pagination/styles/index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/routes.jsx";
 import StateProvider from "./context/StateProvider.jsx";
