@@ -7,6 +7,7 @@ import { Settings } from "../../../api";
 import Login from "../../../components/modal/Login";
 import { useParams } from "react-router-dom";
 import { isGameSuspended } from "../../../utils/isGameSuspended";
+import SpeedCashOut from "../../../components/modal/SpeedCashOut";
 
 /* eslint-disable react/no-unknown-property */
 const Bookmaker = ({
@@ -16,6 +17,7 @@ const Bookmaker = ({
   exposer,
   setShowLoginWarn,
 }) => {
+  const [speedCashOut, setSpeedCashOut] = useState(null);
   const { eventId } = useParams();
   const [errorLogin, setErrorLogin] = useState("");
   const [teamProfit, setTeamProfit] = useState([]);
@@ -33,7 +35,12 @@ const Bookmaker = ({
     runner2,
     gameId
   ) => {
-    let runner, largerExposure, layValue, oppositeLayValue, lowerExposure;
+    let runner,
+      largerExposure,
+      layValue,
+      oppositeLayValue,
+      lowerExposure,
+      speedCashOut;
 
     const pnlArr = [exposureA, exposureB];
     const isOnePositiveExposure = onlyOnePositive(pnlArr);
@@ -52,6 +59,13 @@ const Bookmaker = ({
       layValue = 1 + Number(runner2?.lay?.[0]?.price) / 100;
       oppositeLayValue = 1 + Number(runner1?.lay?.[0]?.price) / 100;
       lowerExposure = exposureA;
+    }
+
+    if (exposureA > 0 && exposureB > 0) {
+      const difference = exposureA - exposureB;
+      if (difference <= 10) {
+        speedCashOut = true;
+      }
     }
 
     // Compute the absolute value of the lower exposure.
@@ -78,6 +92,11 @@ const Bookmaker = ({
       oppositeLayValue,
       gameId,
       isOnePositiveExposure,
+      exposureA,
+      exposureB,
+      runner1,
+      runner2,
+      speedCashOut,
     };
   };
 
@@ -140,10 +159,19 @@ const Bookmaker = ({
   }, [bookmarker, eventId, exposer]);
   return (
     <>
+      {speedCashOut && (
+        <SpeedCashOut
+          speedCashOut={speedCashOut}
+          setSpeedCashOut={setSpeedCashOut}
+        />
+      )}
       {bookmarker?.map((games, i) => {
         const teamProfitForGame = teamProfit?.find(
           (profit) =>
             profit?.gameId === games?.id && profit?.isOnePositiveExposure
+        );
+        const speedCashOut = teamProfit?.find(
+          (profit) => profit?.gameId === games?.id && profit?.speedCashOut
         );
 
         return (
@@ -163,62 +191,90 @@ const Bookmaker = ({
                   {/* { games?.eventTypeId == 4 ? games?.btype : games?.name} */}
                   {games?.name}
                 </h2>
-                {Settings.bookmakerCashOut && games?.runners?.length !== 3 && (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
-                  >
-                    {teamProfitForGame?.profit !== 0 && (
-                      <span
-                        style={{
-                          fontSize: "10px",
-                          color: `${
-                            teamProfitForGame?.profit > 0 ? "green" : "red"
-                          }`,
-                        }}
-                      >
-                        {teamProfitForGame?.profit?.toFixed(2)}
-                      </span>
-                    )}
-
-                    <button
-                      disabled={
-                        !teamProfitForGame ||
-                        isGameSuspended(games) ||
-                        teamProfitForGame?.profit === 0
-                      }
-                      onClick={() =>
-                        handleCashOutPlaceBet(
-                          games,
-                          "lay",
-                          setOpenBetSlip,
-                          setPlaceBetValues,
-                          pnlBySelection,
-                          token,
-                          setShowLogin,
-                          teamProfitForGame
-                        )
-                      }
+                {Settings.bookmakerCashOut &&
+                  games?.runners?.length !== 3 &&
+                  !speedCashOut && (
+                    <div
                       style={{
-                        cursor: `${
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      {teamProfitForGame?.profit !== 0 && (
+                        <span
+                          style={{
+                            fontSize: "10px",
+                            color: `${
+                              teamProfitForGame?.profit > 0 ? "green" : "red"
+                            }`,
+                          }}
+                        >
+                          {teamProfitForGame?.profit?.toFixed(2)}
+                        </span>
+                      )}
+
+                      <button
+                        disabled={
                           !teamProfitForGame ||
                           isGameSuspended(games) ||
                           teamProfitForGame?.profit === 0
-                            ? "not-allowed"
-                            : "pointer"
-                        }`,
-                        opacity: `${
-                          !teamProfitForGame ||
-                          isGameSuspended(games) ||
-                          teamProfitForGame?.profit === 0
-                            ? "0.6"
-                            : "1"
-                        }`,
+                        }
+                        onClick={() =>
+                          handleCashOutPlaceBet(
+                            games,
+                            "lay",
+                            setOpenBetSlip,
+                            setPlaceBetValues,
+                            pnlBySelection,
+                            token,
+                            setShowLogin,
+                            teamProfitForGame
+                          )
+                        }
+                        style={{
+                          cursor: `${
+                            !teamProfitForGame ||
+                            isGameSuspended(games) ||
+                            teamProfitForGame?.profit === 0
+                              ? "not-allowed"
+                              : "pointer"
+                          }`,
+                          opacity: `${
+                            !teamProfitForGame ||
+                            isGameSuspended(games) ||
+                            teamProfitForGame?.profit === 0
+                              ? "0.6"
+                              : "1"
+                          }`,
+                          zIndex: "1000",
+                          pointerEvents: "auto",
+                        }}
+                        _ngcontent-ng-c942213636=""
+                        mat-button=""
+                        mat-ripple-loader-uninitialized=""
+                        mat-ripple-loader-class-name="mat-mdc-button-ripple"
+                        className="mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted"
+                        mat-ripple-loader-
+                      >
+                        <span className="mdc-button__label">
+                          <span> Cashout</span>
+                        </span>
+                      </button>
+                    </div>
+                  )}
+
+                {Settings.bookmakerCashOut &&
+                  games?.runners?.length !== 3 &&
+                  speedCashOut && (
+                    <button
+                      onClick={() => setSpeedCashOut(speedCashOut)}
+                      disabled={isGameSuspended(games)}
+                      style={{
                         zIndex: "1000",
                         pointerEvents: "auto",
+                        backgroundColor: "#82371b",
+                        color: "white",
                       }}
                       _ngcontent-ng-c942213636=""
                       mat-button=""
@@ -228,11 +284,10 @@ const Bookmaker = ({
                       mat-ripple-loader-
                     >
                       <span className="mdc-button__label">
-                        <span> Cashout</span>
+                        <span> Speed Cashout</span>
                       </span>
                     </button>
-                  </div>
-                )}
+                  )}
               </div>
               <div _ngcontent-ng-c942213636="" className="card-header">
                 <h3 _ngcontent-ng-c942213636="" className="card-title">

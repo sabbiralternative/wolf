@@ -21,6 +21,7 @@ import HorseRacing from "../pages/HorseRacing/HorseRacing";
 import GreyhoundRacing from "../pages/GreyhoundRacing/GreyhoundRacing";
 import Affiliate from "../pages/Affiliate/Affiliate";
 import AffiliateUserProfitLoss from "../pages/AffiliateUserProfitLoss/AffiliateUserProfitLoss";
+import AffiliateUserStatement from "../pages/AffiliateUserStatement/AffiliateUserStatement";
 
 export const router = createBrowserRouter(
   [
@@ -109,6 +110,10 @@ export const router = createBrowserRouter(
         {
           path: "/affiliate/user-profit-loss",
           element: <AffiliateUserProfitLoss />,
+        },
+        {
+          path: "/affiliate/user-statement",
+          element: <AffiliateUserStatement />,
         },
       ],
     },

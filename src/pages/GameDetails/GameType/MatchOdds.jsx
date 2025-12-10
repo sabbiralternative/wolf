@@ -7,6 +7,8 @@ import Suspended from "../Suspended";
 import { useParams } from "react-router-dom";
 import { handleCashOutPlaceBet } from "../../../utils/handleCashOutPlaceBet";
 import Login from "../../../components/modal/Login";
+import SpeedCashOut from "../../../components/modal/SpeedCashOut";
+import { isGameSuspended } from "../../../utils/isGameSuspended";
 
 const MatchOdds = ({
   match_odd,
@@ -15,6 +17,7 @@ const MatchOdds = ({
   exposer,
   setShowLoginWarn,
 }) => {
+  const [speedCashOut, setSpeedCashOut] = useState(null);
   const [errorLogin, setErrorLogin] = useState("");
   const { eventId } = useParams();
   const [teamProfit, setTeamProfit] = useState([]);
@@ -33,7 +36,12 @@ const MatchOdds = ({
     runner2,
     gameId
   ) => {
-    let runner, largerExposure, layValue, oppositeLayValue, lowerExposure;
+    let runner,
+      largerExposure,
+      layValue,
+      oppositeLayValue,
+      lowerExposure,
+      speedCashOut;
 
     const pnlArr = [exposureA, exposureB];
     const isOnePositiveExposure = onlyOnePositive(pnlArr);
@@ -52,6 +60,13 @@ const MatchOdds = ({
       layValue = runner2?.lay?.[0]?.price;
       oppositeLayValue = runner1?.lay?.[0]?.price;
       lowerExposure = exposureA;
+    }
+
+    if (exposureA > 0 && exposureB > 0) {
+      const difference = exposureA - exposureB;
+      if (difference <= 10) {
+        speedCashOut = true;
+      }
     }
 
     // Compute the absolute value of the lower exposure.
@@ -78,6 +93,11 @@ const MatchOdds = ({
       oppositeLayValue,
       gameId,
       isOnePositiveExposure,
+      exposureA,
+      exposureB,
+      runner1,
+      runner2,
+      speedCashOut,
     };
   };
 
@@ -126,10 +146,19 @@ const MatchOdds = ({
 
   return (
     <>
+      {speedCashOut && (
+        <SpeedCashOut
+          speedCashOut={speedCashOut}
+          setSpeedCashOut={setSpeedCashOut}
+        />
+      )}
       {match_odd?.map((games, i) => {
         const teamProfitForGame = teamProfit?.find(
           (profit) =>
             profit?.gameId === games?.id && profit?.isOnePositiveExposure
+        );
+        const speedCashOut = teamProfit?.find(
+          (profit) => profit?.gameId === games?.id && profit?.speedCashOut
         );
 
         return (
@@ -161,41 +190,67 @@ const MatchOdds = ({
                       {teamProfitForGame?.profit?.toFixed(2)}
                     </span>
                   )}
-                  {Settings.betFairCashOut && games?.runners?.length !== 3 && (
-                    <button
-                      disabled={!teamProfitForGame}
-                      onClick={() =>
-                        handleCashOutPlaceBet(
-                          games,
-                          "lay",
-                          setOpenBetSlip,
-                          setPlaceBetValues,
-                          pnlBySelection,
-                          token,
-                          setShowLogin,
-                          teamProfitForGame
-                        )
-                      }
-                      style={{
-                        cursor: `${
-                          !teamProfitForGame ? "not-allowed" : "pointer"
-                        }`,
-                        opacity: `${!teamProfitForGame ? "0.6" : "1"}`,
-                        zIndex: "1000",
-                        pointerEvents: "auto",
-                      }}
-                      _ngcontent-ng-c942213636=""
-                      mat-button=""
-                      mat-ripple-loader-uninitialized=""
-                      mat-ripple-loader-class-name="mat-mdc-button-ripple"
-                      className="mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted"
-                      mat-ripple-loader-
-                    >
-                      <span className="mdc-button__label">
-                        <span> Cashout</span>
-                      </span>
-                    </button>
-                  )}
+                  {Settings.betFairCashOut &&
+                    games?.runners?.length !== 3 &&
+                    !speedCashOut && (
+                      <button
+                        disabled={!teamProfitForGame}
+                        onClick={() =>
+                          handleCashOutPlaceBet(
+                            games,
+                            "lay",
+                            setOpenBetSlip,
+                            setPlaceBetValues,
+                            pnlBySelection,
+                            token,
+                            setShowLogin,
+                            teamProfitForGame
+                          )
+                        }
+                        style={{
+                          cursor: `${
+                            !teamProfitForGame ? "not-allowed" : "pointer"
+                          }`,
+                          opacity: `${!teamProfitForGame ? "0.6" : "1"}`,
+                          zIndex: "1000",
+                          pointerEvents: "auto",
+                        }}
+                        _ngcontent-ng-c942213636=""
+                        mat-button=""
+                        mat-ripple-loader-uninitialized=""
+                        mat-ripple-loader-class-name="mat-mdc-button-ripple"
+                        className="mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted"
+                        mat-ripple-loader-
+                      >
+                        <span className="mdc-button__label">
+                          <span> Cashout</span>
+                        </span>
+                      </button>
+                    )}
+                  {Settings.betFairCashOut &&
+                    games?.runners?.length !== 3 &&
+                    speedCashOut && (
+                      <button
+                        onClick={() => setSpeedCashOut(speedCashOut)}
+                        disabled={isGameSuspended(games)}
+                        style={{
+                          zIndex: "1000",
+                          pointerEvents: "auto",
+                          backgroundColor: "#82371b",
+                          color: "white",
+                        }}
+                        _ngcontent-ng-c942213636=""
+                        mat-button=""
+                        mat-ripple-loader-uninitialized=""
+                        mat-ripple-loader-class-name="mat-mdc-button-ripple"
+                        className="mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base ng-star-inserted"
+                        mat-ripple-loader-
+                      >
+                        <span className="mdc-button__label">
+                          <span> Speed Cashout</span>
+                        </span>
+                      </button>
+                    )}
                 </div>
               </div>
               <div _ngcontent-ng-c942213636="" className="card-header">
