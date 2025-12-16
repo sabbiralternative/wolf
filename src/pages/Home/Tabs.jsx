@@ -82,6 +82,24 @@ const Tabs = () => {
 
           <div _ngcontent-ng-c2582205232="" className="pagetab-header">
             <div
+              onClick={() => navigate("/game-details/4/27996014")}
+              _ngcontent-ng-c2582205232=""
+              routerlinkactive="active-link"
+              className={`pagetab-item ng-star-inserted   `}
+            >
+              <div _ngcontent-ng-c2582205232="" className={`icon-wrap `}>
+                <img
+                  _ngcontent-ng-c2582205232=""
+                  alt="Tab Icon"
+                  src="/assets/img/ball.svg"
+                />
+              </div>
+              <div _ngcontent-ng-c2582205232="" className="tab-label">
+                {/* {valueByLanguage ? valueByLanguage?.CRICKET : "Cricket"} */}
+                BBL
+              </div>
+            </div>
+            <div
               onClick={() => handleNavigate(4)}
               _ngcontent-ng-c2582205232=""
               routerlinkactive="active-link"
