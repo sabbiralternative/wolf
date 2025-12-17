@@ -34,7 +34,10 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
       amount,
       event_id: eventId,
       event_type_id: eventTypeId,
+      market_name: speedCashOut?.market_name,
+      event_name: speedCashOut?.event_name,
     };
+
     mutate(payload, {
       onSuccess: (data) => {
         if (data?.success) {
@@ -49,6 +52,7 @@ const SpeedCashOut = ({ speedCashOut, setSpeedCashOut }) => {
       },
     });
   };
+
   return (
     <div className="cdk-overlay-container">
       <div className="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing"></div>
