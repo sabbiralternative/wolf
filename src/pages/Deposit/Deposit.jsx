@@ -188,7 +188,6 @@ const Deposit = () => {
 
   const handleUTRChange = (e) => {
     const value = e.target.value;
-
     setUtr(value);
   };
 
@@ -519,7 +518,7 @@ const Deposit = () => {
                                 ? "Enter Hash code"
                                 : "Enter payment UTR here"
                             }
-                            type="number"
+                            type="text"
                             value={utr !== null && utr}
                           />
                         </div>
