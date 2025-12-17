@@ -268,7 +268,13 @@ const Bookmaker = ({
                   games?.runners?.length !== 3 &&
                   speedCashOut && (
                     <button
-                      onClick={() => setSpeedCashOut(speedCashOut)}
+                      onClick={() =>
+                        setSpeedCashOut({
+                          ...speedCashOut,
+                          market_name: games?.name,
+                          event_name: games?.eventName,
+                        })
+                      }
                       disabled={isGameSuspended(games)}
                       style={{
                         zIndex: "1000",
