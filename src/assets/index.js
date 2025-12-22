@@ -12,8 +12,10 @@ import calendar from "./images/affi-calendar.57b07b6a.svg";
 import commission from "./images/affi-commision-icon.ddf556a3.svg";
 import user from "./images/affi-user-icn.b08f83a6.svg";
 import share from "./images/af-share-img.51df8801.svg";
+import affiliate from "./images/affiliate.png";
 
 export default {
+  affiliate,
   share,
   calendar,
   commission,

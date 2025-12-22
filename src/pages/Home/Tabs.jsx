@@ -9,8 +9,11 @@ import { languageValue } from "../../utils/language";
 import { LanguageKey } from "../../constant/constant";
 import { useState } from "react";
 import WarningCondition from "../../components/modal/WarningCondition";
+import useGetSocialLink from "../../hooks/useGetSocialLink";
+import assets from "../../assets";
 
 const Tabs = () => {
+  const { socialLink } = useGetSocialLink();
   const { setShowLogin, token } = useContextState();
   const { valueByLanguage } = useLanguage();
   const { setSportsType, sportsType } = useContextState();
@@ -99,6 +102,32 @@ const Tabs = () => {
                 BBL
               </div>
             </div>
+            {socialLink?.referral && (
+              <div
+                onClick={() => navigate("/affiliate")}
+                _ngcontent-ng-c2582205232=""
+                routerlinkactive="active-link"
+                className={`pagetab-item ng-star-inserted   `}
+              >
+                <div _ngcontent-ng-c2582205232="" className={`icon-wrap `}>
+                  <img
+                    style={{
+                      filter: "invert(1)",
+                      height: "18px",
+                      objectFit: "contain",
+                    }}
+                    _ngcontent-ng-c2582205232=""
+                    alt="Tab Icon"
+                    src={assets.affiliate}
+                  />
+                </div>
+                <div _ngcontent-ng-c2582205232="" className="tab-label">
+                  {/* {valueByLanguage ? valueByLanguage?.CRICKET : "Cricket"} */}
+                  Affiliate
+                </div>
+              </div>
+            )}
+
             <div
               onClick={() => handleNavigate(4)}
               _ngcontent-ng-c2582205232=""
