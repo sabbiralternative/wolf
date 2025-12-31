@@ -12,6 +12,8 @@ import useContextState from "../../hooks/useContextState";
 import handleDepositMethod from "../../utils/handleDepositMethod";
 import useGetSocialLink from "../../hooks/useGetSocialLink";
 import { AxiosSecure } from "../../lib/AxiosSecure";
+import { HiArrowNarrowDown } from "react-icons/hi";
+import { GrAndroid } from "react-icons/gr";
 const Login = ({
   setShowLogin,
   setErrorLogin,
@@ -150,7 +152,16 @@ const Login = ({
         }
       });
   };
-
+  const handleDownload = (e) => {
+    e.preventDefault();
+    const fileUrl = Settings.apkLink;
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.setAttribute("download", "site.apk");
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode.removeChild(link);
+  };
   return (
     <>
       <div className="cdk-overlay-container">
@@ -435,6 +446,17 @@ const Login = ({
                                   >
                                     Login with Demo ID
                                   </button>
+                                  {Settings.apkLink && (
+                                    <button
+                                      onClick={handleDownload}
+                                      _ngcontent-ng-c2806737617=""
+                                      type="button"
+                                      className="btn secondary-btn ng-star-inserted"
+                                    >
+                                      <GrAndroid /> Download .apk{" "}
+                                      <HiArrowNarrowDown />
+                                    </button>
+                                  )}
                                 </div>
                               </div>
                             </div>

@@ -21,6 +21,7 @@ import useLanguage from "../../../hooks/useLanguage";
 import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../constant/constant";
 import Notification from "./Notification";
+import DownloadAPK from "../../modal/DownloadAPK/DownloadAPK";
 // import { AndroidView } from "react-device-detect";
 const Navbar = () => {
   const { valueByLanguage } = useLanguage();
@@ -59,6 +60,7 @@ const Navbar = () => {
   const [mobileNo, setMobileNo] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [showAPKModal, setShowAPKModal] = useState(false);
 
   /* handle login demo user */
   // const loginWithDemo = () => {
@@ -137,11 +139,16 @@ const Navbar = () => {
   // }, [isModalOpen]);
 
   useEffect(() => {
+    const apk_modal_shown = sessionStorage.getItem("apk_modal_shown");
     const closePopupForForever = localStorage.getItem("closePopupForForever");
     if (location?.state?.pathname === "/apk" || location.pathname === "/apk") {
+      sessionStorage.setItem("apk_modal_shown", true);
       localStorage.setItem("closePopupForForever", true);
       localStorage.removeItem("installPromptExpiryTime");
     } else {
+      if (!apk_modal_shown) {
+        setShowAPKModal(true);
+      }
       if (!closePopupForForever) {
         const expiryTime = localStorage.getItem("installPromptExpiryTime");
         const currentTime = new Date().getTime();
@@ -168,6 +175,10 @@ const Navbar = () => {
       {/* Show warning message */}
       {showWarning && (
         <Warning message={showWarning} setMessage={setShowWarning} />
+      )}
+
+      {Settings?.apkLink && showAPKModal && (
+        <DownloadAPK setShowAPKModal={setShowAPKModal} />
       )}
 
       <div
