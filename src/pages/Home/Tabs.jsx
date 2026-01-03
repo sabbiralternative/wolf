@@ -104,7 +104,9 @@ const Tabs = () => {
             </div>
             {socialLink?.referral && (
               <div
-                onClick={() => navigate("/affiliate")}
+                onClick={() => {
+                  token ? navigate("/affiliate") : setShowLogin(true);
+                }}
                 _ngcontent-ng-c2582205232=""
                 routerlinkactive="active-link"
                 className={`pagetab-item ng-star-inserted   `}
