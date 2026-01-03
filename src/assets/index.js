@@ -13,8 +13,10 @@ import commission from "./images/affi-commision-icon.ddf556a3.svg";
 import user from "./images/affi-user-icn.b08f83a6.svg";
 import share from "./images/af-share-img.51df8801.svg";
 import affiliate from "./images/affiliate.png";
+import install_android from "./images/header_image.png";
 
 export default {
+  install_android,
   affiliate,
   share,
   calendar,
