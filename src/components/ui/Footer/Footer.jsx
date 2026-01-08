@@ -18,6 +18,7 @@ const Footer = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { token, setShowLogin, icon } = useContextState();
+
   const [showMyMarket, setShowMyMarket] = useState(false);
   /* Handle logout */
 

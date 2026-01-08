@@ -3,6 +3,7 @@ import { API, Settings } from "../api";
 export const StateContext = createContext(null);
 import { getSetApis } from "../api/config";
 import notice from "../../notice.json";
+import assets from "../assets";
 const StateProvider = ({ children }) => {
   /* Global state this states we are using in full project */
 
@@ -78,7 +79,7 @@ const StateProvider = ({ children }) => {
         const icon = `${API.assets}/${Settings.siteUrl}/nav-sprite.svg`;
         setIcon(icon);
       } else {
-        setIcon(`/assets/img/logo.svg`);
+        setIcon(assets.navSprite);
       }
 
       /* Dynamically append  theme css  */
