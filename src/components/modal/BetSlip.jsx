@@ -19,7 +19,12 @@ const BetSlip = ({
   setSuccessMessage,
   setErrorMessage,
   refetchCurrentBets,
+  data,
 }) => {
+  const currentPlaceBetEvent = data?.find(
+    (item) => item?.id === placeBetValues?.marketId
+  );
+
   const [isCashOut, setIsCashOut] = useState(false);
   const { eventTypeId } = useParams();
   const { language } = useLanguage();
@@ -59,7 +64,7 @@ const BetSlip = ({
         btype: placeBetValues?.btype,
         placeName: placeBetValues?.placeName,
         eventTypeId: placeBetValues?.eventTypeId,
-        betDelay: placeBetValues?.betDelay,
+        betDelay: currentPlaceBetEvent?.betDelay,
         marketId: placeBetValues?.marketId,
         maxLiabilityPerMarket: placeBetValues?.maxLiabilityPerMarket,
         maxLiabilityPerBet: placeBetValues?.maxLiabilityPerBet,
@@ -71,7 +76,7 @@ const BetSlip = ({
       };
     } else {
       payload = {
-        betDelay: placeBetValues?.betDelay,
+        betDelay: currentPlaceBetEvent?.betDelay,
         btype: placeBetValues?.btype,
         eventTypeId: placeBetValues?.eventTypeId,
         marketId: placeBetValues?.marketId,
@@ -120,8 +125,8 @@ const BetSlip = ({
     ) {
       delay = 9000;
     } else {
-      setBetDelay(placeBetValues?.betDelay);
-      delay = Settings.betDelay ? placeBetValues?.betDelay * 1000 : 0;
+      setBetDelay(currentPlaceBetEvent?.betDelay);
+      delay = Settings.betDelay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
     }
     setLoader(true);
     setTimeout(() => {
@@ -527,7 +532,7 @@ const BetSlip = ({
                                       </clipPath>
                                     </defs>
                                   </svg>
-                                  {placeBetValues?.betDelay}s
+                                  {currentPlaceBetEvent?.betDelay}s
                                 </span>
                               </span>
                               <span className="mat-mdc-focus-indicator"> </span>

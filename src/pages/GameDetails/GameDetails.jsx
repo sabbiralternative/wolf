@@ -277,6 +277,7 @@ const GameDetails = () => {
       {/*  <!-- betslip start --> */}
       {openBetSlip && (
         <BetSlip
+          data={data}
           setOpenBetSlip={setOpenBetSlip}
           placeBetValues={placeBetValues}
           refetchExposure={refetchExposure}

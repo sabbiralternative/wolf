@@ -22,8 +22,11 @@ import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../constant/constant";
 import Notification from "./Notification";
 import DownloadAPK from "../../modal/DownloadAPK/DownloadAPK";
+import BuildVersion from "../../modal/BuildVersion";
 // import { AndroidView } from "react-device-detect";
 const Navbar = () => {
+  const [showBuildVersion, setShowBuildVersion] = useState(false);
+  const stored_build_version = localStorage.getItem("build_version");
   const { valueByLanguage } = useLanguage();
   const language = localStorage.getItem("language");
   const { socialLink } = useGetSocialLink();
@@ -129,6 +132,21 @@ const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const newVersion = socialLink?.build_version;
+    if (!stored_build_version) {
+      if (newVersion) {
+        setShowBuildVersion(true);
+      }
+    }
+    if (stored_build_version && newVersion) {
+      const parseVersion = JSON.parse(stored_build_version);
+      if (newVersion > parseVersion) {
+        setShowBuildVersion(true);
+      }
+    }
+  }, [socialLink?.build_version, stored_build_version]);
+
   // useEffect(() => {
   //   const expiryTime = localStorage.getItem("installPromptExpiryTime");
   //   const currentTime = new Date().getTime();
@@ -179,6 +197,12 @@ const Navbar = () => {
 
       {Settings?.apkLink && showAPKModal && (
         <DownloadAPK setShowAPKModal={setShowAPKModal} />
+      )}
+      {showBuildVersion && !showAPKModal && (
+        <BuildVersion
+          build_version={socialLink?.build_version}
+          setShowBuildVersion={setShowBuildVersion}
+        />
       )}
 
       <div
