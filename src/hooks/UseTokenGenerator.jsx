@@ -10,17 +10,25 @@
 
 // export default UseTokenGenerator;
 
+// const UseTokenGenerator = () => {
+//   // Get IST timestamp using Date
+//   const now = new Date();
+//   const istTime = new Date(now.getTime() + 5.5 * 60 * 60 * 1000); // Adjust UTC to IST
+//   const indianTimestamp = Math.floor(istTime.getTime() / 1000);
+//   // Generate token
+//   const multipliedTimestamp = indianTimestamp * 247;
+//   const randomSixDigitNumber = Math.floor(100000 + Math.random() * 900000);
+//   const finalToken = `${randomSixDigitNumber}${multipliedTimestamp}`;
+
+//   return finalToken;
+// };
 const UseTokenGenerator = () => {
-  // Get IST timestamp using Date
-  const now = new Date();
-  const istTime = new Date(now.getTime() + 5.5 * 60 * 60 * 1000); // Adjust UTC to IST
-  const indianTimestamp = Math.floor(istTime.getTime() / 1000);
-  // Generate token
-  const multipliedTimestamp = indianTimestamp * 247;
-  const randomSixDigitNumber = Math.floor(100000 + Math.random() * 900000);
-  const finalToken = `${randomSixDigitNumber}${multipliedTimestamp}`;
+  const utcTimestamp = Math.floor(Date.now() / 1000);
 
-  return finalToken;
+  const multipliedTimestamp = utcTimestamp * 247;
+  const randomSixDigitNumber_1 = Math.floor(100000 + Math.random() * 900000);
+  const randomSixDigitNumber_2 = Math.floor(100000 + Math.random() * 900000);
+
+  return `${randomSixDigitNumber_1}${multipliedTimestamp}${randomSixDigitNumber_2}`;
 };
-
 export default UseTokenGenerator;
