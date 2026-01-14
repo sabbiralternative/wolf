@@ -497,7 +497,48 @@ const LoggedInProfile = ({
               </Link>
             </li>
           )}
-
+          <li
+            _ngcontent-ng-c2865632707=""
+            routerlink="/affiliate"
+            routerlinkactive="active-link"
+            className="smenu-item"
+          >
+            <Link
+              to="/promotions"
+              _ngcontent-ng-c2865632707=""
+              className="smenu-link"
+            >
+              <div _ngcontent-ng-c2865632707="" className="label-wrap">
+                <img
+                  _ngcontent-ng-c2865632707=""
+                  alt="Menu Icon"
+                  src="/assets/img/sidenav_rules.svg"
+                />
+                <span _ngcontent-ng-c2865632707=""> Promos & Bonus</span>
+              </div>
+            </Link>
+          </li>
+          <li
+            _ngcontent-ng-c2865632707=""
+            routerlink="/affiliate"
+            routerlinkactive="active-link"
+            className="smenu-item"
+          >
+            <Link
+              to="/lossback-claims"
+              _ngcontent-ng-c2865632707=""
+              className="smenu-link"
+            >
+              <div _ngcontent-ng-c2865632707="" className="label-wrap">
+                <img
+                  _ngcontent-ng-c2865632707=""
+                  alt="Menu Icon"
+                  src="/assets/img/sidenav_rules.svg"
+                />
+                <span _ngcontent-ng-c2865632707="">Loss Back Claims</span>
+              </div>
+            </Link>
+          </li>
           {/* {socialLink?.whatsapplink && (
             <li
               _ngcontent-ng-c2865632707=""

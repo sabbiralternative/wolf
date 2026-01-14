@@ -15,8 +15,16 @@ import share from "./images/af-share-img.51df8801.svg";
 import affiliate from "./images/affiliate.png";
 import install_android from "./images/header_image.png";
 import navSprite from "./images/nav-sprite.svg";
+import promotionBanner from "./images/promotionBanner.webp";
+import cashBundle from "./images/cash-bundle.webp";
+import giftCard from "./images/giftCard.webp";
+import redeemCardGift from "./images/redeemCardGift.svg";
 
 export default {
+  cashBundle,
+  giftCard,
+  redeemCardGift,
+  promotionBanner,
   navSprite,
   install_android,
   affiliate,
