@@ -111,7 +111,7 @@ const Main = () => {
     if (window.location.hostname != "localhost") {
       if (window.location.protocol !== "https:") {
         window.location.replace(
-          `https://${window.location.hostname}${window.location.pathname}`
+          `https://${window.location.hostname}${window.location.pathname}`,
         );
       }
     }
@@ -141,7 +141,7 @@ const Main = () => {
       img.setAttribute("style", "display:none");
       img.setAttribute(
         "src",
-        `https://www.facebook.com/tr?id=${version?.metaPixel}&ev=PageView&noscript=1`
+        `https://www.facebook.com/tr?id=${version?.metaPixel}&ev=PageView&noscript=1`,
       );
       noscript.appendChild(img);
       document.body.appendChild(noscript);

@@ -15,7 +15,7 @@ const Passbook = () => {
     }
   };
   const getUniqueDate = Array.from(
-    new Set(passbook?.map((item) => item?.settledTime))
+    new Set(passbook?.map((item) => item?.settledTime)),
   );
 
   return (
@@ -87,13 +87,13 @@ const Passbook = () => {
                                   <>
                                     {getUniqueDate?.map((date) => {
                                       const filterByDate = passbook?.filter(
-                                        (item) => item?.settledTime === date
+                                        (item) => item?.settledTime === date,
                                       );
                                       const totalPnl = filterByDate?.reduce(
                                         (acc, curr) => {
                                           return acc + curr.memberWin;
                                         },
-                                        0
+                                        0,
                                       );
                                       return (
                                         <div key={date}>
@@ -120,7 +120,7 @@ const Passbook = () => {
                                               }}
                                             >
                                               {moment(date).format(
-                                                "Do-MMM-YYYY"
+                                                "Do-MMM-YYYY",
                                               )}
                                             </div>
                                             <div
@@ -150,8 +150,8 @@ const Passbook = () => {
                                                     totalPnl > 0
                                                       ? "#48BB78"
                                                       : totalPnl < 0
-                                                      ? "#F56565"
-                                                      : "#FFFFFF",
+                                                        ? "#F56565"
+                                                        : "#FFFFFF",
                                                 }}
                                               >
                                                 {totalPnl}
@@ -159,12 +159,12 @@ const Passbook = () => {
                                             </div>
                                           </div>
 
-                                          {passbook?.map((item, i) => {
+                                          {filterByDate?.map((item, i) => {
                                             return (
                                               <div
                                                 onClick={() =>
                                                   handleNavigateSinglePassbook(
-                                                    item
+                                                    item,
                                                   )
                                                 }
                                                 key={i}
