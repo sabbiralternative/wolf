@@ -33,7 +33,7 @@ const Bookmaker = ({
     exposureB,
     runner1,
     runner2,
-    gameId
+    gameId,
   ) => {
     let runner,
       largerExposure,
@@ -62,7 +62,7 @@ const Bookmaker = ({
     }
 
     if (exposureA > 0 && exposureB > 0) {
-      const difference = exposureA - exposureB;
+      const difference = Math.abs(exposureA - exposureB);
       if (difference <= 10) {
         speedCashOut = true;
       }
@@ -124,10 +124,10 @@ const Bookmaker = ({
           const runner2Lay = runner2?.lay?.[0]?.price;
 
           const pnl1 = pnlBySelection?.find(
-            (pnl) => pnl?.RunnerId === runner1?.id
+            (pnl) => pnl?.RunnerId === runner1?.id,
           )?.pnl;
           const pnl2 = pnlBySelection?.find(
-            (pnl) => pnl?.RunnerId === runner2?.id
+            (pnl) => pnl?.RunnerId === runner2?.id,
           )?.pnl;
 
           if (
@@ -145,7 +145,7 @@ const Bookmaker = ({
               pnl2,
               runner1,
               runner2,
-              game?.id
+              game?.id,
             );
             results.push(result);
           }
@@ -168,10 +168,10 @@ const Bookmaker = ({
       {bookmarker?.map((games, i) => {
         const teamProfitForGame = teamProfit?.find(
           (profit) =>
-            profit?.gameId === games?.id && profit?.isOnePositiveExposure
+            profit?.gameId === games?.id && profit?.isOnePositiveExposure,
         );
         const speedCashOut = teamProfit?.find(
-          (profit) => profit?.gameId === games?.id && profit?.speedCashOut
+          (profit) => profit?.gameId === games?.id && profit?.speedCashOut,
         );
 
         return (
@@ -229,7 +229,7 @@ const Bookmaker = ({
                             pnlBySelection,
                             token,
                             setShowLogin,
-                            teamProfitForGame
+                            teamProfitForGame,
                           )
                         }
                         style={{
@@ -311,7 +311,7 @@ const Bookmaker = ({
               <div _ngcontent-ng-c942213636="" className="card-body">
                 {games?.runners?.map((runner) => {
                   const pnl = pnlBySelection?.filter(
-                    (pnl) => pnl?.RunnerId === runner?.id
+                    (pnl) => pnl?.RunnerId === runner?.id,
                   );
                   return (
                     <div
@@ -360,7 +360,7 @@ const Bookmaker = ({
                                 setPlaceBetValues,
                                 pnlBySelection,
                                 setShowLoginWarn,
-                                token
+                                token,
                               )
                             }
                             _ngcontent-ng-c942213636=""
@@ -390,7 +390,7 @@ const Bookmaker = ({
                                 setPlaceBetValues,
                                 pnlBySelection,
                                 setShowLoginWarn,
-                                token
+                                token,
                               )
                             }
                             _ngcontent-ng-c942213636=""
