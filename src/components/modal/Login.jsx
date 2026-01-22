@@ -21,6 +21,7 @@ const Login = ({
   setGetToken,
   setShowForgotOTP,
 }) => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { refetchSocialLinks } = useGetSocialLink();
   const { logo, setShowChangePassModal } = useContextState();
   const { register, handleSubmit } = useForm();
@@ -41,6 +42,7 @@ const Login = ({
       username: username,
       password: password,
       b2c: Settings.b2c,
+      apk: closePopupForForever ? true : false,
     };
 
     const { data } = await AxiosSecure.post(API.login, loginData);
@@ -73,7 +75,7 @@ const Login = ({
         const referralCode = data.result.referralCode;
         localStorage.setItem(
           "referralCode",
-          referralCode == null ? "show" : referralCode
+          referralCode == null ? "show" : referralCode,
         );
       }
       /* if in locale storage token and login name available and  data?.result?.changePassword === false */
@@ -113,6 +115,7 @@ const Login = ({
       token: generatedToken,
       site: Settings.siteUrl,
       b2c: Settings.b2c,
+      apk: closePopupForForever ? true : false,
     });
     fetch(API.login, {
       method: "POST",

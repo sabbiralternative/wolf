@@ -21,6 +21,7 @@ const BetSlip = ({
   refetchCurrentBets,
   data,
 }) => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const currentPlaceBetEvent = data?.find(
     (item) => item?.id === placeBetValues?.marketId,
   );
@@ -104,9 +105,9 @@ const BetSlip = ({
     const payloadData = [
       {
         ...payload,
-
         nounce: uuidv4(),
         isbetDelay: socialLink?.bet_delay,
+        apk: closePopupForForever ? true : false,
       },
     ];
     let delay = 0;
