@@ -34,8 +34,12 @@ const Sports = () => {
           },
         });
         const data = res.data;
-        const decryptionData = await handleDecryptData(JSON.stringify(data));
-
+        let decryptionData;
+        if (data?.ct) {
+          decryptionData = handleDecryptData(JSON.stringify(data));
+        } else {
+          decryptionData = data;
+        }
         setGames(decryptionData);
       }
     };
@@ -61,8 +65,8 @@ const Sports = () => {
         new Set(
           Object.values(games)
             .filter((item) => item.visible) // Only include items where visible is true
-            .map((item) => item.eventTypeId)
-        )
+            .map((item) => item.eventTypeId),
+        ),
       );
       /* Sort the category for cricket > tennis > football */
       const sortedCategories = categories.sort((a, b) => {
