@@ -18,6 +18,7 @@ const LoggedInProfile = ({
   setShowChangePassModal,
   balanceData,
 }) => {
+  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { valueByLanguage } = useLanguage();
   const {
     isCheckedBonusToken,
@@ -281,7 +282,7 @@ const LoggedInProfile = ({
                     {" "}
                     {languageValue(
                       valueByLanguage,
-                      LanguageKey.DEPOSIT_SUPPORT
+                      LanguageKey.DEPOSIT_SUPPORT,
                     )}
                   </span>
                 </div>
@@ -327,7 +328,7 @@ const LoggedInProfile = ({
                   {" "}
                   {languageValue(
                     valueByLanguage,
-                    LanguageKey.DEPOSIT_STATEMENT
+                    LanguageKey.DEPOSIT_STATEMENT,
                   )}
                 </span>
               </div>
@@ -353,7 +354,7 @@ const LoggedInProfile = ({
                   {" "}
                   {languageValue(
                     valueByLanguage,
-                    LanguageKey.WITHDRAW_STATMENT
+                    LanguageKey.WITHDRAW_STATMENT,
                   )}
                 </span>
               </div>
@@ -525,7 +526,7 @@ const LoggedInProfile = ({
             className="smenu-item"
           >
             <Link
-              to="/lossback-claims"
+              to="/lossback-bonus"
               _ngcontent-ng-c2865632707=""
               className="smenu-link"
             >
@@ -535,10 +536,34 @@ const LoggedInProfile = ({
                   alt="Menu Icon"
                   src="/assets/img/sidenav_rules.svg"
                 />
-                <span _ngcontent-ng-c2865632707="">Loss Back Claims</span>
+                <span _ngcontent-ng-c2865632707="">Lossback Bonus</span>
               </div>
             </Link>
           </li>
+          {closePopupForForever && (
+            <li
+              _ngcontent-ng-c2865632707=""
+              routerlink="/affiliate"
+              routerlinkactive="active-link"
+              className="smenu-item"
+            >
+              <Link
+                to="/app-only-bonus"
+                _ngcontent-ng-c2865632707=""
+                className="smenu-link"
+              >
+                <div _ngcontent-ng-c2865632707="" className="label-wrap">
+                  <img
+                    _ngcontent-ng-c2865632707=""
+                    alt="Menu Icon"
+                    src="/assets/img/sidenav_rules.svg"
+                  />
+                  <span _ngcontent-ng-c2865632707="">App Only Bonus</span>
+                </div>
+              </Link>
+            </li>
+          )}
+
           {/* {socialLink?.whatsapplink && (
             <li
               _ngcontent-ng-c2865632707=""
