@@ -52,17 +52,17 @@ const Main = () => {
     setTokenLoading,
     showLogin,
   } = useContextState();
-
+  const { socialLink } = useGetSocialLink();
   const [successEditStake, setSuccessEditStake] = useState("");
   const navigate = useNavigate();
-  const disabledDevtool = Settings.disabledDevtool;
+  const disabledDevtool = socialLink?.disabledDevtool;
   // const [verifyDeposit, setVerifyDeposit] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const location = useLocation();
   const { version } = useGetVersion();
   const { refetchBalance } = useBalance();
-  const { socialLink } = useGetSocialLink();
+
   /* If token change then refetch balance */
   useEffect(() => {
     refetchBalance();

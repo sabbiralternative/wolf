@@ -1,16 +1,8 @@
 export const handleLogOut = () => {
-  const keysToRemove = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    // if (key !== "checkedBonusToken") {
-    //   keysToRemove.push(key);
-    // }
-    if (key) {
-      keysToRemove.push(key);
+  const nonRemovalKey = ["closePopupForForever", "build_version"];
+  Object.keys(localStorage).forEach((key) => {
+    if (!nonRemovalKey.includes(key)) {
+      localStorage.removeItem(key);
     }
-  }
-
-  keysToRemove.forEach((key) => {
-    localStorage.removeItem(key);
   });
 };
