@@ -70,18 +70,20 @@ const Main = () => {
 
   /* Disabled devtool based on settings */
   useEffect(() => {
-    if (disabledDevtool) {
-      disableDevtool({
-        ondevtoolopen: (type) => {
-          const info = "devtool opened!; type =" + type;
-          if (info) {
-            handleLogOut();
-            setTokenLoading(true);
-            setGetToken((prev) => !prev);
-            window.location.href = "https://www.google.com/";
-          }
-        },
-      });
+    if (window.location.hostname !== "localhost") {
+      if (disabledDevtool) {
+        disableDevtool({
+          ondevtoolopen: (type) => {
+            const info = "devtool opened!; type =" + type;
+            if (info) {
+              handleLogOut();
+              setTokenLoading(true);
+              setGetToken((prev) => !prev);
+              window.location.href = "https://www.google.com/";
+            }
+          },
+        });
+      }
     }
   }, [navigate, disabledDevtool, setGetToken, setTokenLoading]);
 

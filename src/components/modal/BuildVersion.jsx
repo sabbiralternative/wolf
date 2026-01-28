@@ -12,6 +12,7 @@ const BuildVersion = ({ build_version, setShowBuildVersion }) => {
   const handleSubmit = () => {
     localStorage.setItem("build_version", build_version);
     setShowBuildVersion(false);
+    window.location.reload();
   };
   return (
     <div

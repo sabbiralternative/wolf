@@ -101,6 +101,7 @@ export const getSetApis = (setNoticeLoaded, baseUrl) => {
         Settings.betDelay = data?.result?.settings?.betDelay;
         Settings.complaint = data?.result?.settings?.complaint;
         Settings.aura = data?.result?.settings?.aura;
+        Settings.appOnly = data?.result?.settings?.appOnly;
 
         setNoticeLoaded(true);
       }

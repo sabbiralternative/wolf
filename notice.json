@@ -35,6 +35,7 @@
       "otpWhatsapp": true,
       "complaint": true,
       "aura": true,
+      "appOnly": false,
       "logo": {
         "height": 55,
         "width": 125,
@@ -50,7 +51,7 @@
       "notification": "https://api7.live/api/exchange/diamond/notification",
       "openEvents": "https://cache7.live/api/exchange/diamond/openEvents",
       "stats": "https://cache7.live/api/exchange/diamond/stats.php?id=",
-      "eventDetails": "https://cache7.live/api/exchange/encrypted/odds/event",
+      "eventDetails": "https://cache7.live/api/exchange/open/odds/event",
       "order": "https://api7.live/api/exchange/diamond/order",
       "rules": "https://api7.live/api/exchange/diamond/rules",
       "orderCount": "https://api7.live/api/exchange/diamond/order-count.php",

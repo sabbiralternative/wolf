@@ -21,9 +21,9 @@ const Login = ({
   setGetToken,
   setShowForgotOTP,
 }) => {
-  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { refetchSocialLinks } = useGetSocialLink();
-  const { logo, setShowChangePassModal } = useContextState();
+  const { logo, setShowChangePassModal, closePopupForForever } =
+    useContextState();
   const { register, handleSubmit } = useForm();
   const [disable, setDisable] = useState(false);
   /* Close modal click out side */

@@ -23,6 +23,7 @@ import { LanguageKey } from "../../../constant/constant";
 import Notification from "./Notification";
 import DownloadAPK from "../../modal/DownloadAPK/DownloadAPK";
 import BuildVersion from "../../modal/BuildVersion";
+import Error from "../../modal/Error/Error";
 // import { AndroidView } from "react-device-detect";
 const Navbar = () => {
   const [showBuildVersion, setShowBuildVersion] = useState(false);
@@ -47,6 +48,8 @@ const Navbar = () => {
     setSHowDeposit,
     showOTP,
     setShowOTP,
+    closePopupForForever,
+    setClosePopUpForForever,
   } = useContextState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -159,9 +162,11 @@ const Navbar = () => {
   useEffect(() => {
     const apk_modal_shown = sessionStorage.getItem("apk_modal_shown");
     const closePopupForForever = localStorage.getItem("closePopupForForever");
+    setClosePopUpForForever(closePopupForForever ? true : false);
     if (location?.state?.pathname === "/apk" || location.pathname === "/apk") {
       sessionStorage.setItem("apk_modal_shown", true);
       localStorage.setItem("closePopupForForever", true);
+      setClosePopUpForForever(true);
       localStorage.removeItem("installPromptExpiryTime");
     } else {
       if (!apk_modal_shown) {
@@ -176,13 +181,23 @@ const Navbar = () => {
         }
       }
     }
-  }, [windowWidth, isModalOpen, location?.state?.pathname, location.pathname]);
+  }, [
+    windowWidth,
+    isModalOpen,
+    location?.state?.pathname,
+    location.pathname,
+    setClosePopUpForForever,
+  ]);
 
   const openWhatsapp = () => {
     if (socialLink?.whatsapplink) {
       window.open(socialLink?.whatsapplink, "_blank");
     }
   };
+
+  if (Settings.appOnly && !closePopupForForever) {
+    return <Error />;
+  }
 
   return (
     <>
@@ -320,7 +335,7 @@ const Navbar = () => {
                         {" "}
                         {languageValue(
                           valueByLanguage,
-                          LanguageKey.DEPOSIT
+                          LanguageKey.DEPOSIT,
                         )}{" "}
                       </span>
                       <span className="mat-mdc-focus-indicator"></span>

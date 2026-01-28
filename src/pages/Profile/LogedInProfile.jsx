@@ -18,7 +18,6 @@ const LoggedInProfile = ({
   setShowChangePassModal,
   balanceData,
 }) => {
-  const closePopupForForever = localStorage.getItem("closePopupForForever");
   const { valueByLanguage } = useLanguage();
   const {
     isCheckedBonusToken,
@@ -27,6 +26,7 @@ const LoggedInProfile = ({
     token,
     setTokenLoading,
     setGetToken,
+    closePopupForForever,
   } = useContextState();
   const memberId = localStorage.getItem("memberId");
   const navigate = useNavigate();

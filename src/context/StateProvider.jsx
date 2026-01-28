@@ -8,6 +8,7 @@ const StateProvider = ({ children }) => {
   /* Global state this states we are using in full project */
 
   const [sportsType, setSportsType] = useState(0);
+  const [closePopupForForever, setClosePopUpForForever] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [token, setToken] = useState("");
   const [showLogin, setShowLogin] = useState(false);
@@ -109,9 +110,13 @@ const StateProvider = ({ children }) => {
       FavIconLink.href = `${API.assets}/${Settings.siteUrl}/favicon.png`;
       document.head.appendChild(FavIconLink);
       /* Site title */
-      document.title = Settings.siteTitle;
+      if (Settings.appOnly && !closePopupForForever) {
+        document.title = window.location.hostname;
+      } else {
+        document.title = Settings.siteTitle;
+      }
     }
-  }, [noticeLoaded]);
+  }, [noticeLoaded, closePopupForForever]);
 
   if (!noticeLoaded) {
     return;
@@ -168,6 +173,8 @@ const StateProvider = ({ children }) => {
     setPredictOdds,
     showChangePassModal,
     setShowChangePassModal,
+    closePopupForForever,
+    setClosePopUpForForever,
   };
   return (
     <StateContext.Provider value={stateInfo}>{children}</StateContext.Provider>

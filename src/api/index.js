@@ -90,4 +90,5 @@ export const Settings = {
   otpWhatsapp: "",
   complaint: "",
   aura: "",
+  appOnly: "",
 };
