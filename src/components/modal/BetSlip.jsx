@@ -196,6 +196,8 @@ const BetSlip = ({
     setIsCashOut(false);
   };
 
+  console.log(placeBetValues);
+
   useEffect(() => {
     let total;
     if (

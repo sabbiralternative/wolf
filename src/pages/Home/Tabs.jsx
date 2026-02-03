@@ -62,7 +62,7 @@ const Tabs = () => {
                   <div
                     onClick={() => {
                       navigate(
-                        `/game-details/${item?.eventTypeId}/${item?.eventId}`
+                        `/game-details/${item?.eventTypeId}/${item?.eventId}`,
                       );
                     }}
                     key={i}
@@ -84,7 +84,7 @@ const Tabs = () => {
           )}
 
           <div _ngcontent-ng-c2582205232="" className="pagetab-header">
-            <div
+            {/* <div
               onClick={() => navigate("/game-details/4/27996014")}
               _ngcontent-ng-c2582205232=""
               routerlinkactive="active-link"
@@ -98,10 +98,9 @@ const Tabs = () => {
                 />
               </div>
               <div _ngcontent-ng-c2582205232="" className="tab-label">
-                {/* {valueByLanguage ? valueByLanguage?.CRICKET : "Cricket"} */}
                 BBL
               </div>
-            </div>
+            </div> */}
             {socialLink?.referral && (
               <div
                 onClick={() => {
