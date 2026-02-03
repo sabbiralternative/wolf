@@ -9,11 +9,9 @@ import { languageValue } from "../../utils/language";
 import { LanguageKey } from "../../constant/constant";
 import { useState } from "react";
 import WarningCondition from "../../components/modal/WarningCondition";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 import assets from "../../assets";
 
 const Tabs = () => {
-  const { socialLink } = useGetSocialLink();
   const { setShowLogin, token } = useContextState();
   const { valueByLanguage } = useLanguage();
   const { setSportsType, sportsType } = useContextState();
@@ -101,7 +99,7 @@ const Tabs = () => {
                 BBL
               </div>
             </div> */}
-            {socialLink?.referral && (
+            {Settings?.referral && (
               <div
                 onClick={() => {
                   token ? navigate("/affiliate") : setShowLogin(true);

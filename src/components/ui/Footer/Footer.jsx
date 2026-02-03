@@ -2,18 +2,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useContextState from "../../../hooks/useContextState";
 import MyMarket from "../../modal/MyMarket";
 import { useEffect, useState } from "react";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import useGetVersion from "../../../hooks/useGetVersion";
 import useLanguage from "../../../hooks/useLanguage";
 import { languageValue } from "../../../utils/language";
 import { LanguageKey } from "../../../constant/constant";
 import img from "../../../../public/assets/img";
+import { Settings } from "../../../api";
 
 /* eslint-disable react/no-unknown-property */
 const Footer = () => {
   const { valueByLanguage } = useLanguage();
   const { version } = useGetVersion();
-  const { socialLink, refetchSocialLinks } = useGetSocialLink();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,16 +27,12 @@ const Footer = () => {
 
   /* on click whats app navigate in new tab */
   const navigateWhatsApp = () => {
-    if (token && socialLink?.branchWhatsapplink) {
-      window.open(socialLink?.branchWhatsapplink, "_blank");
+    if (token && Settings?.branchWhatsapplink) {
+      window.open(Settings?.branchWhatsapplink, "_blank");
     } else {
-      window.open(socialLink?.whatsapplink, "_blank");
+      window.open(Settings?.whatsapplink, "_blank");
     }
   };
-
-  useEffect(() => {
-    refetchSocialLinks();
-  }, [token, refetchSocialLinks]);
 
   useEffect(() => {
     if (version?.chaport?.isChaportEnabled) {
@@ -96,10 +91,10 @@ const Footer = () => {
               className="btn-item ng-star-inserted"
             >
               <div _ngcontent-ng-c943649379="" className="btn-wrap whatsapp">
-                {socialLink?.instagramLink && location.pathname === "/" ? (
+                {Settings?.instagramLink && location.pathname === "/" ? (
                   <img
                     onClick={() =>
-                      window.open(socialLink?.instagramLink, "_blank")
+                      window.open(Settings?.instagramLink, "_blank")
                     }
                     style={{ height: "40px", width: "40px" }}
                     _ngcontent-ng-c943649379=""
@@ -120,10 +115,10 @@ const Footer = () => {
               className="btn-item ng-star-inserted"
             >
               <div _ngcontent-ng-c943649379="" className="btn-wrap whatsapp">
-                {socialLink?.telegramLink && location.pathname === "/" ? (
+                {Settings?.telegramLink && location.pathname === "/" ? (
                   <img
                     onClick={() =>
-                      window.open(socialLink?.telegramLink, "_blank")
+                      window.open(Settings?.telegramLink, "_blank")
                     }
                     style={{ height: "40px", width: "40px" }}
                     _ngcontent-ng-c943649379=""
@@ -144,7 +139,7 @@ const Footer = () => {
               className="btn-item ng-star-inserted"
             >
               <div _ngcontent-ng-c943649379="" className="btn-wrap whatsapp">
-                {(socialLink?.whatsapplink || socialLink?.branchWhatsapplink) &&
+                {(Settings?.whatsapplink || Settings?.branchWhatsapplink) &&
                 location.pathname === "/" ? (
                   <img
                     onClick={navigateWhatsApp}

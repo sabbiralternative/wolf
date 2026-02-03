@@ -2,10 +2,9 @@
 import { useRef } from "react";
 import useCloseModalClickOutside from "../../hooks/useCloseModalClickOutside";
 import useContextState from "../../hooks/useContextState";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 import { motion } from "framer-motion";
+import { Settings } from "../../api";
 const Help = () => {
-  const { socialLink } = useGetSocialLink();
   const { setShowHelpModal } = useContextState();
   const helpModalRef = useRef();
   useCloseModalClickOutside(helpModalRef, () => {
@@ -119,7 +118,7 @@ const Help = () => {
                         </button>
                         <button
                           onClick={() =>
-                            handleNavigateSocialLink(socialLink?.link)
+                            handleNavigateSocialLink(Settings?.link)
                           }
                           _ngcontent-ng-c1325205117=""
                           type="button"

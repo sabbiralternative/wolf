@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import useContextState from "../../hooks/useContextState";
 import { API, Settings } from "../../api";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 import { useEffect, useState } from "react";
 import Withdraw from "../../components/modal/Withdraw";
 import Success from "../../components/ui/Notification/Success";
@@ -30,7 +29,6 @@ const LoggedInProfile = ({
   } = useContextState();
   const memberId = localStorage.getItem("memberId");
   const navigate = useNavigate();
-  const { socialLink } = useGetSocialLink();
   const [showWithdraw, setSHowWithdraw] = useState(false);
   const [withdrawCoinSuccess, setWithdrawCoinSuccess] = useState("");
   const [withdrawCoinErr, setWithdrawCoinErr] = useState("");
@@ -260,7 +258,7 @@ const LoggedInProfile = ({
               </div>
             </a>
           </li> */}
-          {socialLink?.branchWhatsapplink && (
+          {Settings?.branchWhatsapplink && (
             <li
               _ngcontent-ng-c2865632707=""
               routerlink="/rules"
@@ -268,7 +266,7 @@ const LoggedInProfile = ({
               className="smenu-item"
             >
               <a
-                onClick={() => navigateWhatsApp(socialLink?.branchWhatsapplink)}
+                onClick={() => navigateWhatsApp(Settings?.branchWhatsapplink)}
                 _ngcontent-ng-c2865632707=""
                 className="smenu-link"
               >
@@ -475,7 +473,7 @@ const LoggedInProfile = ({
             </li>
           )}
 
-          {socialLink?.referral && (
+          {Settings?.referral && (
             <li
               _ngcontent-ng-c2865632707=""
               routerlink="/affiliate"
@@ -564,7 +562,7 @@ const LoggedInProfile = ({
             </li>
           )}
 
-          {/* {socialLink?.whatsapplink && (
+          {/* {Settings?.whatsapplink && (
             <li
               _ngcontent-ng-c2865632707=""
               routerlink="/rules"
@@ -572,7 +570,7 @@ const LoggedInProfile = ({
               className="smenu-item"
             >
               <a
-                onClick={() => navigateWhatsApp(socialLink?.whatsapplink)}
+                onClick={() => navigateWhatsApp(Settings?.whatsapplink)}
                 _ngcontent-ng-c2865632707=""
                 className="smenu-link"
               >
@@ -623,7 +621,7 @@ const LoggedInProfile = ({
             </li>
           )}
         </ul>
-        {socialLink?.instagramLink || socialLink?.telegramLink ? (
+        {Settings?.instagramLink || Settings?.telegramLink ? (
           <div
             _ngcontent-ng-c2865632707=""
             className="social-links-wrap ng-star-inserted"
@@ -640,10 +638,10 @@ const LoggedInProfile = ({
                   src="https://ss.manage63.com/bmk-wl/commonAssets/icon_dark_facebook.svg"
                 />
               </a> */}
-              {socialLink?.instagramLink && (
+              {Settings?.instagramLink && (
                 <a
                   onClick={() =>
-                    handleNavigateSocialLink(socialLink?.instagramLink)
+                    handleNavigateSocialLink(Settings?.instagramLink)
                   }
                   _ngcontent-ng-c2865632707=""
                   className="ng-star-inserted"
@@ -656,10 +654,10 @@ const LoggedInProfile = ({
                 </a>
               )}
 
-              {socialLink?.telegramLink && (
+              {Settings?.telegramLink && (
                 <a
                   onClick={() =>
-                    handleNavigateSocialLink(socialLink?.telegramLink)
+                    handleNavigateSocialLink(Settings?.telegramLink)
                   }
                   _ngcontent-ng-c2865632707=""
                   className="ng-star-inserted"

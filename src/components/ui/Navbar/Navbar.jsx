@@ -15,7 +15,6 @@ import Success from "../Notification/Success";
 import GetForgotOTP from "../../modal/forgotPassword/GetForgotOTP";
 import ForgotPassword from "../../modal/forgotPassword/ForgotPassword";
 import AppPopup from "./AppPopUp";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import Language from "../../modal/Language";
 import useLanguage from "../../../hooks/useLanguage";
 import { languageValue } from "../../../utils/language";
@@ -30,7 +29,7 @@ const Navbar = () => {
   const stored_build_version = localStorage.getItem("build_version");
   const { valueByLanguage } = useLanguage();
   const language = localStorage.getItem("language");
-  const { socialLink } = useGetSocialLink();
+
   const [orderId, setOrderId] = useState({
     orderId: "",
     otpMethod: "",
@@ -136,7 +135,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    const newVersion = socialLink?.build_version;
+    const newVersion = Settings?.build_version;
     if (!stored_build_version) {
       if (newVersion) {
         localStorage.setItem("build_version", newVersion);
@@ -148,7 +147,7 @@ const Navbar = () => {
         setShowBuildVersion(true);
       }
     }
-  }, [socialLink?.build_version, stored_build_version]);
+  }, [stored_build_version]);
 
   // useEffect(() => {
   //   const expiryTime = localStorage.getItem("installPromptExpiryTime");
@@ -190,8 +189,8 @@ const Navbar = () => {
   ]);
 
   const openWhatsapp = () => {
-    if (socialLink?.whatsapplink) {
-      window.open(socialLink?.whatsapplink, "_blank");
+    if (Settings?.whatsapplink) {
+      window.open(Settings?.whatsapplink, "_blank");
     }
   };
 
@@ -215,7 +214,7 @@ const Navbar = () => {
       )}
       {showBuildVersion && !showAPKModal && (
         <BuildVersion
-          build_version={socialLink?.build_version}
+          build_version={Settings?.build_version}
           setShowBuildVersion={setShowBuildVersion}
         />
       )}
@@ -383,22 +382,21 @@ const Navbar = () => {
                       <span className="mat-ripple mat-mdc-button-ripple"></span>
                     </button>
                   )}
-                  {Settings.registrationWhatsapp &&
-                    socialLink?.whatsapplink && (
-                      <button
-                        onClick={openWhatsapp}
-                        _ngcontent-ng-c3243547741=""
-                        mat-flat-button=""
-                        className="btn dark-outlined-btn mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-unthemed mat-mdc-button-base"
-                        mat-ripple-loader-class-name="mat-mdc-button-ripple"
-                      >
-                        <span className="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
-                        <span className="mdc-button__label">Get Id</span>
-                        <span className="mat-mdc-focus-indicator"></span>
-                        <span className="mat-mdc-button-touch-target"></span>
-                        <span className="mat-ripple mat-mdc-button-ripple"></span>
-                      </button>
-                    )}
+                  {Settings.registrationWhatsapp && Settings?.whatsapplink && (
+                    <button
+                      onClick={openWhatsapp}
+                      _ngcontent-ng-c3243547741=""
+                      mat-flat-button=""
+                      className="btn dark-outlined-btn mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-unthemed mat-mdc-button-base"
+                      mat-ripple-loader-class-name="mat-mdc-button-ripple"
+                    >
+                      <span className="mat-mdc-button-persistent-ripple mdc-button__ripple"></span>
+                      <span className="mdc-button__label">Get Id</span>
+                      <span className="mat-mdc-focus-indicator"></span>
+                      <span className="mat-mdc-button-touch-target"></span>
+                      <span className="mat-ripple mat-mdc-button-ripple"></span>
+                    </button>
+                  )}
                   {/* If demo login true in settings then showing demologin button  */}
                   {/* {Settings.demoLogin && (
                     <button

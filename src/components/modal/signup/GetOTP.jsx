@@ -8,7 +8,7 @@ import Success from "../../ui/Notification/Success";
 // import getOtpOnWhatsapp from "../../../utils/getOtpOnWhatsapp";
 import toast from "react-hot-toast";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
+
 const GetOTP = ({
   setShowOTP,
   setShowRegister,
@@ -16,8 +16,6 @@ const GetOTP = ({
   setMobileNo,
   setOrderId,
 }) => {
-  const { socialLink } = useGetSocialLink();
-
   const { logo, token } = useContextState();
   const [err, setErr] = useState("");
   /* Close otp modal click outside */
@@ -313,7 +311,7 @@ const GetOTP = ({
                                   : "Proceed"}
                               </button>
                               {Settings?.registrationWhatsapp &&
-                                socialLink?.whatsapplink &&
+                                Settings?.whatsapplink &&
                                 !token && (
                                   <>
                                     <p
@@ -328,9 +326,7 @@ const GetOTP = ({
                                     >
                                       <button
                                         onClick={() =>
-                                          getWhatsappOTP(
-                                            socialLink?.whatsapplink
-                                          )
+                                          getWhatsappOTP(Settings?.whatsapplink)
                                         }
                                         _ngcontent-ng-c2806737617=""
                                         type="button"

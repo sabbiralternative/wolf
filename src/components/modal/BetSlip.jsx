@@ -8,7 +8,6 @@ import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 import useLanguage from "../../hooks/useLanguage";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 import { AxiosJSEncrypt } from "../../lib/AxiosJSEncrypt";
 
 /* eslint-disable react/no-unknown-property */
@@ -41,7 +40,6 @@ const BetSlip = ({
   const [totalSize, setTotalSize] = useState("");
   const [loader, setLoader] = useState(false);
   const [betDelay, setBetDelay] = useState("");
-  const { socialLink } = useGetSocialLink();
   const { refetchBalance } = useBalance();
   const [stakeErr, setStakeErr] = useState("");
   const [price, setPrice] = useState(null);
@@ -106,7 +104,7 @@ const BetSlip = ({
       {
         ...payload,
         nounce: uuidv4(),
-        isbetDelay: socialLink?.bet_delay,
+        isbetDelay: Settings?.bet_delay,
         apk: closePopupForForever ? true : false,
       },
     ];
@@ -128,7 +126,7 @@ const BetSlip = ({
       delay = 9000;
     } else {
       setBetDelay(currentPlaceBetEvent?.betDelay);
-      delay = socialLink?.bet_delay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
+      delay = Settings?.bet_delay ? currentPlaceBetEvent?.betDelay * 1000 : 0;
     }
     setLoader(true);
     setTimeout(async () => {

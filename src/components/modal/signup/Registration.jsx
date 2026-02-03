@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { API, Settings } from "../../../api";
 import useContextState from "../../../hooks/useContextState";
 import handleDepositMethod from "../../../utils/handleDepositMethod";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
 /* eslint-disable react/no-unknown-property */
 const Registration = ({
@@ -17,7 +16,6 @@ const Registration = ({
   orderId,
 }) => {
   const referralCode = localStorage.getItem("referralCode");
-  const { refetchSocialLinks } = useGetSocialLink();
   const { logo, setGetToken } = useContextState();
   /* Close modal click outside */
   const registerRef = useRef();
@@ -85,7 +83,7 @@ const Registration = ({
         data?.result?.changePassword === false
       ) {
         setGetToken((prev) => !prev);
-        refetchSocialLinks();
+
         /* Show success message */
         setSuccessRegister("User registration successful!");
         /* Close modal */

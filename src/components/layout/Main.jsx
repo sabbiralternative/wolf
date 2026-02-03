@@ -20,7 +20,6 @@ import ChangePassword from "../modal/ChangePassword";
 import useGetVersion from "../../hooks/useGetVersion";
 import useBalance from "../../hooks/useBalance";
 import Tabs from "../../pages/Home/Tabs";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 const pathnames = ["/", "/horse-racing", "/greyhound-racing"];
 
 const Main = () => {
@@ -52,10 +51,10 @@ const Main = () => {
     setTokenLoading,
     showLogin,
   } = useContextState();
-  const { socialLink } = useGetSocialLink();
+
   const [successEditStake, setSuccessEditStake] = useState("");
   const navigate = useNavigate();
-  const disabledDevtool = socialLink?.disabledDevtool;
+  const disabledDevtool = Settings?.disabledDevtool;
   // const [verifyDeposit, setVerifyDeposit] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -187,7 +186,7 @@ const Main = () => {
   }, [showLogin, setShowChangePassModal, showChangePassModal]);
 
   useEffect(() => {
-    if (socialLink?.pixel) {
+    if (Settings?.pixel) {
       // Create fb pixel main script
       const script = document.createElement("script");
       script.innerHTML = `
@@ -199,7 +198,7 @@ const Main = () => {
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', ${socialLink?.pixel});
+      fbq('init', ${Settings?.pixel});
       fbq('track', 'PageView');
     `;
       document.head.appendChild(script);
@@ -210,7 +209,7 @@ const Main = () => {
       img.height = 1;
       img.width = 1;
       img.style.display = "none";
-      img.src = `https://www.facebook.com/tr?id=${socialLink?.pixel}&ev=PageView&noscript=1`;
+      img.src = `https://www.facebook.com/tr?id=${Settings?.pixel}&ev=PageView&noscript=1`;
       noscript.appendChild(img);
 
       document.body.appendChild(noscript);
@@ -221,7 +220,7 @@ const Main = () => {
         noscript.remove();
       };
     }
-  }, [socialLink?.pixel]);
+  }, []);
 
   return (
     <>

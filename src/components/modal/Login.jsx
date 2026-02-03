@@ -10,7 +10,6 @@ import { API, Settings } from "../../api";
 import Warning from "../ui/Notification/Warning";
 import useContextState from "../../hooks/useContextState";
 import handleDepositMethod from "../../utils/handleDepositMethod";
-import useGetSocialLink from "../../hooks/useGetSocialLink";
 import { AxiosSecure } from "../../lib/AxiosSecure";
 import { HiArrowNarrowDown } from "react-icons/hi";
 import { GrAndroid } from "react-icons/gr";
@@ -21,7 +20,6 @@ const Login = ({
   setGetToken,
   setShowForgotOTP,
 }) => {
-  const { refetchSocialLinks } = useGetSocialLink();
   const { logo, setShowChangePassModal, closePopupForForever } =
     useContextState();
   const { register, handleSubmit } = useForm();
@@ -88,7 +86,6 @@ const Login = ({
         setShowLogin(false);
         /* get current token from locale storage */
         setGetToken((prev) => !prev);
-        refetchSocialLinks();
       }
       if (data?.result?.changePassword) {
         setGetToken((prev) => !prev);

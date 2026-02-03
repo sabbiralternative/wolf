@@ -11,7 +11,6 @@ import ClaimWarning from "../Notification/ClaimWarning";
 // import axios from "axios";
 // import UseTokenGenerator from "../../../hooks/UseTokenGenerator";
 // import UseEncryptData from "../../../hooks/UseEncryptData";
-import useGetSocialLink from "../../../hooks/useGetSocialLink";
 import useBalance from "../../../hooks/useBalance";
 /* eslint-disable react/no-unknown-property */
 const Sidebar = () => {
@@ -40,7 +39,6 @@ const Sidebar = () => {
   const [showClaimWarn, setShowClaimWarn] = useState(false);
   // const [promoCode, setPromoCode] = useState("");
   const [referralCode, setReferralCode] = useState("");
-  const { socialLink } = useGetSocialLink();
 
   const handleNavigateSocialLink = (link) => {
     window.open(link, "_blank");
@@ -567,7 +565,7 @@ const Sidebar = () => {
                     </a>
                   </li>
                 )}
-                {socialLink?.link && (
+                {Settings?.link && (
                   <li
                     _ngcontent-ng-c967272132=""
                     className="smenu-item ng-star-inserted"
@@ -595,7 +593,7 @@ const Sidebar = () => {
                   _ngcontent-ng-c967272132=""
                   className="smenu-item social-links-wrap ng-star-inserted"
                 >
-                  {socialLink?.instagramLink || socialLink?.telegramLink ? (
+                  {Settings?.instagramLink || Settings?.telegramLink ? (
                     <label _ngcontent-ng-c967272132="">Join us Now</label>
                   ) : null}
 
@@ -607,10 +605,10 @@ const Sidebar = () => {
                         src="https://ss.manage63.com/bmk-wl/commonAssets/icon_dark_facebook.svg"
                       />
                     </a> */}
-                    {socialLink?.instagramLink && (
+                    {Settings?.instagramLink && (
                       <a
                         onClick={() =>
-                          handleNavigateSocialLink(socialLink?.instagramLink)
+                          handleNavigateSocialLink(Settings?.instagramLink)
                         }
                         _ngcontent-ng-c2865632707=""
                         className="ng-star-inserted"
@@ -623,10 +621,10 @@ const Sidebar = () => {
                       </a>
                     )}
 
-                    {socialLink?.telegramLink && (
+                    {Settings?.telegramLink && (
                       <a
                         onClick={() =>
-                          handleNavigateSocialLink(socialLink?.telegramLink)
+                          handleNavigateSocialLink(Settings?.telegramLink)
                         }
                         _ngcontent-ng-c2865632707=""
                         className="ng-star-inserted"
