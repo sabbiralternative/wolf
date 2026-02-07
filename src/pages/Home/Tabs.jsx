@@ -82,8 +82,8 @@ const Tabs = () => {
           )}
 
           <div _ngcontent-ng-c2582205232="" className="pagetab-header">
-            {/* <div
-              onClick={() => navigate("/game-details/4/27996014")}
+            <div
+              onClick={() => navigate("/game-details/4/33439271")}
               _ngcontent-ng-c2582205232=""
               routerlinkactive="active-link"
               className={`pagetab-item ng-star-inserted   `}
@@ -96,9 +96,9 @@ const Tabs = () => {
                 />
               </div>
               <div _ngcontent-ng-c2582205232="" className="tab-label">
-                BBL
+                T20 World Cup
               </div>
-            </div> */}
+            </div>
             {Settings?.referral && (
               <div
                 onClick={() => {

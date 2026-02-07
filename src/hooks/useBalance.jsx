@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { AxiosSecure } from "../lib/AxiosSecure";
 import useContextState from "./useContextState";
-import { API, Settings } from "../api";
+import { API } from "../api";
 import { handleLogOut } from "../utils/handleLogOut";
 /* Balance api */
 const useBalance = () => {
@@ -28,7 +28,6 @@ const useBalance = () => {
       }
     },
     /* Refetch after 6 second */
-    refetchInterval: Settings?.balanceApiLoop ? 6000 : null,
   });
 
   return { balanceData, refetchBalance };
