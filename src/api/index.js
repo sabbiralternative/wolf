@@ -33,7 +33,7 @@ export const API = {
   whatsApp: "",
   otp: "",
   liveCasinoWolf: "",
-  slotWolf: "",
+  slotsWolf: "",
   liveCasinoIFrame: "",
   auraWolf: "",
   assets: "",

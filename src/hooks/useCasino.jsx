@@ -23,7 +23,7 @@ const useCasino = () => {
       if (Settings?.language) {
         payload.language = language;
       }
-      const res = await axios.post(API.slotWolf, payload, {
+      const res = await axios.post(API.slotsWolf, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
