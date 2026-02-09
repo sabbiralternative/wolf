@@ -13,6 +13,7 @@ import handleDepositMethod from "../../utils/handleDepositMethod";
 import { AxiosSecure } from "../../lib/AxiosSecure";
 import { HiArrowNarrowDown } from "react-icons/hi";
 import { GrAndroid } from "react-icons/gr";
+import { useSettingsMutation } from "../../hooks/settings";
 const Login = ({
   setShowLogin,
   setErrorLogin,
@@ -20,6 +21,7 @@ const Login = ({
   setGetToken,
   setShowForgotOTP,
 }) => {
+  const { mutate } = useSettingsMutation();
   const { logo, setShowChangePassModal, closePopupForForever } =
     useContextState();
   const { register, handleSubmit } = useForm();
@@ -46,6 +48,7 @@ const Login = ({
     const { data } = await AxiosSecure.post(API.login, loginData);
 
     if (data.success) {
+      mutate();
       setDisable(false);
       if (Settings.deposit) {
         const handleDeposit = handleDepositMethod(data.result.token);
@@ -123,6 +126,7 @@ const Login = ({
     })
       .then((res) => res.json())
       .then((data) => {
+        mutate();
         setDisable(false);
         /* Set token to localeStorage */
         localStorage.setItem("token", data.result.token);

@@ -46,3 +46,4 @@ export const LanguageKey = {
   INSTALL: "INSTALL",
   VIEW_ALL: "VIEW_ALL",
 };
+export const settingsAPI = "https://api7.live/api/exchange/diamond/settings";

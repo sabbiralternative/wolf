@@ -10,6 +10,7 @@ import useLanguage from "../../hooks/useLanguage";
 import { LanguageKey } from "../../constant/constant";
 import { languageValue } from "../../utils/language";
 import { AxiosSecure } from "../../lib/AxiosSecure";
+import { useSettingsMutation } from "../../hooks/settings";
 
 /* eslint-disable react/no-unknown-property */
 const LoggedInProfile = ({
@@ -17,6 +18,7 @@ const LoggedInProfile = ({
   setShowChangePassModal,
   balanceData,
 }) => {
+  const { mutate } = useSettingsMutation();
   const { valueByLanguage } = useLanguage();
   const {
     isCheckedBonusToken,
@@ -61,6 +63,7 @@ const LoggedInProfile = ({
   const handleLogout = () => {
     /* Logout function */
     handleLogOut();
+    mutate();
     setTokenLoading(true);
     /* Get updated token from local storage */
     setGetToken((prev) => !prev);

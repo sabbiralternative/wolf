@@ -6,8 +6,10 @@ import useContextState from "./useContextState";
 import { API } from "../api";
 import { useEffect } from "react";
 import { handleLogOut } from "../utils/handleLogOut";
+import { useSettingsMutation } from "./settings";
 
 const useBonusBalance = () => {
+  const { mutate } = useSettingsMutation();
   const { setGetToken, isCheckedBonusToken, setTokenLoading } =
     useContextState();
   const bonusToken = localStorage.getItem("bonusToken");
@@ -30,6 +32,7 @@ const useBonusBalance = () => {
       /* Logout if success false */
       if (res?.data?.success === false && bonusToken) {
         handleLogOut();
+        mutate();
         setTokenLoading(true);
         setGetToken((prev) => !prev);
       } else if (res?.data?.success && bonusToken) {

@@ -207,7 +207,7 @@ const WithdrawStatement = () => {
                                           }}
                                           onClick={() =>
                                             setComplaintId(
-                                              withdraw?.referenceNo
+                                              withdraw?.referenceNo,
                                             )
                                           }
                                           className="px-2 py-1  text-white   "

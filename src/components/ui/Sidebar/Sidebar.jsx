@@ -12,6 +12,7 @@ import ClaimWarning from "../Notification/ClaimWarning";
 // import UseTokenGenerator from "../../../hooks/UseTokenGenerator";
 // import UseEncryptData from "../../../hooks/UseEncryptData";
 import useBalance from "../../../hooks/useBalance";
+import { useSettingsMutation } from "../../../hooks/settings";
 /* eslint-disable react/no-unknown-property */
 const Sidebar = () => {
   const {
@@ -30,6 +31,7 @@ const Sidebar = () => {
     setShowBonusRule,
     setTokenLoading,
   } = useContextState();
+  const { mutate } = useSettingsMutation();
   const loginName = localStorage.getItem("loginName");
   const navigate = useNavigate();
   const leftMenuRef = useRef();
@@ -52,6 +54,7 @@ const Sidebar = () => {
   const handleLogout = () => {
     /* Logout function */
     handleLogOut();
+    mutate();
     setTokenLoading(true);
     /* Close sidebar */
     setShowSidebar(false);

@@ -6,6 +6,7 @@ import { API, Settings } from "../../../api";
 import useContextState from "../../../hooks/useContextState";
 import handleDepositMethod from "../../../utils/handleDepositMethod";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
+import { useSettingsMutation } from "../../../hooks/settings";
 /* eslint-disable react/no-unknown-property */
 const Registration = ({
   setShowRegister,
@@ -15,6 +16,7 @@ const Registration = ({
   setErrRegister,
   orderId,
 }) => {
+  const { mutate } = useSettingsMutation();
   const referralCode = localStorage.getItem("referralCode");
   const { logo, setGetToken } = useContextState();
   /* Close modal click outside */
@@ -48,6 +50,7 @@ const Registration = ({
     const { data } = await AxiosSecure.post(API.register, registerData);
 
     if (data?.success) {
+      mutate();
       if (window?.fbq) {
         window.fbq("track", "CompleteRegistration", {
           content_name: "User Signup",
