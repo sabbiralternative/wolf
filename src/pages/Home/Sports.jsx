@@ -45,16 +45,16 @@ const Sports = () => {
     };
     gameData();
     /* Refetch after 600 millisecond */
-    if (
-      sportsType === 0 ||
-      sportsType === 4 ||
-      sportsType === 1 ||
-      sportsType === 2 ||
-      sportsType === 5
-    ) {
-      const intervalId = setInterval(gameData, API.interval);
-      return () => clearInterval(intervalId);
-    }
+    // if (
+    //   sportsType === 0 ||
+    //   sportsType === 4 ||
+    //   sportsType === 1 ||
+    //   sportsType === 2 ||
+    //   sportsType === 5
+    // ) {
+    //   const intervalId = setInterval(gameData, API.interval);
+    //   return () => clearInterval(intervalId);
+    // }
   }, [sportsType]);
 
   /* get category for games */

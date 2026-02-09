@@ -20,11 +20,10 @@ import ChangePassword from "../modal/ChangePassword";
 import useGetVersion from "../../hooks/useGetVersion";
 import useBalance from "../../hooks/useBalance";
 import Tabs from "../../pages/Home/Tabs";
-import { useSettingsMutation } from "../../hooks/settings";
+
 const pathnames = ["/", "/horse-racing", "/greyhound-racing"];
 
 const Main = () => {
-  const { mutate } = useSettingsMutation();
   const {
     showEditStake,
     setShowEditStake,
@@ -78,7 +77,7 @@ const Main = () => {
             const info = "devtool opened!; type =" + type;
             if (info) {
               handleLogOut();
-              mutate();
+
               setTokenLoading(true);
               setGetToken((prev) => !prev);
               window.location.href = "https://www.google.com/";

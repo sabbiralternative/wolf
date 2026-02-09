@@ -3,10 +3,9 @@ import { AxiosSecure } from "../lib/AxiosSecure";
 import useContextState from "./useContextState";
 import { API } from "../api";
 import { handleLogOut } from "../utils/handleLogOut";
-import { useSettingsMutation } from "./settings";
+
 /* Balance api */
 const useBalance = () => {
-  const { mutate } = useSettingsMutation();
   const { token, setGetToken, tokenLoading, setTokenLoading } =
     useContextState();
   const { data: balanceData = {}, refetch: refetchBalance } = useQuery({
@@ -20,7 +19,7 @@ const useBalance = () => {
       if (res?.data?.success === false && token) {
         /* Logout if success false  */
         handleLogOut();
-        mutate();
+
         setTokenLoading(true);
         /* Get current token */
         setGetToken((prev) => !prev);
