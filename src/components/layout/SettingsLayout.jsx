@@ -4,15 +4,11 @@ import { useSettingsMutation } from "../../hooks/settings";
 
 const SettingsLayout = ({ children }) => {
   const { token } = useContextState();
-  const { mutate, isSuccess } = useSettingsMutation();
+  const { mutate } = useSettingsMutation();
 
   useEffect(() => {
     mutate();
   }, [token, mutate]);
-
-  if (!isSuccess) {
-    return null;
-  }
 
   return children;
 };

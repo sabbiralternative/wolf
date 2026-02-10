@@ -47,12 +47,11 @@ const StateProvider = ({ children }) => {
   useEffect(() => {
     if (noticeLoaded) {
       const token = localStorage.getItem("token");
-      if (token) {
-        setToken(token);
-        setTokenLoading(false);
-      }
+
+      setToken(token);
+      setTokenLoading(false);
     }
-  }, [token, setToken, setTokenLoading, noticeLoaded]);
+  }, [token, setToken, setTokenLoading, noticeLoaded, getToken]);
 
   if (!noticeLoaded) {
     return null;
