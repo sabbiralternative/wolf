@@ -12,7 +12,6 @@ const StateProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [showChangePassModal, setShowChangePassModal] = useState(false);
-
   const [getToken, setGetToken] = useState(false);
   const [tokenLoading, setTokenLoading] = useState(true);
   const [showEditStake, setShowEditStake] = useState(false);
@@ -33,9 +32,9 @@ const StateProvider = ({ children }) => {
   const [openBetSlip, setOpenBetSlip] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
   const [predictOdds, setPredictOdds] = useState([]);
-
   const [noticeLoaded, setNoticeLoaded] = useState(false);
   const baseUrl = notice?.result?.settings?.baseUrl;
+
   useEffect(() => {
     if (!noticeLoaded) {
       const fetchAPI = () => {
@@ -45,8 +44,18 @@ const StateProvider = ({ children }) => {
     }
   }, [noticeLoaded, baseUrl]);
 
+  useEffect(() => {
+    if (noticeLoaded) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setToken(token);
+        setTokenLoading(false);
+      }
+    }
+  }, [token, setToken, setTokenLoading, noticeLoaded]);
+
   if (!noticeLoaded) {
-    return;
+    return null;
   }
 
   const stateInfo = {

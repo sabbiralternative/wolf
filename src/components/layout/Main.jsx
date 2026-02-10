@@ -48,7 +48,7 @@ const Main = () => {
     setShowChangePassModal,
     // tokenLoading,
     // isCheckedBonusToken,
-
+    closePopupForForever,
     setTokenLoading,
     showLogin,
   } = useContextState();
@@ -223,6 +223,14 @@ const Main = () => {
       };
     }
   }, []);
+
+  useEffect(() => {
+    if (Settings.appOnly && !closePopupForForever) {
+      document.title = window.location.hostname;
+    } else {
+      document.title = Settings.siteTitle;
+    }
+  }, [closePopupForForever]);
 
   return (
     <>

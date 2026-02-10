@@ -4,7 +4,6 @@ import { Settings } from "./index";
 export const getSetApis = async (setNoticeLoaded, baseUrl) => {
   const url = baseUrl ? `${baseUrl}/notice.json` : "/notice.json";
   const { data: settingsResponse } = await axios.get(url);
-
   if (settingsResponse?.result) {
     // Destructure API endpoints and Settings
     const { settings = {} } = settingsResponse.result;
