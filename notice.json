@@ -28,7 +28,7 @@
       "mac88": true,
       "b2c": true,
       "language": true,
-      "build": "development",
+      "build": "production",
       "betDelay": true,
       "otpWhatsapp": true,
       "complaint": true,
