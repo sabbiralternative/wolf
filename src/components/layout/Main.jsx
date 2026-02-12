@@ -20,6 +20,7 @@ import ChangePassword from "../modal/ChangePassword";
 import useGetVersion from "../../hooks/useGetVersion";
 import useBalance from "../../hooks/useBalance";
 import Tabs from "../../pages/Home/Tabs";
+import MaintenanceMessage from "../ui/MaintenanceMessage/MaintenanceMessage";
 
 const pathnames = ["/", "/horse-racing", "/greyhound-racing"];
 
@@ -231,6 +232,10 @@ const Main = () => {
       document.title = Settings.siteTitle;
     }
   }, [closePopupForForever]);
+
+  if (Settings.maintenance_message) {
+    return <MaintenanceMessage />;
+  }
 
   return (
     <>

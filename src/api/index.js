@@ -59,7 +59,9 @@ export const API = {
 };
 
 export const Settings = {
-  apkLink: "",
+  apk_link: "",
+  maintenance_message: "",
+
   bonus: "",
   deposit: "",
   withdraw: "",
