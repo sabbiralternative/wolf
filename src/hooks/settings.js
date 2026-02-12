@@ -2,17 +2,15 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosSecure } from "../lib/AxiosSecure";
 import { API, Settings } from "../api";
 import { settingsAPI } from "../constant/constant";
-import notice from "../../notice.json";
 import useContextState from "./useContextState";
 import assets from "../assets";
 
 export const useSettingsMutation = () => {
   const { setIcon, setLogo } = useContextState();
-  const site = notice?.result?.settings?.siteUrl;
   return useMutation({
     mutationKey: ["settings"],
     mutationFn: async () => {
-      const { data } = await AxiosSecure.post(settingsAPI, { site });
+      const { data } = await AxiosSecure.post(settingsAPI);
 
       if (data?.success) {
         if (data?.result) {
