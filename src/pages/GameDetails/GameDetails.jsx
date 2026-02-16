@@ -11,7 +11,7 @@ import MarketTab from "./MarketTab";
 import Warning from "../../components/ui/Notification/Warning";
 import axios from "axios";
 import { API, Settings } from "../../api";
-import useBalance from "../../hooks/useBalance";
+
 import handleDecryptData from "../../utils/handleDecryptData";
 import Score from "./Score";
 import { useSportsVideo } from "../../hooks/useIFrame";
@@ -28,7 +28,7 @@ const GameDetails = () => {
 
   const [score, setScore] = useState({});
   const [sportsBook, setSportsBook] = useState({});
-  const { placeBetValues, token, openBetSlip, setOpenBetSlip, tokenLoading } =
+  const { placeBetValues, token, openBetSlip, setOpenBetSlip } =
     useContextState();
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,7 +39,7 @@ const GameDetails = () => {
   const [showScore, setShowScore] = useState(false);
   const [match_odds, setMatch_odds] = useState([]);
   const [showLoginWarn, setShowLoginWarn] = useState("");
-  const { refetchBalance } = useBalance();
+
   const [iFrame, setIframe] = useState(null);
   const { mutate } = useSportsVideo();
 
@@ -48,7 +48,7 @@ const GameDetails = () => {
       eventTypeId: eventTypeId,
       eventId: eventId,
       type: "video",
-      casinoCurrency: Settings.casinoCurrency,
+      casino_currency: Settings.casino_currency,
     };
     mutate(encryptedVideoData, {
       onSuccess: (data) => {
@@ -58,12 +58,6 @@ const GameDetails = () => {
       },
     });
   };
-
-  useEffect(() => {
-    if (!tokenLoading && !Settings.balanceApiLoop) {
-      refetchBalance();
-    }
-  }, []);
 
   /* get game details */
   useEffect(() => {
@@ -96,7 +90,7 @@ const GameDetails = () => {
     };
     getGameDetails();
     /* refetch after some millisecond */
-    const intervalId = setInterval(getGameDetails, Settings.interval);
+    const intervalId = setInterval(getGameDetails, 900);
     return () => clearInterval(intervalId);
   }, [eventId, eventTypeId]);
 

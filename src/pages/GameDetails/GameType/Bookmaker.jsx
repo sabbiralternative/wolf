@@ -191,7 +191,7 @@ const Bookmaker = ({
                   {/* { games?.eventTypeId == 4 ? games?.btype : games?.name} */}
                   {games?.name}
                 </h2>
-                {Settings.bookmakerCashOut &&
+                {Settings.cashout &&
                   games?.runners?.length !== 3 &&
                   !speedCashOut && (
                     <div
@@ -264,7 +264,7 @@ const Bookmaker = ({
                     </div>
                   )}
 
-                {Settings.bookmakerCashOut &&
+                {Settings.cashout &&
                   games?.runners?.length !== 3 &&
                   speedCashOut && (
                     <button

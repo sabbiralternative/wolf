@@ -226,10 +226,10 @@ const Main = () => {
   }, []);
 
   useEffect(() => {
-    if (Settings.appOnly && !closePopupForForever) {
+    if (Settings.app_only && !closePopupForForever) {
       document.title = window.location.hostname;
     } else {
-      document.title = Settings.siteTitle;
+      document.title = Settings.site_name;
     }
   }, [closePopupForForever]);
 

@@ -25,7 +25,7 @@ const Casino = () => {
       if (isCheckedBonusToken) {
         return setWarnMessage("Bonus wallet is available only on sports.");
       }
-      if (Settings.casinoCurrency !== "AED") {
+      if (Settings.casino_currency !== "AED") {
         navigate(`/casino/${name.replace(/ /g, "")}/${id}`);
       } else {
         setGameInfo({ gameName: "", gameId: "" });

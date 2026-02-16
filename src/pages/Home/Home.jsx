@@ -8,8 +8,7 @@ import { useEffect, useState } from "react";
 import SliderImage from "./SliderImage";
 import useBannerImage from "../../hooks/useBannerImage";
 // import Banner from "./Banner";
-import useBalance from "../../hooks/useBalance";
-import { Settings } from "../../api";
+
 import Mac88 from "./Mac88";
 import Banner from "../../components/modal/Banner";
 // import MyMatches from "./MyMatches";
@@ -18,26 +17,14 @@ import Banner from "../../components/modal/Banner";
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const banner = localStorage.getItem("banner");
-  const { sportsType, tokenLoading, token, showChangePassModal } =
-    useContextState();
+  const { sportsType, token, showChangePassModal } = useContextState();
   const { bannerImage } = useBannerImage();
-  const { refetchBalance } = useBalance();
+
   // const location = useLocation();
   /* Reset scroll */
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [sportsType]);
-
-  useEffect(() => {
-    if (!tokenLoading && !Settings.balanceApiLoop) {
-      refetchBalance();
-    }
-  }, []);
-  useEffect(() => {
-    if (!tokenLoading && !Settings.balanceApiLoop) {
-      refetchBalance();
-    }
-  }, []);
 
   useEffect(() => {
     const leftArrow = document.getElementsByClassName("swiper-button-prev");

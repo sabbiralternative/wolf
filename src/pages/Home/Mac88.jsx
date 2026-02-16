@@ -20,7 +20,7 @@ const Mac88 = () => {
       if (isCheckedBonusToken) {
         return setWarnMessage("Bonus wallet is available only on sports.");
       }
-      if (Settings.casinoCurrency !== "AED") {
+      if (Settings.casino_currency !== "AED") {
         console.log("ok");
         navigate(`/casino/${name.replace(/ /g, "")}/${id}`);
       } else {

@@ -5,40 +5,9 @@
   },
   "result": {
     "settings": {
-      "siteTitle": "a23money",
       "siteUrl": "11xgame.vip",
-      "interval": 900,
-      "casino": "diamond",
-      "register": true,
-      "forceLogin": false,
-      "demoLogin": true,
-      "registrationWhatsapp": true,
-      "deposit": true,
-      "bonus": true,
-      "withdraw": true,
-      "casinoCurrency": "INR",
-      "otp": true,
-      "buildVersion": 1.01,
-      "balanceApiLoop": false,
-      "otpless": true,
-      "baseUrl": "",
-      "betFairCashOut": true,
-      "bookmakerCashOut": true,
-
-      "mac88": true,
-      "b2c": true,
-      "language": true,
-      "build": "production",
-      "betDelay": true,
-      "otpWhatsapp": true,
-      "complaint": true,
-      "aura": true,
-      "appOnly": false,
-      "logo": {
-        "height": 55,
-        "width": 125,
-        "format": "svg"
-      }
+      "build": "development",
+      "bonus": true
     },
 
     "endpoint": {

@@ -70,7 +70,7 @@ const LiveCasinoTab = () => {
       if (isCheckedBonusToken) {
         return setWarnMessage("Bonus wallet is available only on sports.");
       }
-      if (Settings.casinoCurrency !== "AED") {
+      if (Settings.casino_currency !== "AED") {
         console.log("ok");
         navigate(`/casino/${name.replace(/ /g, "")}/${id}`);
       } else {
@@ -138,7 +138,7 @@ const LiveCasinoTab = () => {
                                 onClick={() =>
                                   handleLiveSlotCasino(
                                     item?.game_id,
-                                    item?.game_name
+                                    item?.game_name,
                                   )
                                 }
                                 key={i}
@@ -204,7 +204,7 @@ const LiveCasinoTab = () => {
                                 onClick={() =>
                                   handleLiveSlotCasino(
                                     item?.game_id,
-                                    item?.game_name
+                                    item?.game_name,
                                   )
                                 }
                                 key={i}
@@ -261,7 +261,7 @@ const LiveCasinoTab = () => {
                                 </div>
                               </li>
                             );
-                          }
+                          },
                         )}
                   </ul>
                 </div>

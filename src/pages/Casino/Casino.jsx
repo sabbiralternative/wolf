@@ -19,7 +19,7 @@ const Casino = () => {
         gameId: id?.toString(),
         isHome: false,
         mobileOnly: true,
-        casinoCurrency: Settings.casinoCurrency,
+        casino_currency: Settings.casino_currency,
       };
       try {
         const res = await AxiosSecure.post(API.liveCasinoIFrame, payload);

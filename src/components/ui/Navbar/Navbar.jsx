@@ -194,7 +194,7 @@ const Navbar = () => {
     }
   };
 
-  if (Settings.appOnly && !closePopupForForever) {
+  if (Settings.app_only && !closePopupForForever) {
     return <Error />;
   }
 
@@ -262,8 +262,8 @@ const Navbar = () => {
               >
                 <img
                   style={{
-                    // height: `${Settings.logoHeight}px`,
-                    // width: `${Settings.logoWidth}px`,
+                    // height: `${Settings.logo_height}px`,
+                    // width: `${Settings.logo_width}px`,
                     objectFit: "contain",
                   }}
                   _ngcontent-ng-c3243547741=""
@@ -382,7 +382,7 @@ const Navbar = () => {
                       <span className="mat-ripple mat-mdc-button-ripple"></span>
                     </button>
                   )}
-                  {Settings.registrationWhatsapp && Settings?.whatsapplink && (
+                  {Settings.registration_whatsapp && Settings?.whatsapplink && (
                     <button
                       onClick={openWhatsapp}
                       _ngcontent-ng-c3243547741=""
@@ -397,8 +397,8 @@ const Navbar = () => {
                       <span className="mat-ripple mat-mdc-button-ripple"></span>
                     </button>
                   )}
-                  {/* If demo login true in settings then showing demologin button  */}
-                  {/* {Settings.demoLogin && (
+                  {/* If demo login true in settings then showing demo_login button  */}
+                  {/* {Settings.demo_login && (
                     <button
                       onClick={loginWithDemo}
                       _ngcontent-ng-c3243547741=""

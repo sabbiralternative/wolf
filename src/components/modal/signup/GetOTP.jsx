@@ -310,7 +310,7 @@ const GetOTP = ({
                                   ? " Get OTP On Message"
                                   : "Proceed"}
                               </button>
-                              {Settings?.registrationWhatsapp &&
+                              {Settings?.registration_whatsapp &&
                                 Settings?.whatsapplink &&
                                 !token && (
                                   <>

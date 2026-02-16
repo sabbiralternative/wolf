@@ -33,16 +33,15 @@ const StateProvider = ({ children }) => {
   const [showOTP, setShowOTP] = useState(false);
   const [predictOdds, setPredictOdds] = useState([]);
   const [noticeLoaded, setNoticeLoaded] = useState(false);
-  const baseUrl = notice?.result?.settings?.baseUrl;
 
   useEffect(() => {
     if (!noticeLoaded) {
       const fetchAPI = () => {
-        getSetApis(setNoticeLoaded, baseUrl);
+        getSetApis(setNoticeLoaded);
       };
       fetchAPI();
     }
-  }, [noticeLoaded, baseUrl]);
+  }, [noticeLoaded]);
 
   useEffect(() => {
     if (noticeLoaded) {

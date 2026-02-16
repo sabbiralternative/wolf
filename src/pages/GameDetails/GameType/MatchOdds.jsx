@@ -190,7 +190,7 @@ const MatchOdds = ({
                       {teamProfitForGame?.profit?.toFixed(2)}
                     </span>
                   )}
-                  {Settings.betFairCashOut &&
+                  {Settings.cashout &&
                     games?.runners?.length !== 3 &&
                     !speedCashOut && (
                       <button
@@ -227,7 +227,7 @@ const MatchOdds = ({
                         </span>
                       </button>
                     )}
-                  {Settings.betFairCashOut &&
+                  {Settings.cashout &&
                     games?.runners?.length !== 3 &&
                     speedCashOut && (
                       <button

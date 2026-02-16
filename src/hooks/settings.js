@@ -47,10 +47,10 @@ export const useSettingsMutation = () => {
 
         /*Dynamically append Logo */
         if (Settings.build === "production") {
-          const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logoFormat}`;
+          const logo = `${API.assets}/${Settings.siteUrl}/logo.${Settings.logo_format}`;
           setLogo(logo);
         } else {
-          setLogo(`/assets/img/logo.${Settings.logoFormat}`);
+          setLogo(`/assets/img/logo.${Settings.logo_format}`);
         }
 
         /* Dynamically append  favicon  */

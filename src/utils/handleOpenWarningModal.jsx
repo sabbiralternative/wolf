@@ -7,10 +7,10 @@ const handleOpenWarningModal = async (
   token,
   navigate,
   setGameId,
-  setShowWarning
+  setShowWarning,
 ) => {
   if (token) {
-    if (Settings.casinoCurrency !== "AED" || sportsType === "aura") {
+    if (Settings.casino_currency !== "AED" || sportsType === "aura") {
       navigate(`/casino/${name.replace(/ /g, "")}/${id}`);
     } else {
       setGameId("");
