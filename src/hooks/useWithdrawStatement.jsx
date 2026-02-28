@@ -13,7 +13,7 @@ const useWithdrawStatement = () => {
   /* current date */
   const toDate = new Date().toISOString().split("T")[0];
 
-  const { data: withdrawStatement = [] } = useQuery({
+  const { data: withdrawStatement = [], refetch } = useQuery({
     queryKey: ["withdraw-statement"],
     queryFn: async () => {
       let payload = {
@@ -33,7 +33,7 @@ const useWithdrawStatement = () => {
       }
     },
   });
-  return { withdrawStatement };
+  return { withdrawStatement, refetch };
 };
 
 export default useWithdrawStatement;

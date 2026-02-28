@@ -4,11 +4,14 @@ import useWithdrawStatement from "../../hooks/useWithdrawStatement";
 import ViewImage from "../../components/modal/ViewImage";
 import Complaint from "../../components/modal/Complaint";
 import { Settings } from "../../api";
+import { useBankMutation } from "../../hooks/bankAccount";
+import toast from "react-hot-toast";
 
 const WithdrawStatement = () => {
+  const { mutate: deleteWithdraw } = useBankMutation();
   const [complaintId, setComplaintId] = useState(null);
   const [image, setImage] = useState(null);
-  const { withdrawStatement } = useWithdrawStatement();
+  const { withdrawStatement, refetch } = useWithdrawStatement();
 
   const withdrawTab = [
     'If you face any issue with your withdraw, click the "Report Issue" button next to your withdraw details to let us know.',
@@ -33,6 +36,23 @@ const WithdrawStatement = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleDeleteWithdraw = async (withdraw_id) => {
+    const payload = {
+      type: "withdrawDelete",
+      withdraw_id,
+    };
+    deleteWithdraw(payload, {
+      onSuccess: (data) => {
+        if (data?.success) {
+          refetch();
+          toast.success(data?.result?.message);
+        } else {
+          toast.error(data?.error?.errorMessage);
+        }
+      },
+    });
+  };
   return (
     <>
       {Settings.complaint && (
@@ -194,27 +214,66 @@ const WithdrawStatement = () => {
                                       >
                                         {withdraw?.status}
                                       </span>
-                                      {Settings.complaint && (
-                                        <button
-                                          style={{
-                                            backgroundColor: "rgb(255 131 46)",
-                                            borderBottomRightRadius: "4px",
-                                            borderTopLeftRadius: "4px",
-                                            fontSize: "12px",
-                                            border: "none",
-                                            color: "white",
-                                            marginTop: "4px",
-                                          }}
-                                          onClick={() =>
-                                            setComplaintId(
-                                              withdraw?.referenceNo,
-                                            )
-                                          }
-                                          className="px-2 py-1  text-white   "
-                                        >
-                                          Report Issue
-                                        </button>
-                                      )}
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          gap: "0px 5px",
+                                        }}
+                                      >
+                                        {withdraw.status === "PENDING" &&
+                                          withdraw?.reject_request === 0 && (
+                                            <button
+                                              style={{
+                                                backgroundColor:
+                                                  "rgb(255 131 46)",
+                                                borderBottomRightRadius: "4px",
+                                                borderTopRightRadius: "4px",
+                                                fontSize: "12px",
+                                                border: "none",
+                                                color: "white",
+                                                marginTop: "auto",
+                                                height: "fit-content",
+                                              }}
+                                              onClick={() =>
+                                                handleDeleteWithdraw(
+                                                  withdraw?.withdraw_id,
+                                                )
+                                              }
+                                            >
+                                              Delete Withdraw
+                                            </button>
+                                          )}
+
+                                        {withdraw.status === "PENDING" &&
+                                          withdraw?.reject_request === 1 && (
+                                            <p style={{ margin: "0px" }}>
+                                              Withdraw delete request sent.
+                                            </p>
+                                          )}
+                                        {Settings.complaint && (
+                                          <button
+                                            style={{
+                                              backgroundColor:
+                                                "rgb(255 131 46)",
+                                              borderBottomRightRadius: "4px",
+                                              borderTopLeftRadius: "4px",
+                                              fontSize: "12px",
+                                              border: "none",
+                                              color: "white",
+                                              marginTop: "auto",
+                                              height: "fit-content",
+                                            }}
+                                            onClick={() =>
+                                              setComplaintId(
+                                                withdraw?.referenceNo,
+                                              )
+                                            }
+                                            className="px-2 py-1  text-white   "
+                                          >
+                                            Report Issue
+                                          </button>
+                                        )}
+                                      </div>
                                     </p>
                                   </li>
                                 </ul>
